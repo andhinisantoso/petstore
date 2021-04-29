@@ -2,6 +2,7 @@ import React from 'react';
 import {Text, StyleSheet, View, Image, SafeAreaView} from 'react-native';
 import COLORS from '../../const/colors';
 import {PrimaryButton} from '../components/Button';
+import Home from './Home';
 
 const OnBoardScreen = ({navigation}) => {
   return (
