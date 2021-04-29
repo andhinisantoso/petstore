@@ -1,9 +1,9 @@
 import React from 'react';
-import OnBoardScreen from './src/views/screens/OnBoardScreen'
+import Home from './src/views/screens/Home';
 
 const App = () => {
-  return (
-    <OnBoardScreen/>
+  return(
+    <Home/>
   )
 }
 
