@@ -3,6 +3,7 @@ import {SafeAreaView, StyleSheet, View, Text, Image} from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
 import {PrimaryButton} from '../components/Button';
+import Home from './Home';
 
 const CartScreen = () => {
   const CartCard = () => {
@@ -57,7 +58,7 @@ const CartScreen = () => {
         </View>
       </View>
       <View style={{marginHorizontal: 30}}>
-        <PrimaryButton title="CHECKOUT" />
+        <PrimaryButton title="CHECKOUT" onPress={Home}/>
       </View>
     </SafeAreaView>
   );
