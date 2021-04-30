@@ -20,7 +20,7 @@ const CartScreen = () => {
           <Text style={{fontSize: 13, color: COLORS.grey}}>
             Persian 1 kg
           </Text>
-          <Text style={{fontSize: 17, fontWeight: 'bold'}}>Rp 200.000</Text>
+          <Text style={{fontSize: 16, fontWeight: 'bold'}}>Rp 200.000</Text>
         </View>
         <View style={{marginLeft: 60}}>
           <View style={{marginRight: 20, alignItems: 'center'}}>
@@ -70,13 +70,16 @@ const style = StyleSheet.create({
     marginHorizontal: 20,
   },
   cartCard: {
-    height: 100,
-    elevation: 15,
-    borderRadius: 10,
+    height: 150,
+    width: 330,
+    marginHorizontal: 10,
+    marginLeft: 30,
+    marginBottom: 10,
+    borderRadius: 15,
+    elevation: 13,
     backgroundColor: COLORS.white,
-    marginVertical: 10,
-    marginHorizontal: 20,
-    paddingHorizontal: 10,
+    shadowRadius: 5,
+    shadowColor: COLORS.grey,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

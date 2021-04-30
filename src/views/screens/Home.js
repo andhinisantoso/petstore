@@ -82,7 +82,7 @@ const Home = ({navigation}) => {
           </View>
           <View style={{marginHorizontal: 10, marginTop: 10}}>
             <Text style={{fontSize: 18, fontWeight: 'bold'}}>Royal Canin</Text>
-            <Text style={{fontSize: 14, color: COLORS.grey, marginTop: 2}}>Persian 1 kg            </Text>
+            <Text style={{fontSize: 14, color: COLORS.grey, marginTop: 2}}>Persian 1 kg </Text>
           </View>
           <View
             style={{
