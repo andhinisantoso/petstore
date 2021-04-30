@@ -5,17 +5,17 @@ import COLORS from '../../const/colors';
 import {PrimaryButton} from '../components/Button';
 import Home from './Home';
 
-const CartScreen = () => {
-  const CartCard = () => {
+const Favorite = () => {
+  const FavoriteCard = () => {
     return (
-      <View style={style.cartCard}>
+      <View style={style.favoriteCard}>
         <Image source={require('../../assets/rc-persian.png')} style={{height: 80, width: 80}} />
         <View
           style={{
             height: 100,
             marginLeft: 10,
-            flex: 1,
             marginTop: 30,
+            flex: 1,
           }}>
           <Text style={{fontWeight: 'bold', fontSize: 16}}>Royal Canin</Text>
           <Text style={{fontSize: 13, color: COLORS.grey}}>
@@ -23,16 +23,15 @@ const CartScreen = () => {
           </Text>
           <Text style={{fontSize: 16, fontWeight: 'bold'}}>Rp 200.000</Text>
         </View>
-        <View style={{marginTop: -10}}>
-          <View style={{marginRight: 20, alignItems: 'center'}}>
-            <Text style={{fontWeight: 'bold', fontSize: 18, marginBottom: 10}}>3</Text>
+        <View style={{marginTop: -20}}>
+          <View style={{alignItems: 'center'}}>
             <View style={style.actionBtn}>
-              <TouchableOpacity activeOpacity={0.8} onPress={Home} style={style.icon}>
-                <MaterialIcons name="remove" color={COLORS.white} size={25} />
-              </TouchableOpacity>
-              <TouchableOpacity activeOpacity={0.8} onPress={Home} style={style.icon}>
-                <MaterialIcons name="add" color={COLORS.white} size={25} />
-              </TouchableOpacity>
+                <TouchableOpacity activeOpacity={0.8} onPress={Home} style={style.iconContainer}>
+                    <MaterialIcons name="favorite" color={COLORS.primary} size={25} />
+                </TouchableOpacity>
+                <TouchableOpacity activeOpacity={0.8} onPress={Home} style={style.iconContainer}>
+                    <MaterialIcons name="shopping-cart" color={COLORS.primary} size={25} />
+                </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -43,28 +42,18 @@ const CartScreen = () => {
     <SafeAreaView style={{backgroundColor: COLORS.white, flex: 1}}>
       <View style={style.header}>
         <MaterialIcons name="arrow-back-ios" size={28}/>
-        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Cart</Text>
+        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Favorite</Text>
       </View>
       <View>
         <View style={style.card}>
-          <CartCard/>
+          <FavoriteCard style={style.card}/>
         </View>
         <View style={style.card}>
-          <CartCard/>
+          <FavoriteCard style={style.card}/>
         </View>
         <View style={style.card}>
-          <CartCard/>
+          <FavoriteCard style={style.card}/>
         </View>
-        
-        <View style={style.footer}>
-          <Text style={{fontSize: 18, fontWeight: 'bold', marginLeft: 30}}>
-            Total Price
-          </Text>
-          <Text style={{fontSize: 18, fontWeight: 'bold', marginRight: 40}}>Rp 200.000</Text>
-        </View>
-      </View>
-      <View style={{marginHorizontal: 30}}>
-        <PrimaryButton title="Checkout" onPress={Home}/>
       </View>
     </SafeAreaView>
   );
@@ -76,10 +65,10 @@ const style = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 20,
   },
-  cartCard: {
+  favoriteCard: {
     height: 120,
     width: 330,
-    marginHorizontal: 10,
+    marginHorizontal: 20,
     marginLeft: 30,
     marginBottom: 10,
     borderRadius: 15,
@@ -92,24 +81,21 @@ const style = StyleSheet.create({
     justifyContent: 'space-between',
   },
   actionBtn: {
-    width: 100,
-    height: 40,
-    backgroundColor: COLORS.primary,
-    borderRadius: 30,
-    paddingHorizontal: 5,
+    width: 80,
+    height: 30,
     flexDirection: 'row',
     justifyContent: 'center',
     alignContent: 'center',
+    marginRight: 30,
   },
-  footer: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      marginVertical: 20,
-  },
-  icon: {
+  iconContainer: {
+    backgroundColor: COLORS.secondary,
+    height: 50,
+    width: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 30,
     marginRight: 10,
-    marginTop: 8,
-    marginLeft: 7
   },
   card: {
     flexDirection: 'row',
@@ -118,4 +104,4 @@ const style = StyleSheet.create({
   }
 });
 
-export default CartScreen;
+export default Favorite;
