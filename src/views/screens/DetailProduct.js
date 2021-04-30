@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, View, Text, Image, ScrollView} from 'react-native';
+import {SafeAreaView, StyleSheet, View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
 import {GreyButton} from '../components/Button';
@@ -33,9 +33,9 @@ const DetailsScreen = () => {
             <Text style={{fontSize: 25, fontWeight: 'bold', color: COLORS.dark, marginBottom: -10}}>
               Royal Canin
             </Text>
-            <View style={style.iconContainer}>
+            <TouchableOpacity activeOpacity={0.8} onPress={Home} style={style.iconContainer}>
               <MaterialIcons name="favorite-border" color={COLORS.primary} size={25} />
-            </View>
+            </TouchableOpacity>
           </View>
           <Text style={{fontSize: 14, fontWeight: 'bold', color: COLORS.dark, marginTop: 2}}>Persian 1 kg </Text>
           <Text style={style.detailsText}>
