@@ -9,10 +9,11 @@ import CartScreen from './src/views/screens/Cart';
 import AlertSuccess from './src/views/screens/AlertSuccess';
 import Favorite from './src/views/screens/Favorite';
 import History from './src/views/screens/History';
+import DetailHistory from './src/views/screens/DetailHistory';
 
 const App = () => {
   return (
-    <History/>
+    <DetailHistory/>
   )
 }
 
