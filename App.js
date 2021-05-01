@@ -11,26 +11,19 @@ import Favorite from './src/views/screens/Favorite';
 import History from './src/views/screens/History';
 import DetailHistory from './src/views/screens/DetailHistory';
 import AdminHome from './src/views/screens/AdminHome';
-<<<<<<< HEAD
-import Profile from './src/views/screens/Profile';
-import EditProfile from './src/views/screens/EditProfile';
-
-const App = () => {
-  return (
-    <EditProfile/>
-=======
 import AdminCatalog from './src/views/screens/AdminCatalog';
 import AdminDetailsScreen from './src/views/screens/AdminDetailProduct';
 import PopupDelete from './src/views/screens/PopupDelete';
 import AddCategory from './src/views/screens/AddCategory';
 import AddProduct from './src/views/screens/AddProduct';
-import AdminEditProfile from './src/views/screens/AdminEditProfile'
+import AdminEditProfile from './src/views/screens/AdminEditProfile';
+import InfoPetStore from './src/views/screens/StoreProfile';
+
 
 
 const App = () => {
   return (
-    <AdminEditProfile/>
->>>>>>> 84567b964df255c5e1c1d00c0102e3e27303e40c
+    <InfoPetStore/>
 
 
   )
