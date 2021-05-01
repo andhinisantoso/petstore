@@ -7,6 +7,7 @@ import { PrimaryButton } from '../components/Button';
 import Home from './Home';
 // redux
 import { login } from '../../redux/logSlice';
+// navigation
 
 const SignIn = ({ navigation }) => {
   const dispatch = useDispatch()
@@ -21,7 +22,7 @@ const SignIn = ({ navigation }) => {
 
   useEffect(() => {
     if (status === 'login') {
-      navigation.navigate('Home')
+      navigation.replace('Home')
     }
   }, [status])
 

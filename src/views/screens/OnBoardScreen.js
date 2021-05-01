@@ -39,7 +39,7 @@ const OnBoardScreen = ({ navigation }) => {
           </Text>
         </View>
         <PrimaryButton
-          onPress={() => navigation.navigate('SignIn')}
+          onPress={() => navigation.replace('SignIn')}
           title="Get Started"
         />
       </View>
