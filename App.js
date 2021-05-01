@@ -12,10 +12,11 @@ import History from './src/views/screens/History';
 import DetailHistory from './src/views/screens/DetailHistory';
 import AdminHome from './src/views/screens/AdminHome';
 import AdminCatalog from './src/views/screens/AdminCatalog';
+import AdminDetailsScreen from './src/views/screens/AdminDetailProduct';
 
 const App = () => {
   return (
-    <AdminCatalog/>
+    <AdminDetailsScreen/>
 
 
   )
