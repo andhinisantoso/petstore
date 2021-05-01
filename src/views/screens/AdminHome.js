@@ -24,50 +24,7 @@ const Home = ({navigation}) => {
 
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
 
-  const ListCategories = () => {
-    return (
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={style.categoriesListContainer}>
-        {categories.map((category, index) => (
-          <TouchableOpacity
-            key={index}
-            activeOpacity={0.8}
-            onPress={() => setSelectedCategoryIndex(index)}>
-            <View
-              style={{width: 150, marginRight: 10, borderRadius: 30, flexDirection: 'row', height: 50,
-                backgroundColor:
-                  selectedCategoryIndex == index
-                    ? COLORS.primary
-                    : COLORS.secondary,
-                ...style.categoryBtn,
-              }}>
-              <View style={style.categoryBtnImgCon}>
-                <Image
-                  source={category.image}
-                  style={{height: 30, width: 30, resizeMode: 'cover'}}
-                />
-              </View>
-              <Text
-                style={{
-                  fontSize: 15,
-                  fontWeight: 'bold',
-                  marginLeft: 10,
-                  marginTop: 15,
-                  color:
-                    selectedCategoryIndex == index
-                      ? COLORS.white
-                      : COLORS.primary,
-                }}>
-                {category.name}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
-    );
-  };
+  
 
   const CardAddProduct = ({}) => {
     return (
