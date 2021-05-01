@@ -4,6 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
 import {PrimaryButton} from '../components/Button';
 import Home from './Home';
+import BottomNavigator from '../navigation/BottomNavigation';
 
 const CartScreen = () => {
   const CartCard = () => {
@@ -66,6 +67,7 @@ const CartScreen = () => {
       <View style={{marginHorizontal: 30}}>
         <PrimaryButton title="Checkout" onPress={Home}/>
       </View>
+      <BottomNavigator/>
     </SafeAreaView>
   );
 };

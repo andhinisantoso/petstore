@@ -2,7 +2,7 @@ import React from 'react';
 import {SafeAreaView, StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
-import {PrimaryButton} from '../components/Button';
+import BottomNavigator from '../navigation/BottomNavigation';
 import Home from './Home';
 
 const Favorite = () => {
@@ -55,6 +55,7 @@ const Favorite = () => {
           <FavoriteCard style={style.card}/>
         </View>
       </View>
+      <BottomNavigator/>
     </SafeAreaView>
   );
 };
