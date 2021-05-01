@@ -26,6 +26,7 @@ const App = () => {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator
+          initialRouteName="Home"
           screenOptions={{
             headerShown: false
           }}
