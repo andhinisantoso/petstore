@@ -31,8 +31,14 @@ const GreyButton = ({title, onPress = () => {}}) => {
 };
 
 const style = StyleSheet.create({
+  title: {
+    color: COLORS.white, 
+    fontWeight: 'bold', 
+    fontSize: 18
+
+  },
   btnContainer: {
-    title: {color: COLORS.white, fontWeight: 'bold', fontSize: 18},
+    
     backgroundColor: COLORS.primary,
     height: 60,
     borderRadius: 30,

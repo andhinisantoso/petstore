@@ -5,6 +5,7 @@ const COLORS = {
     secondary : '#DDE6FC',
     light : '#e5e5e5',
     grey : '#908e8c',
+    
 };
 
 export default COLORS;
