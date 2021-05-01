@@ -15,8 +15,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // redux
-import store from './src/redux/store';
+import { store, persistore } from './src/redux/store';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const Stack = createStackNavigator();
 
@@ -24,21 +25,23 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Home"
-          screenOptions={{
-            headerShown: false
-          }}
-        >
-          <Stack.Screen name="OnBoard" component={OnBoardScreen} />
-          <Stack.Screen name="SignIn" component={SignIn} />
-          <Stack.Screen name="SignUp" component={SignUp} />
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Cart" component={CartScreen} />
-          <Stack.Screen name="Favourite" component={Favorite} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <PersistGate loading={null} persistor={persistore} >
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{
+              headerShown: false
+            }}
+          >
+            <Stack.Screen name="OnBoard" component={OnBoardScreen} />
+            <Stack.Screen name="SignIn" component={SignIn} />
+            <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="Cart" component={CartScreen} />
+            <Stack.Screen name="Favourite" component={Favorite} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PersistGate>
     </Provider>
   )
 }
