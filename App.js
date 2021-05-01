@@ -11,10 +11,11 @@ import Favorite from './src/views/screens/Favorite';
 import History from './src/views/screens/History';
 import DetailHistory from './src/views/screens/DetailHistory';
 import AdminHome from './src/views/screens/AdminHome';
+import AdminCatalog from './src/views/screens/AdminCatalog';
 
 const App = () => {
   return (
-    <AdminHome/>
+    <AdminCatalog/>
 
 
   )
