@@ -24,7 +24,6 @@ const PopupDelete = () => {
                 title="Yes"
                 />
             </View>
-          
             </View>
             </View>
             
