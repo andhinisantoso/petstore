@@ -13,10 +13,11 @@ import DetailHistory from './src/views/screens/DetailHistory';
 import AdminHome from './src/views/screens/AdminHome';
 import AdminCatalog from './src/views/screens/AdminCatalog';
 import AdminDetailsScreen from './src/views/screens/AdminDetailProduct';
+import PopupDelete from './src/views/screens/PopupDelete';
 
 const App = () => {
   return (
-    <AdminDetailsScreen/>
+    <PopupDelete/>
 
 
   )
