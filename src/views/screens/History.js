@@ -8,6 +8,7 @@ import Home from './Home';
 const History = () => {
   const HistoryCard = () => {
     return (
+      <View>
       <View style={style.historyCard}>
         <View style={style.textDesc}>
           <Text style={style.text}>Date</Text>
@@ -29,11 +30,16 @@ const History = () => {
           </View>
         </View>
       </View>
+      </View>
     );
   };
   return (
     <SafeAreaView style={{backgroundColor: COLORS.white, flex: 1}}>
-      <View>
+      <View style={style.header}></View>
+      <View style={{marginBottom: 380}}>
+        <View style={style.card}>
+          <HistoryCard style={style.card}/>
+        </View>
         <View style={style.card}>
           <HistoryCard style={style.card}/>
         </View>
@@ -43,6 +49,9 @@ const History = () => {
   );
 };
 const style = StyleSheet.create({
+  header: {
+    height: 70
+  },
   historyCard: {
     height: 120,
     width: 330,

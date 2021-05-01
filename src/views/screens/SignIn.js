@@ -17,7 +17,7 @@ const SignIn = ({navigation}) => {
           style={{
             width: 200,
             height: 200,
-            top: 40,
+            top: 100,
             left: 120,
           }}
           source={require('../../assets/categories/home.png')}
@@ -72,7 +72,7 @@ const style = StyleSheet.create({
     paddingHorizontal: 50,
     justifyContent: 'space-between',
     paddingBottom: 40,
-    paddingTop: 10,
+    paddingTop: 50,
   },
   formLogin: {
     marginTop: 30,
@@ -83,7 +83,8 @@ const style = StyleSheet.create({
     marginBottom: 20,
     borderRadius: 15,
     backgroundColor: COLORS.white,
-    shadowRadius: 5,
+    shadowRadius: 20,
+    elevation: 13,
     shadowColor: COLORS.grey,
     flexDirection: 'row',
     alignItems: 'center',

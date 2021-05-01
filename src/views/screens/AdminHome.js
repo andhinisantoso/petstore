@@ -8,23 +8,15 @@ import {
 } from 'react-native';
 import {
   Dimensions,
-  ScrollView,
-  TextInput,
   TouchableHighlight,
-  TouchableOpacity,
 } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { AntDesign, MaterialIcons, MaterialCommunityIcons, Octicons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
-import categories from '../../const/categories';
 import BottomNavigator from '../navigation/AdminButtomNavigation';
 const {width} = Dimensions.get('screen');
 const cardWidth = width / 2 - 20;
 
-const Home = ({navigation}) => {
-
-  const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
-
-  
+const AdminHome = ({navigation}) => {
 
   const CardAddProduct = ({}) => {
     return (
@@ -34,8 +26,8 @@ const Home = ({navigation}) => {
         onPress={() => navigation.navigate('DetailsScreen')}
       >
         <View style={style.card}>
-          <View>
-            <Image source={require('../../assets/AddProduct.png')} style={{marginBottom:15.06, marginLeft:54, marginTop:51, marginLeft:53.78, height: 50.94, width: 53.22}} />
+          <View  style={{marginBottom:15.06, marginLeft:40, marginTop:45, height: 50.94}}>
+            <AntDesign name="tag" size={70} color={COLORS.primary}/>
           </View>
           <View style={{marginHorizontal: 10, marginTop: 10}}>
             <Text style={{lineHeight:28, fontFamily:'Roboto', textAlign:'center', fontSize: 24, fontWeight: 'bold', color:COLORS.primary}}>Add{"\n"}Product</Text>
@@ -52,8 +44,8 @@ const Home = ({navigation}) => {
         onPress={() => navigation.navigate('DetailsScreen')}
       >
         <View style={style.card}>
-          <View>
-            <Image source={require('../../assets/OrderCheck.png')} style={{marginBottom:11, marginLeft:49, marginTop:40, marginLeft:49, height: 66, width: 63}} />
+          <View  style={{marginBottom:15.06, marginLeft:50, marginTop:45, height: 50.94}}>
+            <MaterialCommunityIcons name="briefcase-check" size={70} color={COLORS.primary}/>
           </View>
           <View style={{marginHorizontal: 10, marginTop: 10}}>
             <Text style={{lineHeight:28, fontFamily:'Roboto', textAlign:'center', fontSize: 24, fontWeight: 'bold', color:COLORS.primary}}>Order{"\n"}Check</Text>
@@ -70,8 +62,8 @@ const Home = ({navigation}) => {
         onPress={() => navigation.navigate('DetailsScreen')}
       >
         <View style={style.card}>
-          <View>
-            <Image source={require('../../assets/AddCategory.png')} style={{marginBottom:9, marginLeft:44, marginTop:44, marginLeft:44, height: 64, width: 73}} />
+          <View  style={{marginBottom:15.06, marginLeft:50, marginTop:40, height: 50.94}}>
+            <MaterialIcons name="category" size={70} color={COLORS.primary}/>
           </View>
           <View style={{marginHorizontal: 10, marginTop: 10}}>
             <Text style={{lineHeight:28, fontFamily:'Roboto', textAlign:'center', fontSize: 24, fontWeight: 'bold', color:COLORS.primary}}>Add{"\n"}Category</Text>
@@ -88,8 +80,8 @@ const Home = ({navigation}) => {
         onPress={() => navigation.navigate('DetailsScreen')}
       >
         <View style={style.card}>
-          <View>
-            <Image source={require('../../assets/Summary.png')} style={{marginBottom:13, marginLeft:42, marginTop:44, marginLeft:49, height: 59, width: 70}} />
+          <View  style={{marginBottom:15.06, marginLeft:50, marginTop:45, height: 50.94}}>
+            <Octicons name="graph" size={70} color={COLORS.primary}/>
           </View>
           <View style={{marginHorizontal: 10, marginTop: 10}}>
             <Text style={{lineHeight:28, fontFamily:'Roboto', textAlign:'center', fontSize: 24, fontWeight: 'bold', color:COLORS.primary}}>Summary</Text>
@@ -128,15 +120,15 @@ const Home = ({navigation}) => {
           borderBottomWidth: 2,
           marginLeft: 13,
           marginRight: 13,
-          
+          marginBottom: 10,
         }}>
       </View>
 
-      <View style={{flex: 1, flexDirection: 'row', marginLeft: 20, }}>
+      <View style={{flex: 1, flexDirection: 'row', marginLeft: 10, }}>
         <CardAddProduct/>
         <CardOrderCheck/> 
       </View>
-      <View style={{flex: 1, flexDirection: 'row', marginLeft: 20, }}>  
+      <View style={{flex: 1, flexDirection: 'row', marginLeft: 10, }}>  
         <CardAddCategory/>
         <CardSummary/>
       </View>
@@ -153,7 +145,7 @@ const style = StyleSheet.create({
     height: '100%',
   },
   header: {
-    marginTop: 40,
+    marginTop: 70,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
@@ -218,4 +210,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default Home;
+export default AdminHome;

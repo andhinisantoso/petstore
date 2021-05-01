@@ -54,7 +54,6 @@ const Home = ({navigation}) => {
                   fontSize: 15,
                   fontWeight: 'bold',
                   marginLeft: 10,
-                  marginTop: 15,
                   color:
                     selectedCategoryIndex == index
                       ? COLORS.white
@@ -156,7 +155,7 @@ const style = StyleSheet.create({
     height: '100%',
   },
   header: {
-    marginTop: 40,
+    marginTop: 60,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
@@ -190,7 +189,6 @@ const style = StyleSheet.create({
     height: 40,
     width: 40,
     marginLeft: 5,
-    marginTop: 5,
     backgroundColor: COLORS.white,
     borderRadius: 30,
     justifyContent: 'center',

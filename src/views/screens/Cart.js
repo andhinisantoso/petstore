@@ -56,16 +56,17 @@ const CartScreen = () => {
         <View style={style.card}>
           <CartCard/>
         </View>
-        
-        <View style={style.footer}>
-          <Text style={{fontSize: 18, fontWeight: 'bold', marginLeft: 30}}>
-            Total Price
-          </Text>
-          <Text style={{fontSize: 18, fontWeight: 'bold', marginRight: 40}}>Rp 200.000</Text>
-        </View>
+        <View style={{paddingBottom: 80}}>
+          <View style={style.footer}>
+            <Text style={{fontSize: 18, fontWeight: 'bold', marginLeft: 30}}>
+              Total Price
+            </Text>
+            <Text style={{fontSize: 18, fontWeight: 'bold', marginRight: 40}}>Rp 200.000</Text>
+          </View>
+          <View style={{marginHorizontal: 30}}>
+          <PrimaryButton title="Checkout" onPress={Home}/>
+          </View>
       </View>
-      <View style={{marginHorizontal: 30}}>
-        <PrimaryButton title="Checkout" onPress={Home}/>
       </View>
       <BottomNavigator/>
     </SafeAreaView>
@@ -73,7 +74,8 @@ const CartScreen = () => {
 };
 const style = StyleSheet.create({
   header: {
-    paddingVertical: 20,
+    paddingTop: 50,
+    paddingBottom: 20,
     flexDirection: 'row',
     alignItems: 'center',
     marginHorizontal: 20,

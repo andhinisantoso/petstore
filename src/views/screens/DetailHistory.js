@@ -55,6 +55,7 @@ const DetailHistory = () => {
         <MaterialIcons name="arrow-back-ios" size={28}/>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Detail History</Text>
       </View>
+      <View style={{marginBottom: 50}}>
       <View>
         <View style={style.card}>
           <HistoryCard style={style.card}/>
@@ -63,13 +64,15 @@ const DetailHistory = () => {
         <CartCard/>
         <CartCard/>
       </View>
+      </View>
       <BottomNavigator/>
     </SafeAreaView>
   );
 };
 const style = StyleSheet.create({
   header: {
-    paddingVertical: 20,
+    paddingTop: 50,
+    paddingBottom: 20,
     flexDirection: 'row',
     alignItems: 'center',
     marginHorizontal: 20,

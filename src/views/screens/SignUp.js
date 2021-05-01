@@ -14,7 +14,7 @@ const SignUp = ({navigation}) => {
             paddingHorizontal: 150,
             justifyContent: 'space-between',
             marginBottom: 10,
-            marginTop: 50
+            marginTop: 100
         }}
       >
         <Ionicons name="ios-person-circle-outline" size={100} color={COLORS.primary}/>
@@ -85,6 +85,7 @@ const style = StyleSheet.create({
     backgroundColor: COLORS.white,
     shadowRadius: 5,
     shadowColor: COLORS.grey,
+    elevation: 13,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

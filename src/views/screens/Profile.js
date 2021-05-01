@@ -1,91 +1,101 @@
 import React from 'react';
-import {StyleSheet, View, Text, SafeAreaView, Image} from 'react-native';
+import {Text, StyleSheet, View, Image, SafeAreaView, TextInput} from 'react-native';
 import COLORS from '../../const/colors';
-import { PrimaryButton } from '../components/Button';
-import { MaterialIcons } from '@expo/vector-icons';
+import {PrimaryButton, SecondaryButton} from '../components/Button';
 import Home from './Home';
+import { MaterialIcons } from '@expo/vector-icons';
 
-const Profile = () => {
-    return (
-        <SafeAreaView>
-            <View style={style.header}>
-                <MaterialIcons name="arrow-back-ios" size={28} onPress={Home} />
-                <Text style={{fontSize: 20, fontWeight: 'bold'}}>Profile</Text>
-            </View>
-            <View>
-                <Image
-                    source={require('../../assets/categories/home.png')}
-                    style={{height: 120, width: 120, borderRadius: 25, marginLeft: 150}}
-                />
-            </View>
-            <View style={style.container}>
-                <View>
-                    <Text style={style.form}>
-                        Full Name
-                    </Text>
-                    <Text style={style.textData}>
-                        Dadu
-                    </Text>
-                </View>
-                <View>
-                    <Text style={style.form}>
-                        Email
-                    </Text>
-                    <Text style={style.textData}>
-                        Dadu@gmail.com
-                    </Text>
-                </View>
-                <View>
-                    <Text style={style.form}>
-                        Telephone
-                    </Text>
-                    <Text style={style.textData}>
-                        082222222
-                    </Text>
-                </View>
-                <View>
-                    <Text style={style.form}>
-                        Password
-                    </Text>
-                    <Text style={style.textData}>
-                        ********
-                    </Text>
-                </View>
-                <PrimaryButton
+const Profile = ({navigation}) => {
+  return (
+    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
+      <View style={style.header}>
+        <MaterialIcons name="arrow-back-ios" size={28} onPress={Home} />
+        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Profile</Text>
+      </View>
+      <View 
+        style={{
+            paddingHorizontal: 130,
+            justifyContent: 'space-between',
+            marginBottom: 10,
+            marginTop: 10
+        }}
+      >
+        <Image source={require('../../assets/categories/home.png')} style={{
+            width: 150,
+            height: 150,}}/>
+      </View>
+      <View style={style.textContainer}>
+        <View>
+            <Text style={{marginTop: 15, fontSize: 18, color: COLORS.grey}}>
+                Full Name
+            </Text>
+            <Text style={style.textInput}>
+                Dadu
+            </Text>
+        </View>
+        <View>
+            <Text style={{marginTop: 15, fontSize: 18, color: COLORS.grey}}>
+                Email
+            </Text>
+            <Text style={style.textInput}>
+                dadu08@gmail.com
+            </Text>
+        </View>
+        <View>
+            <Text style={{marginTop: 15, fontSize: 18, color: COLORS.grey}}>
+                Telephone
+            </Text>
+            <Text style={style.textInput}>
+                0808080808
+            </Text>
+        </View>
+        <View>
+            <Text style={{marginTop: 15, fontSize: 18, color: COLORS.grey}}>
+                Password
+            </Text>
+            <Text style={style.textInput}>
+                ********
+            </Text>
+        </View>
+        <View style={{paddingTop: 30}}>
+          <View style={{marginBottom: 20}}>
+            <PrimaryButton
                 onPress={() => navigation.navigate('Home')}
-                title="Verification"
-                />
-            </View>
-        </SafeAreaView>
-    );
-}
+                title="Edit"
+            />
+          </View>
+          <View>
+            <SecondaryButton
+              onPress={() => navigation.navigate('Home')}
+              title="Log Out"
+            />
+          </View>
+        </View>
+    </View>
+    </SafeAreaView>
+  );
+};
 
-const style = StyleSheet.create ({
-    header: {
-        paddingVertical: 20,
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginHorizontal: 20,
+const style = StyleSheet.create({
+  header: {
+    paddingTop: 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginHorizontal: 20,
+  },
+  textContainer: {
+    paddingHorizontal: 40,
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  textInput: {
+    height: 40,
+    borderColor: COLORS.dark,
+    borderBottomWidth: 4,
+    marginTop: 10,
+    fontSize: 24,
+    fontWeight: 'bold'
     },
-    container: {
-        flex: 1,
-        margin: 40,
-    },
-    form: {
-        marginTop: 5, 
-        fontSize: 18, 
-        color: COLORS.grey
-    },
-    textData: {
-        fontSize: 24, 
-        color: COLORS.dark,
-        fontWeight: 'bold',
-        height: 40,
-        borderColor: COLORS.dark,
-        borderBottomWidth: 2,
-        marginBottom: 36,
-        marginTop: 10,
-    }
 });
 
 export default Profile;

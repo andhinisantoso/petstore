@@ -44,7 +44,7 @@ const Favorite = () => {
         <MaterialIcons name="arrow-back-ios" size={28}/>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Favorite</Text>
       </View>
-      <View>
+      <View style={{marginBottom: 210}}>
         <View style={style.card}>
           <FavoriteCard style={style.card}/>
         </View>
@@ -61,7 +61,8 @@ const Favorite = () => {
 };
 const style = StyleSheet.create({
   header: {
-    paddingVertical: 20,
+    paddingTop: 50,
+    paddingBottom: 20,
     flexDirection: 'row',
     alignItems: 'center',
     marginHorizontal: 20,

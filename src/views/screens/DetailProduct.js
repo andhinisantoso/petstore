@@ -18,7 +18,8 @@ const DetailsScreen = () => {
           style={{
             justifyContent: 'center',
             alignItems: 'center',
-            height: 280,
+            height: 220,
+            marginBottom: 20,
           }}>
           <Image source={require('../../assets/rc-persian.png')} style={{height: 220, width: 220}} />
         </View>
@@ -56,7 +57,8 @@ const DetailsScreen = () => {
 
 const style = StyleSheet.create({
   header: {
-    paddingVertical: 20,
+    paddingTop: 50,
+    paddingBottom: 20,
     flexDirection: 'row',
     alignItems: 'center',
     marginHorizontal: 20,
