@@ -1,15 +1,15 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
+import { SafeAreaView, StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
-import {PrimaryButton} from '../components/Button';
+import { PrimaryButton } from '../components/Button';
 import Home from './Home';
 
-const CartScreen = () => {
+const CartScreen = ({ navigation }) => {
   const CartCard = () => {
     return (
       <View style={style.cartCard}>
-        <Image source={require('../../assets/rc-persian.png')} style={{height: 80, width: 80}} />
+        <Image source={require('../../assets/rc-persian.png')} style={{ height: 80, width: 80 }} />
         <View
           style={{
             height: 100,
@@ -17,15 +17,15 @@ const CartScreen = () => {
             flex: 1,
             marginTop: 30,
           }}>
-          <Text style={{fontWeight: 'bold', fontSize: 16}}>Royal Canin</Text>
-          <Text style={{fontSize: 13, color: COLORS.grey}}>
+          <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Royal Canin</Text>
+          <Text style={{ fontSize: 13, color: COLORS.grey }}>
             Persian 1 kg
           </Text>
-          <Text style={{fontSize: 16, fontWeight: 'bold'}}>Rp 200.000</Text>
+          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Rp 200.000</Text>
         </View>
-        <View style={{marginTop: -10}}>
-          <View style={{marginRight: 20, alignItems: 'center'}}>
-            <Text style={{fontWeight: 'bold', fontSize: 18, marginBottom: 10}}>3</Text>
+        <View style={{ marginTop: -10 }}>
+          <View style={{ marginRight: 20, alignItems: 'center' }}>
+            <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 10 }}>3</Text>
             <View style={style.actionBtn}>
               <TouchableOpacity activeOpacity={0.8} onPress={Home} style={style.icon}>
                 <MaterialIcons name="remove" color={COLORS.white} size={25} />
@@ -40,31 +40,33 @@ const CartScreen = () => {
     );
   };
   return (
-    <SafeAreaView style={{backgroundColor: COLORS.white, flex: 1}}>
+    <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1 }}>
       <View style={style.header}>
-        <MaterialIcons name="arrow-back-ios" size={28}/>
-        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Cart</Text>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <MaterialIcons name="arrow-back-ios" size={28} />
+          <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Cart</Text>
+        </TouchableOpacity>
       </View>
       <View>
         <View style={style.card}>
-          <CartCard/>
+          <CartCard />
         </View>
         <View style={style.card}>
-          <CartCard/>
+          <CartCard />
         </View>
         <View style={style.card}>
-          <CartCard/>
+          <CartCard />
         </View>
-        
+
         <View style={style.footer}>
-          <Text style={{fontSize: 18, fontWeight: 'bold', marginLeft: 30}}>
+          <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 30 }}>
             Total Price
           </Text>
-          <Text style={{fontSize: 18, fontWeight: 'bold', marginRight: 40}}>Rp 200.000</Text>
+          <Text style={{ fontSize: 18, fontWeight: 'bold', marginRight: 40 }}>Rp 200.000</Text>
         </View>
       </View>
-      <View style={{marginHorizontal: 30}}>
-        <PrimaryButton title="Checkout" onPress={Home}/>
+      <View style={{ marginHorizontal: 30 }}>
+        <PrimaryButton title="Checkout" onPress={Home} />
       </View>
     </SafeAreaView>
   );
@@ -102,9 +104,9 @@ const style = StyleSheet.create({
     alignContent: 'center',
   },
   footer: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      marginVertical: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 20,
   },
   icon: {
     marginRight: 10,

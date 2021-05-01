@@ -1,48 +1,48 @@
 import React from 'react';
-import {Text, StyleSheet, View, Image, SafeAreaView, TextInput} from 'react-native';
+import { Text, StyleSheet, View, Image, SafeAreaView, TextInput } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import COLORS from '../../const/colors';
-import {PrimaryButton} from '../components/Button';
+import { PrimaryButton } from '../components/Button';
 import Home from './Home';
 import { Ionicons } from '@expo/vector-icons';
 
-const SignUp = ({navigation}) => {
+const SignUp = ({ navigation }) => {
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
-      <View 
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
+      <View
         style={{
-            paddingHorizontal: 150,
-            justifyContent: 'space-between',
-            marginBottom: 10,
-            marginTop: 50
+          paddingHorizontal: 150,
+          justifyContent: 'space-between',
+          marginBottom: 10,
+          marginTop: 50
         }}
       >
-        <Ionicons name="ios-person-circle-outline" size={100} color={COLORS.primary}/>
+        <Ionicons name="ios-person-circle-outline" size={100} color={COLORS.primary} />
       </View>
       <View style={style.textContainer}>
         <View>
           <View style={style.formLogin}>
             <View style={style.inputContainer}>
               <TextInput
-                style={{paddingLeft: 10, flex: 2, fontSize: 16, color: COLORS.grey}}
+                style={{ paddingLeft: 10, flex: 2, fontSize: 16, color: COLORS.grey }}
                 placeholder="Full Name"
               />
             </View>
             <View style={style.inputContainer}>
               <TextInput
-                style={{paddingLeft: 10, flex: 2, fontSize: 16}}
+                style={{ paddingLeft: 10, flex: 2, fontSize: 16 }}
                 placeholder="Email"
               />
             </View>
             <View style={style.inputContainer}>
               <TextInput
-                style={{paddingLeft: 10, flex: 2, fontSize: 16}}
+                style={{ paddingLeft: 10, flex: 2, fontSize: 16 }}
                 placeholder="Telephone"
               />
             </View>
             <View style={style.inputContainer}>
               <TextInput
-                style={{paddingLeft: 10, flex: 2, fontSize: 16}}
+                style={{ paddingLeft: 10, flex: 2, fontSize: 16 }}
                 placeholder="Password"
               />
             </View>
@@ -52,15 +52,15 @@ const SignUp = ({navigation}) => {
             />
           </View>
         </View>
-          <Text
-            style={{
-              marginTop: 20,
-              fontSize: 16,
-              textAlign: 'center',
-              color: COLORS.grey,
-            }}>
-            Already have an Account? <TouchableOpacity activeOpacity={0.5} onPress={Home}><Text style={{color: COLORS.primary, fontWeight: 'bold', fontSize: 18}}>Sign In</Text></TouchableOpacity>
-          </Text>
+        <Text
+          style={{
+            marginTop: 20,
+            fontSize: 16,
+            textAlign: 'center',
+            color: COLORS.grey,
+          }}>
+          Already have an Account? <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.navigate('SignIn')}><Text style={{ color: COLORS.primary, fontWeight: 'bold', fontSize: 18 }}>Sign In</Text></TouchableOpacity>
+        </Text>
       </View>
     </SafeAreaView>
   );

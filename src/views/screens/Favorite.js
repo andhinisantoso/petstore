@@ -1,15 +1,15 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
+import { SafeAreaView, StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
-import {PrimaryButton} from '../components/Button';
+import { PrimaryButton } from '../components/Button';
 import Home from './Home';
 
-const Favorite = () => {
+const Favorite = ({ navigation }) => {
   const FavoriteCard = () => {
     return (
       <View style={style.favoriteCard}>
-        <Image source={require('../../assets/rc-persian.png')} style={{height: 80, width: 80}} />
+        <Image source={require('../../assets/rc-persian.png')} style={{ height: 80, width: 80 }} />
         <View
           style={{
             height: 100,
@@ -17,21 +17,21 @@ const Favorite = () => {
             marginTop: 30,
             flex: 1,
           }}>
-          <Text style={{fontWeight: 'bold', fontSize: 16}}>Royal Canin</Text>
-          <Text style={{fontSize: 13, color: COLORS.grey}}>
+          <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Royal Canin</Text>
+          <Text style={{ fontSize: 13, color: COLORS.grey }}>
             Persian 1 kg
           </Text>
-          <Text style={{fontSize: 16, fontWeight: 'bold'}}>Rp 200.000</Text>
+          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Rp 200.000</Text>
         </View>
-        <View style={{marginTop: -20}}>
-          <View style={{alignItems: 'center'}}>
+        <View style={{ marginTop: -20 }}>
+          <View style={{ alignItems: 'center' }}>
             <View style={style.actionBtn}>
-                <TouchableOpacity activeOpacity={0.8} onPress={Home} style={style.iconContainer}>
-                    <MaterialIcons name="favorite" color={COLORS.primary} size={25} />
-                </TouchableOpacity>
-                <TouchableOpacity activeOpacity={0.8} onPress={Home} style={style.iconContainer}>
-                    <MaterialIcons name="shopping-cart" color={COLORS.primary} size={25} />
-                </TouchableOpacity>
+              <TouchableOpacity activeOpacity={0.8} onPress={Home} style={style.iconContainer}>
+                <MaterialIcons name="favorite" color={COLORS.primary} size={25} />
+              </TouchableOpacity>
+              <TouchableOpacity activeOpacity={0.8} onPress={Home} style={style.iconContainer}>
+                <MaterialIcons name="shopping-cart" color={COLORS.primary} size={25} />
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -39,20 +39,22 @@ const Favorite = () => {
     );
   };
   return (
-    <SafeAreaView style={{backgroundColor: COLORS.white, flex: 1}}>
+    <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1 }}>
       <View style={style.header}>
-        <MaterialIcons name="arrow-back-ios" size={28}/>
-        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Favorite</Text>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <MaterialIcons name="arrow-back-ios" size={28} />
+          <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Favorite</Text>
+        </TouchableOpacity>
       </View>
       <View>
         <View style={style.card}>
-          <FavoriteCard style={style.card}/>
+          <FavoriteCard style={style.card} />
         </View>
         <View style={style.card}>
-          <FavoriteCard style={style.card}/>
+          <FavoriteCard style={style.card} />
         </View>
         <View style={style.card}>
-          <FavoriteCard style={style.card}/>
+          <FavoriteCard style={style.card} />
         </View>
       </View>
     </SafeAreaView>
