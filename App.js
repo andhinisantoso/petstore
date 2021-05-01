@@ -14,10 +14,14 @@ import AdminHome from './src/views/screens/AdminHome';
 import AdminCatalog from './src/views/screens/AdminCatalog';
 import AdminDetailsScreen from './src/views/screens/AdminDetailProduct';
 import PopupDelete from './src/views/screens/PopupDelete';
+import AddCategory from './src/views/screens/AddCategory';
+import AddProduct from './src/views/screens/AddProduct';
+import AdminEditProfile from './src/views/screens/AdminEditProfile'
+
 
 const App = () => {
   return (
-    <PopupDelete/>
+    <AdminEditProfile/>
 
 
   )
