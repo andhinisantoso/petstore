@@ -15,6 +15,8 @@ import AdminHome from './src/views/screens/AdminHome';
 const App = () => {
   return (
     <AdminHome/>
+
+
   )
 }
 
