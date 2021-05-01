@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { get } from '../api/categoryApi';
+import HOME from '../const/host';
 
 export const getCategories = createAsyncThunk(
     'category/getCategories',
     async () => {
-        const response = await fetch('http://192.168.43.15:8000/api/categories')
+        const response = await fetch(`${HOME}/api/categories`)
         return response.json()
     }
 )
