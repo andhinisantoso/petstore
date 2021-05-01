@@ -10,10 +10,12 @@ import AlertSuccess from './src/views/screens/AlertSuccess';
 import Favorite from './src/views/screens/Favorite';
 import History from './src/views/screens/History';
 import DetailHistory from './src/views/screens/DetailHistory';
+import Profile from './src/views/screens/Profile';
+import EditProfile from './src/views/screens/EditProfile';
 
 const App = () => {
   return (
-    <DetailHistory/>
+    <EditProfile/>
   )
 }
 
