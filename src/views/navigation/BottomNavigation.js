@@ -22,7 +22,7 @@ const BottomNavigator = () => {
       <TouchableOpacity onPress={() => navigation.navigate('Favourite')} activeOpacity={0.5} style={style.icon}>
         <MaterialIcons name="favorite" size={36} color={COLORS.secondary} />
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.5} style={style.icon}>
+      <TouchableOpacity onPress={() => navigation.navigate('InfoPetStore')} activeOpacity={0.5} style={style.icon}>
         <MaterialIcons name="store" size={36} color={COLORS.secondary} />
       </TouchableOpacity>
 
