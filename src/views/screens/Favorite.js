@@ -4,12 +4,15 @@ import { MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
 import BottomNavigator from '../navigation/BottomNavigation';
 import Home from './Home';
+import { useSelector } from 'react-redux';
 
 const Favorite = ({ navigation }) => {
-  const FavoriteCard = () => {
+  const listFavourite = useSelector((state) => state.favourite.listFavourite)
+
+  const FavoriteCard = (props) => {
     return (
       <View style={style.favoriteCard}>
-        <Image source={require('../../assets/rc-persian.png')} style={{ height: 80, width: 80 }} />
+        <Image source={{ uri: props.image }} style={{ height: 80, width: 80 }} />
         <View
           style={{
             height: 100,
@@ -17,11 +20,11 @@ const Favorite = ({ navigation }) => {
             marginTop: 30,
             flex: 1,
           }}>
-          <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Royal Canin</Text>
+          <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{props.name}</Text>
           <Text style={{ fontSize: 13, color: COLORS.grey }}>
-            Persian 1 kg
+            {props.detail}
           </Text>
-          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Rp 200.000</Text>
+          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Rp {props.price}</Text>
         </View>
         <View style={{ marginTop: -20 }}>
           <View style={{ alignItems: 'center' }}>
@@ -38,6 +41,7 @@ const Favorite = ({ navigation }) => {
       </View>
     );
   };
+
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1 }}>
       <View style={style.header}>
@@ -47,15 +51,11 @@ const Favorite = ({ navigation }) => {
         </TouchableOpacity>
       </View>
       <View style={{ marginBottom: 210 }}>
-        <View style={style.card}>
-          <FavoriteCard style={style.card} />
-        </View>
-        <View style={style.card}>
-          <FavoriteCard style={style.card} />
-        </View>
-        <View style={style.card}>
-          <FavoriteCard style={style.card} />
-        </View>
+        {listFavourite.map((item) => (
+          <View key={item.id} style={style.card}>
+            <FavoriteCard style={style.card} key={item.id} image={item.image} id={item.id} name={item.name} price={item.price} detail={item.detail} />
+          </View>
+        ))}
       </View>
       <BottomNavigator />
     </SafeAreaView>

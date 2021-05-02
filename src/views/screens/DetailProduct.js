@@ -45,7 +45,7 @@ const DetailsScreen = ({ route, navigation }) => {
             <Text style={{ fontSize: 25, fontWeight: 'bold', color: COLORS.dark, marginBottom: -10 }}>
               {name}
             </Text>
-            <TouchableOpacity activeOpacity={0.8} onPress={() => dispatch(add({ id: id, name: name, detail: detail, price: price }))} style={style.iconContainer}>
+            <TouchableOpacity activeOpacity={0.8} onPress={() => dispatch(add({ id: id, image: image, name: name, detail: detail, price: price }))} style={style.iconContainer}>
               <MaterialIcons name="favorite-border" color={COLORS.primary} size={25} />
             </TouchableOpacity>
           </View>
