@@ -36,7 +36,9 @@ const Home = ({ navigation }) => {
   }, [dispatch])
 
   useEffect(() => {
-    if (status !== 'login' && role !== 'user') {
+    if (role == 'admin') {
+      navigation.replace('AdminHome')
+    } else if (status != 'login') {
       navigation.replace('OnBoard')
     }
   }, [])
