@@ -3,6 +3,7 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import categoryReducer from './categorySlice';
 import logReducer from './logSlice';
+import itemReducer from './itemSlice';
 
 const persistConfig = {
     key: 'root',
@@ -12,7 +13,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     category: categoryReducer,
-    log: logReducer
+    log: logReducer,
+    item: itemReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

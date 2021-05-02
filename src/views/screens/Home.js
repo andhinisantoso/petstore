@@ -23,17 +23,19 @@ const cardWidth = width / 2 - 20;
 
 // redux
 import { getCategories } from '../../redux/categorySlice'
+import { getAllItem } from '../../redux/itemSlice'
 
 const Home = ({ navigation }) => {
-
-  const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
   const dispatch = useDispatch()
-
   const status = useSelector((state) => state.log.status)
   const role = useSelector((state) => state.log.role)
+  const listCategory = useSelector((state) => state.category.listCategory)
+  const listItem = useSelector((state) => state.item.listItem)
+  const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(listCategory[0]['id']);
 
   useEffect(() => {
     dispatch(getCategories())
+    dispatch(getAllItem())
   }, [dispatch])
 
   useEffect(() => {
@@ -43,8 +45,6 @@ const Home = ({ navigation }) => {
       navigation.replace('OnBoard')
     }
   }, [])
-
-  const listCategory = useSelector((state) => state.category.listCategory)
 
   const ListCategories = () => {
     return (
@@ -91,7 +91,7 @@ const Home = ({ navigation }) => {
     );
   };
 
-  const Card = ({ }) => {
+  const Card = (props) => {
     return (
       <TouchableHighlight
         underlayColor={COLORS.white}
@@ -100,12 +100,12 @@ const Home = ({ navigation }) => {
       >
         <View style={style.card}>
           <View style={{ alignItems: 'center' }}>
-            <Image source={require('../../assets/rc-persian.png')} style={{ height: 120, width: 120 }} />
+            <Image source={{ uri: props.image }} style={{ height: 120, width: 120 }} />
           </View>
 
           <View style={{ marginHorizontal: 10, marginTop: 10 }}>
-            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Royal Canin</Text>
-            <Text style={{ fontSize: 14, color: COLORS.grey, marginTop: 2 }}>Persian 1 kg </Text>
+            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{props.name}</Text>
+            <Text style={{ fontSize: 14, color: COLORS.grey, marginTop: 2 }}>{props.detail}</Text>
           </View>
           <View
             style={{
@@ -115,7 +115,7 @@ const Home = ({ navigation }) => {
               justifyContent: 'space-between',
             }}>
             <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
-              Rp 200.000
+              Rp {props.price}
             </Text>
             <View style={style.addToCartBtn}>
               <MaterialIcons name="add" size={20} color={COLORS.white} />
@@ -165,8 +165,11 @@ const Home = ({ navigation }) => {
         <ListCategories />
       </View>
       <View style={{ flex: 1, flexDirection: 'row', marginLeft: 10, }}>
-        <Card />
-        <Card />
+        {listItem.map((item) => {
+          if (item.category_id == selectedCategoryIndex) {
+            return <Card image={item.image} name={item.name} price={item.price} detail={item.detail} key={item.id} />
+          }
+        })}
       </View>
       <BottomNavigator />
     </SafeAreaView>
