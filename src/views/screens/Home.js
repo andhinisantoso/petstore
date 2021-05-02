@@ -136,10 +136,12 @@ const Home = ({ navigation }) => {
             What do you need today
           </Text>
         </View>
-        <Image
-          source={require('../../assets/categories/home.png')}
-          style={{ height: 50, width: 50, borderRadius: 25 }}
-        />
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')} >
+          <Image
+            source={require('../../assets/categories/home.png')}
+            style={{ height: 50, width: 50, borderRadius: 25 }}
+          />
+        </TouchableOpacity>
       </View>
       <View
         style={{

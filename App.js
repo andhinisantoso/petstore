@@ -6,6 +6,7 @@ import DetailsScreen from './src/views/screens/DetailProduct';
 import SignIn from './src/views/screens/SignIn';
 import SignUp from './src/views/screens/SignUp';
 import Verification from './src/views/screens/Verification';
+import Profile from './src/views/screens/Profile';
 import CartScreen from './src/views/screens/Cart';
 import AlertSuccess from './src/views/screens/AlertSuccess';
 import Favorite from './src/views/screens/Favorite';
@@ -51,6 +52,7 @@ const App = () => {
             <Stack.Screen name="Verification" component={Verification} />
             {/* user */}
             <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="Profile" component={Profile} />
             <Stack.Screen name="DetailProduct" component={DetailsScreen} />
             <Stack.Screen name="Cart" component={CartScreen} />
             <Stack.Screen name="Favourite" component={Favorite} />
