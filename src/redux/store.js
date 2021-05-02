@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import categoryReducer from './categorySlice';
 import logReducer from './logSlice';
 import itemReducer from './itemSlice';
+import favouriteReducer from './favouriteSlice';
 
 const persistConfig = {
     key: 'root',
@@ -14,7 +15,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
     category: categoryReducer,
     log: logReducer,
-    item: itemReducer
+    item: itemReducer,
+    favourite: favouriteReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

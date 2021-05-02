@@ -31,11 +31,12 @@ const Home = ({ navigation }) => {
   const role = useSelector((state) => state.log.role)
   const listCategory = useSelector((state) => state.category.listCategory)
   const listItem = useSelector((state) => state.item.listItem)
-  const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(listCategory[0]['id']);
+  const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
 
   useEffect(() => {
     dispatch(getCategories())
     dispatch(getAllItem())
+    setSelectedCategoryIndex(listCategory[0]['id'])
   }, [dispatch])
 
   useEffect(() => {
@@ -174,7 +175,7 @@ const Home = ({ navigation }) => {
       <View style={{ flex: 1, flexDirection: 'row', marginLeft: 10, }}>
         {listItem.map((item) => {
           if (item.category_id == selectedCategoryIndex) {
-            return <Card image={item.image} name={item.name} price={item.price} detail={item.detail} description={item.description} key={item.id} />
+            return <Card image={item.image} name={item.name} price={item.price} detail={item.detail} description={item.description} key={item.id} id={item.id} />
           }
         })}
       </View>
