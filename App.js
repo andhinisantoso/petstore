@@ -9,6 +9,16 @@ import Verification from './src/views/screens/Verification';
 import CartScreen from './src/views/screens/Cart';
 import AlertSuccess from './src/views/screens/AlertSuccess';
 import Favorite from './src/views/screens/Favorite';
+import History from './src/views/screens/History';
+import DetailHistory from './src/views/screens/DetailHistory';
+import AdminHome from './src/views/screens/AdminHome';
+import AdminCatalog from './src/views/screens/AdminCatalog';
+import AdminDetailsScreen from './src/views/screens/AdminDetailProduct';
+import PopupDelete from './src/views/screens/PopupDelete';
+import AddCategory from './src/views/screens/AddCategory';
+import AddProduct from './src/views/screens/AddProduct';
+import AdminEditProfile from './src/views/screens/AdminEditProfile';
+import InfoPetStore from './src/views/screens/StoreProfile';
 import BottomNavigation from './src/views/navigation/BottomNavigation';
 // navigation
 import { NavigationContainer } from '@react-navigation/native';
@@ -20,6 +30,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
 const Stack = createStackNavigator();
+
 
 const App = () => {
 

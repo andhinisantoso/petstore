@@ -2,7 +2,7 @@ import React from 'react';
 import {SafeAreaView, StyleSheet, View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
-import {GreyButton} from '../components/Button';
+import {GreyButton, PrimaryButton} from '../components/Button';
 import Home from '../screens/Home';
 
 const DetailsScreen = () => {
@@ -18,8 +18,7 @@ const DetailsScreen = () => {
           style={{
             justifyContent: 'center',
             alignItems: 'center',
-            height: 220,
-            marginBottom: 20,
+            height: 280,
           }}>
           <Image source={require('../../assets/rc-persian.png')} style={{height: 220, width: 220}} />
         </View>
@@ -46,8 +45,11 @@ const DetailsScreen = () => {
             and scrambled it to make a type specimen book. It has survived not
             only five centuries.
           </Text>
-          <View style={{marginTop: 40, marginBottom: 40}}>
-            <GreyButton title="Add To Cart" />
+          <View style={{marginTop: 40, marginBottom:7}}>
+            <PrimaryButton title="Edit" />
+          </View>
+          <View style={{marginTop: 7, marginBottom: 40}}>
+              <GreyButton title="Decline" />
           </View>
         </View>
       </ScrollView>
@@ -57,8 +59,7 @@ const DetailsScreen = () => {
 
 const style = StyleSheet.create({
   header: {
-    paddingTop: 50,
-    paddingBottom: 20,
+    paddingVertical: 20,
     flexDirection: 'row',
     alignItems: 'center',
     marginHorizontal: 20,

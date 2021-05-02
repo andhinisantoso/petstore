@@ -23,7 +23,7 @@ const AlertSuccess = () => {
 
 const style = StyleSheet.create ({
     header: {
-        paddingVertical: 20,
+        paddingVertical: 50,
         flexDirection: 'row',
         alignItems: 'center',
         marginHorizontal: 20,

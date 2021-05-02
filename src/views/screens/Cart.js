@@ -4,6 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
 import { PrimaryButton } from '../components/Button';
 import Home from './Home';
+import BottomNavigator from '../navigation/BottomNavigation';
 
 const CartScreen = ({ navigation }) => {
   const CartCard = () => {
@@ -58,22 +59,27 @@ const CartScreen = ({ navigation }) => {
           <CartCard />
         </View>
 
-        <View style={style.footer}>
-          <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 30 }}>
-            Total Price
-          </Text>
-          <Text style={{ fontSize: 18, fontWeight: 'bold', marginRight: 40 }}>Rp 200.000</Text>
+        <View style={{ paddingBottom: 80 }}>
+          <View style={style.footer}>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 30 }}>
+              Total Price
+            </Text>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', marginRight: 40 }}>Rp 200.000</Text>
+          </View>
+          <View style={{ marginHorizontal: 30 }}>
+            <PrimaryButton title="Checkout" onPress={Home} />
+          </View>
         </View>
+
       </View>
-      <View style={{ marginHorizontal: 30 }}>
-        <PrimaryButton title="Checkout" onPress={Home} />
-      </View>
+      <BottomNavigator />
     </SafeAreaView>
   );
 };
 const style = StyleSheet.create({
   header: {
-    paddingVertical: 20,
+    paddingTop: 50,
+    paddingBottom: 20,
     flexDirection: 'row',
     alignItems: 'center',
     marginHorizontal: 20,

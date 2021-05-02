@@ -15,10 +15,10 @@ const OnBoardScreen = ({ navigation }) => {
         }}>
         <Image
           style={{
-            width: 200,
-            height: 200,
-            top: 100,
-            left: 120,
+            width: 300,
+            height: 300,
+            top: 130,
+            left: 80,
           }}
           source={require('../../assets/categories/home.png')}
         />
@@ -53,6 +53,7 @@ const style = StyleSheet.create({
     paddingHorizontal: 50,
     justifyContent: 'space-between',
     paddingBottom: 40,
+    marginTop: 50,
   },
 });
 
