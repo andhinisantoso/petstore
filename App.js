@@ -44,12 +44,27 @@ const App = () => {
               headerShown: false
             }}
           >
+            {/* scene login signup and onboard */}
             <Stack.Screen name="OnBoard" component={OnBoardScreen} />
             <Stack.Screen name="SignIn" component={SignIn} />
             <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="Verification" component={Verification} />
+            {/* user */}
             <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="DetailProduct" component={DetailsScreen} />
             <Stack.Screen name="Cart" component={CartScreen} />
             <Stack.Screen name="Favourite" component={Favorite} />
+            <Stack.Screen name="History" component={History} />
+            <Stack.Screen name="DetailHistory" component={DetailHistory} />
+            <Stack.Screen name="InfoPetStore" component={InfoPetStore} />
+            <Stack.Screen name="Success" component={AlertSuccess} />
+            {/* admin */}
+            <Stack.Screen name="AdminHome" component={AdminHome} />
+            <Stack.Screen name="AdminCatalog" component={AdminCatalog} />
+            <Stack.Screen name="AdminEditProfile" component={AdminEditProfile} />
+            <Stack.Screen name="AdminDetailsScreen" component={AdminDetailsScreen} />
+            <Stack.Screen name="AddCategory" component={AddCategory} />
+            <Stack.Screen name="AddProduct" component={AddProduct} />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>
