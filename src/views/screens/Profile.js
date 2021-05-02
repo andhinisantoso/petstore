@@ -5,8 +5,19 @@ import { PrimaryButton, SecondaryButton } from '../components/Button';
 import Home from './Home';
 import { MaterialIcons } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useDispatch } from 'react-redux';
+// reducer
+import { logout } from '../../redux/logSlice';
 
 const Profile = ({ navigation }) => {
+
+  const dispatch = useDispatch()
+
+  const _logout = () => {
+    dispatch(logout())
+    navigation.replace('SignIn')
+  }
+
   return (
     <ScrollView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <View style={style.header}>
@@ -62,13 +73,13 @@ const Profile = ({ navigation }) => {
         <View style={{ paddingTop: 30 }}>
           <View style={{ marginBottom: 20 }}>
             <PrimaryButton
-              onPress={() => navigation.navigate('Home')}
+              onPress={() => navigation.replace('Home')}
               title="Edit"
             />
           </View>
           <View>
             <SecondaryButton
-              onPress={() => navigation.navigate('Home')}
+              onPress={_logout}
               title="Log Out"
             />
           </View>

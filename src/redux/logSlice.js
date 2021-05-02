@@ -26,6 +26,13 @@ const logSlice = createSlice({
         role: '',
         status: 'logout',
     },
+    reducers: {
+        logout: (state) => {
+            state.userId = null
+            state.role = ''
+            state.status = 'logout'
+        }
+    },
     extraReducers: {
         [login.pending]: (state) => {
             state.status = 'pending'
@@ -44,5 +51,7 @@ const logSlice = createSlice({
         }
     }
 })
+
+export const { logout } = logSlice.actions
 
 export default logSlice.reducer
