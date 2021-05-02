@@ -13,6 +13,7 @@ import {
 import { AntDesign, MaterialIcons, MaterialCommunityIcons, Octicons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
 import BottomNavigator from '../navigation/AdminButtomNavigation';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 const { width } = Dimensions.get('screen');
 const cardWidth = width / 2 - 20;
 
@@ -59,7 +60,7 @@ const AdminHome = ({ navigation }) => {
       <TouchableHighlight
         underlayColor={COLORS.white}
         activeOpacity={0.9}
-        onPress={() => navigation.navigate('DetailsScreen')}
+        onPress={() => navigation.navigate('AddCategory')}
       >
         <View style={style.card}>
           <View style={{ marginBottom: 15.06, marginLeft: 50, marginTop: 40, height: 50.94 }}>
@@ -106,10 +107,12 @@ const AdminHome = ({ navigation }) => {
             Manage your store
           </Text>
         </View>
-        <Image
-          source={require('../../assets/categories/home.png')}
-          style={{ height: 50, width: 50, borderRadius: 25 }}
-        />
+        <TouchableOpacity onPress={() => { }}>
+          <Image
+            source={require('../../assets/categories/home.png')}
+            style={{ height: 50, width: 50, borderRadius: 25 }}
+          />
+        </TouchableOpacity>
       </View>
       <View
         style={{
