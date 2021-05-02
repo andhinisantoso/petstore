@@ -1,17 +1,19 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
+import { SafeAreaView, StyleSheet, View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
-import {GreyButton} from '../components/Button';
+import { GreyButton } from '../components/Button';
 import Home from '../screens/Home';
 
-const DetailsScreen = () => {
+const DetailsScreen = ({ navigation }) => {
 
   return (
-    <SafeAreaView style={{backgroundColor: COLORS.white}}>
+    <SafeAreaView style={{ backgroundColor: COLORS.white }}>
       <View style={style.header}>
-        <MaterialIcons name="arrow-back-ios" size={28} onPress={Home} />
-        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Details Product</Text>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <MaterialIcons name="arrow-back-ios" size={28} onPress={Home} />
+          <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Details Product</Text>
+        </TouchableOpacity>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View
@@ -21,24 +23,24 @@ const DetailsScreen = () => {
             height: 220,
             marginBottom: 20,
           }}>
-          <Image source={require('../../assets/rc-persian.png')} style={{height: 220, width: 220}} />
+          <Image source={require('../../assets/rc-persian.png')} style={{ height: 220, width: 220 }} />
         </View>
         <View style={style.details}>
-          <Text style={{fontSize: 18, fontWeight: 'bold', color: COLORS.dark, marginBottom: -10}}>Rp 200.000</Text>
+          <Text style={{ fontSize: 18, fontWeight: 'bold', color: COLORS.dark, marginBottom: -10 }}>Rp 200.000</Text>
           <View
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
               alignItems: 'center',
             }}>
-            <Text style={{fontSize: 25, fontWeight: 'bold', color: COLORS.dark, marginBottom: -10}}>
+            <Text style={{ fontSize: 25, fontWeight: 'bold', color: COLORS.dark, marginBottom: -10 }}>
               Royal Canin
             </Text>
             <TouchableOpacity activeOpacity={0.8} onPress={Home} style={style.iconContainer}>
               <MaterialIcons name="favorite-border" color={COLORS.primary} size={25} />
             </TouchableOpacity>
           </View>
-          <Text style={{fontSize: 14, fontWeight: 'bold', color: COLORS.dark, marginTop: 2}}>Persian 1 kg </Text>
+          <Text style={{ fontSize: 14, fontWeight: 'bold', color: COLORS.dark, marginTop: 2 }}>Persian 1 kg </Text>
           <Text style={style.detailsText}>
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry's standard dummy text
@@ -46,7 +48,7 @@ const DetailsScreen = () => {
             and scrambled it to make a type specimen book. It has survived not
             only five centuries.
           </Text>
-          <View style={{marginTop: 40, marginBottom: 40}}>
+          <View style={{ marginTop: 40, marginBottom: 40 }}>
             <GreyButton title="Add To Cart" />
           </View>
         </View>

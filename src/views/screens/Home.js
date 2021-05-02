@@ -95,7 +95,7 @@ const Home = ({ navigation }) => {
       <TouchableHighlight
         underlayColor={COLORS.white}
         activeOpacity={0.9}
-        onPress={() => navigation.navigate('DetailsScreen')}
+        onPress={() => navigation.navigate('DetailProduct')}
       >
         <View style={style.card}>
           <View style={{ alignItems: 'center' }}>
