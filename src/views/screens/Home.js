@@ -96,7 +96,14 @@ const Home = ({ navigation }) => {
       <TouchableHighlight
         underlayColor={COLORS.white}
         activeOpacity={0.9}
-        onPress={() => navigation.navigate('DetailProduct')}
+        onPress={() => navigation.navigate('DetailProduct', {
+          id: props.id,
+          price: props.price,
+          name: props.name,
+          detail: props.detail,
+          description: props.description,
+          image: props.image
+        })}
       >
         <View style={style.card}>
           <View style={{ alignItems: 'center' }}>
@@ -167,7 +174,7 @@ const Home = ({ navigation }) => {
       <View style={{ flex: 1, flexDirection: 'row', marginLeft: 10, }}>
         {listItem.map((item) => {
           if (item.category_id == selectedCategoryIndex) {
-            return <Card image={item.image} name={item.name} price={item.price} detail={item.detail} key={item.id} />
+            return <Card image={item.image} name={item.name} price={item.price} detail={item.detail} description={item.description} key={item.id} />
           }
         })}
       </View>
