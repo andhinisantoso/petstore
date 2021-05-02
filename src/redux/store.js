@@ -26,4 +26,10 @@ export const store = configureStore({
     }),
 })
 
+// run commented command to turn back store to the initial state
+
+// const purge = persistStore(store).purge()
+
+// purge
+
 export const persistore = persistStore(store)
