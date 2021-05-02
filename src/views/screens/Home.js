@@ -28,6 +28,7 @@ const Home = ({ navigation }) => {
 
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
   const dispatch = useDispatch()
+
   const status = useSelector((state) => state.log.status)
   const role = useSelector((state) => state.log.role)
 
@@ -51,16 +52,16 @@ const Home = ({ navigation }) => {
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={style.categoriesListContainer}>
-        {listCategory.map((category, index) => (
+        {listCategory.map((category) => (
           <TouchableOpacity
-            key={index}
+            key={category.id}
             activeOpacity={0.8}
-            onPress={() => setSelectedCategoryIndex(index)}>
+            onPress={() => setSelectedCategoryIndex(category.id)}>
             <View
               style={{
                 width: 150, marginRight: 10, borderRadius: 30, flexDirection: 'row', height: 50,
                 backgroundColor:
-                  selectedCategoryIndex == index
+                  selectedCategoryIndex == category.id
                     ? COLORS.primary
                     : COLORS.secondary,
                 ...style.categoryBtn,
@@ -77,7 +78,7 @@ const Home = ({ navigation }) => {
                   fontWeight: 'bold',
                   marginLeft: 10,
                   color:
-                    selectedCategoryIndex == index
+                    selectedCategoryIndex == category.id
                       ? COLORS.white
                       : COLORS.primary,
                 }}>
