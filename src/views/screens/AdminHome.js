@@ -13,12 +13,30 @@ import {
 import { AntDesign, MaterialIcons, MaterialCommunityIcons, Octicons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
 import BottomNavigator from '../navigation/AdminButtomNavigation';
-const {width} = Dimensions.get('screen');
+const { width } = Dimensions.get('screen');
 const cardWidth = width / 2 - 20;
 
-const AdminHome = ({navigation}) => {
+const AdminHome = ({ navigation }) => {
 
-  const CardAddProduct = ({}) => {
+  const CardAddProduct = ({ }) => {
+    return (
+      <TouchableHighlight
+        underlayColor={COLORS.white}
+        activeOpacity={0.9}
+        onPress={() => navigation.navigate('AddProduct')}
+      >
+        <View style={style.card}>
+          <View style={{ marginBottom: 15.06, marginLeft: 40, marginTop: 45, height: 50.94 }}>
+            <AntDesign name="tag" size={70} color={COLORS.primary} />
+          </View>
+          <View style={{ marginHorizontal: 10, marginTop: 10 }}>
+            <Text style={{ lineHeight: 28, fontFamily: 'Roboto', textAlign: 'center', fontSize: 24, fontWeight: 'bold', color: COLORS.primary }}>Add{"\n"}Product</Text>
+          </View>
+        </View>
+      </TouchableHighlight>
+    );
+  };
+  const CardOrderCheck = ({ }) => {
     return (
       <TouchableHighlight
         underlayColor={COLORS.white}
@@ -26,17 +44,17 @@ const AdminHome = ({navigation}) => {
         onPress={() => navigation.navigate('DetailsScreen')}
       >
         <View style={style.card}>
-          <View  style={{marginBottom:15.06, marginLeft:40, marginTop:45, height: 50.94}}>
-            <AntDesign name="tag" size={70} color={COLORS.primary}/>
+          <View style={{ marginBottom: 15.06, marginLeft: 50, marginTop: 45, height: 50.94 }}>
+            <MaterialCommunityIcons name="briefcase-check" size={70} color={COLORS.primary} />
           </View>
-          <View style={{marginHorizontal: 10, marginTop: 10}}>
-            <Text style={{lineHeight:28, fontFamily:'Roboto', textAlign:'center', fontSize: 24, fontWeight: 'bold', color:COLORS.primary}}>Add{"\n"}Product</Text>
+          <View style={{ marginHorizontal: 10, marginTop: 10 }}>
+            <Text style={{ lineHeight: 28, fontFamily: 'Roboto', textAlign: 'center', fontSize: 24, fontWeight: 'bold', color: COLORS.primary }}>Order{"\n"}Check</Text>
           </View>
         </View>
       </TouchableHighlight>
     );
   };
-  const CardOrderCheck = ({}) => {
+  const CardAddCategory = ({ }) => {
     return (
       <TouchableHighlight
         underlayColor={COLORS.white}
@@ -44,17 +62,17 @@ const AdminHome = ({navigation}) => {
         onPress={() => navigation.navigate('DetailsScreen')}
       >
         <View style={style.card}>
-          <View  style={{marginBottom:15.06, marginLeft:50, marginTop:45, height: 50.94}}>
-            <MaterialCommunityIcons name="briefcase-check" size={70} color={COLORS.primary}/>
+          <View style={{ marginBottom: 15.06, marginLeft: 50, marginTop: 40, height: 50.94 }}>
+            <MaterialIcons name="category" size={70} color={COLORS.primary} />
           </View>
-          <View style={{marginHorizontal: 10, marginTop: 10}}>
-            <Text style={{lineHeight:28, fontFamily:'Roboto', textAlign:'center', fontSize: 24, fontWeight: 'bold', color:COLORS.primary}}>Order{"\n"}Check</Text>
+          <View style={{ marginHorizontal: 10, marginTop: 10 }}>
+            <Text style={{ lineHeight: 28, fontFamily: 'Roboto', textAlign: 'center', fontSize: 24, fontWeight: 'bold', color: COLORS.primary }}>Add{"\n"}Category</Text>
           </View>
         </View>
       </TouchableHighlight>
     );
   };
-  const CardAddCategory = ({}) => {
+  const CardSummary = ({ }) => {
     return (
       <TouchableHighlight
         underlayColor={COLORS.white}
@@ -62,53 +80,35 @@ const AdminHome = ({navigation}) => {
         onPress={() => navigation.navigate('DetailsScreen')}
       >
         <View style={style.card}>
-          <View  style={{marginBottom:15.06, marginLeft:50, marginTop:40, height: 50.94}}>
-            <MaterialIcons name="category" size={70} color={COLORS.primary}/>
+          <View style={{ marginBottom: 15.06, marginLeft: 50, marginTop: 45, height: 50.94 }}>
+            <Octicons name="graph" size={70} color={COLORS.primary} />
           </View>
-          <View style={{marginHorizontal: 10, marginTop: 10}}>
-            <Text style={{lineHeight:28, fontFamily:'Roboto', textAlign:'center', fontSize: 24, fontWeight: 'bold', color:COLORS.primary}}>Add{"\n"}Category</Text>
-          </View>
-        </View>
-      </TouchableHighlight>
-    );
-  };
-  const CardSummary = ({}) => {
-    return (
-      <TouchableHighlight
-        underlayColor={COLORS.white}
-        activeOpacity={0.9}
-        onPress={() => navigation.navigate('DetailsScreen')}
-      >
-        <View style={style.card}>
-          <View  style={{marginBottom:15.06, marginLeft:50, marginTop:45, height: 50.94}}>
-            <Octicons name="graph" size={70} color={COLORS.primary}/>
-          </View>
-          <View style={{marginHorizontal: 10, marginTop: 10}}>
-            <Text style={{lineHeight:28, fontFamily:'Roboto', textAlign:'center', fontSize: 24, fontWeight: 'bold', color:COLORS.primary}}>Summary</Text>
+          <View style={{ marginHorizontal: 10, marginTop: 10 }}>
+            <Text style={{ lineHeight: 28, fontFamily: 'Roboto', textAlign: 'center', fontSize: 24, fontWeight: 'bold', color: COLORS.primary }}>Summary</Text>
           </View>
         </View>
       </TouchableHighlight>
     );
   };
-  
+
 
   return (
     <SafeAreaView style={style.container}>
       <View style={style.header}>
         <View>
-          <View style={{flexDirection: 'row'}}>
-            <Text style={{fontSize: 28, fontWeight: 'bold'}}>Welcome ,</Text>
-            <Text style={{fontSize: 28, fontWeight: 'bold', marginLeft: 10}}>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={{ fontSize: 28, fontWeight: 'bold' }}>Welcome ,</Text>
+            <Text style={{ fontSize: 28, fontWeight: 'bold', marginLeft: 10 }}>
               Admin
             </Text>
           </View>
-          <Text style={{marginTop: 5, fontSize: 22, color: COLORS.grey}}>
+          <Text style={{ marginTop: 5, fontSize: 22, color: COLORS.grey }}>
             Manage your store
           </Text>
         </View>
         <Image
           source={require('../../assets/categories/home.png')}
-          style={{height: 50, width: 50, borderRadius: 25}}
+          style={{ height: 50, width: 50, borderRadius: 25 }}
         />
       </View>
       <View
@@ -124,22 +124,22 @@ const AdminHome = ({navigation}) => {
         }}>
       </View>
 
-      <View style={{flex: 1, flexDirection: 'row', marginLeft: 10, }}>
-        <CardAddProduct/>
-        <CardOrderCheck/> 
+      <View style={{ flex: 1, flexDirection: 'row', marginLeft: 10, }}>
+        <CardAddProduct />
+        <CardOrderCheck />
       </View>
-      <View style={{flex: 1, flexDirection: 'row', marginLeft: 10, }}>  
-        <CardAddCategory/>
-        <CardSummary/>
+      <View style={{ flex: 1, flexDirection: 'row', marginLeft: 10, }}>
+        <CardAddCategory />
+        <CardSummary />
       </View>
-      <BottomNavigator/>
+      <BottomNavigator />
     </SafeAreaView>
   )
 }
 
 const style = StyleSheet.create({
   container: {
-    flex: 1, 
+    flex: 1,
     backgroundColor: COLORS.white,
     minHeight: 600,
     height: '100%',
@@ -191,8 +191,8 @@ const style = StyleSheet.create({
     marginHorizontal: 10,
     marginBottom: 20,
     marginTop: 15,
-    marginLeft:13,
-    marginRight:15,
+    marginLeft: 13,
+    marginRight: 15,
     borderRadius: 10,
     elevation: 13,
     backgroundColor: COLORS.secondary,

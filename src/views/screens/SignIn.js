@@ -15,6 +15,7 @@ const SignIn = ({ navigation }) => {
   const [username, setUsername] = useState('')
   const [password, setPasword] = useState('')
   const status = useSelector((state) => state.log.status)
+  const role = useSelector((state) => state.log.role)
 
   const loginHandler = () => {
     dispatch(login({ name: username, password: password }))
@@ -22,7 +23,11 @@ const SignIn = ({ navigation }) => {
 
   useEffect(() => {
     if (status === 'login') {
-      navigation.replace('Home')
+      if (role === 'user') {
+        navigation.replace('Home')
+      } else if (role === 'admin') {
+        navigation.replace('AdminHome')
+      }
     }
   }, [status])
 

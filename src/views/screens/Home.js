@@ -29,13 +29,14 @@ const Home = ({ navigation }) => {
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
   const dispatch = useDispatch()
   const status = useSelector((state) => state.log.status)
+  const role = useSelector((state) => state.log.role)
 
   useEffect(() => {
     dispatch(getCategories())
   }, [dispatch])
 
   useEffect(() => {
-    if (status !== 'login') {
+    if (status !== 'login' && role !== 'user') {
       navigation.replace('OnBoard')
     }
   }, [])
