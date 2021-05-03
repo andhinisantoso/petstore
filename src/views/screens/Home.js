@@ -24,6 +24,7 @@ const cardWidth = width / 2 - 20;
 // redux
 import { getCategories } from '../../redux/categorySlice'
 import { getAllItem } from '../../redux/itemSlice'
+import { addToCart } from '../../redux/cartSlice'
 
 const Home = ({ navigation }) => {
   const dispatch = useDispatch()
@@ -46,6 +47,8 @@ const Home = ({ navigation }) => {
       navigation.replace('OnBoard')
     }
   }, [])
+
+  const listCart = useSelector((state) => state.cart.listItem)
 
   const ListCategories = () => {
     return (
@@ -125,9 +128,11 @@ const Home = ({ navigation }) => {
             <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
               Rp {props.price}
             </Text>
-            <View style={style.addToCartBtn}>
-              <MaterialIcons name="add" size={20} color={COLORS.white} />
-            </View>
+            <TouchableOpacity onPress={() => dispatch(addToCart({ itemId: props.id, price: props.price, name: props.name, detail: props.detail, image: props.image, total: 1 }))} >
+              <View style={style.addToCartBtn}>
+                <MaterialIcons name="add" size={20} color={COLORS.white} />
+              </View>
+            </TouchableOpacity>
           </View>
         </View>
       </TouchableHighlight>

@@ -12,10 +12,6 @@ const DetailsScreen = ({ route, navigation }) => {
   const dispatch = useDispatch()
   const listFavourite = useSelector((state) => state.favourite.listFavourite)
 
-  useEffect(() => {
-    console.log(listFavourite)
-  }, [listFavourite])
-
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.white }}>
       <View style={style.header}>

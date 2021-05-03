@@ -5,6 +5,7 @@ import categoryReducer from './categorySlice';
 import logReducer from './logSlice';
 import itemReducer from './itemSlice';
 import favouriteReducer from './favouriteSlice';
+import cartReducer from './cartSlice';
 
 const persistConfig = {
     key: 'root',
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     category: categoryReducer,
     log: logReducer,
     item: itemReducer,
-    favourite: favouriteReducer
+    favourite: favouriteReducer,
+    cart: cartReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

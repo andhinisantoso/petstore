@@ -5,12 +5,18 @@ import COLORS from '../../const/colors';
 import { PrimaryButton } from '../components/Button';
 import Home from './Home';
 import BottomNavigator from '../navigation/BottomNavigation';
+import { useSelector } from 'react-redux';
 
 const CartScreen = ({ navigation }) => {
-  const CartCard = () => {
+  const listItem = useSelector((state) => state.cart.listItem)
+  const totalPrice = useSelector((state) => state.cart.totalPrice)
+
+  const CartCard = (props) => {
+    const { id, name, detail, price, total, image } = props
+
     return (
       <View style={style.cartCard}>
-        <Image source={require('../../assets/rc-persian.png')} style={{ height: 80, width: 80 }} />
+        <Image source={{ uri: image }} style={{ height: 80, width: 80 }} />
         <View
           style={{
             height: 100,
@@ -18,15 +24,15 @@ const CartScreen = ({ navigation }) => {
             flex: 1,
             marginTop: 30,
           }}>
-          <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Royal Canin</Text>
+          <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{name}</Text>
           <Text style={{ fontSize: 13, color: COLORS.grey }}>
-            Persian 1 kg
+            {detail}
           </Text>
-          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Rp 200.000</Text>
+          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Rp {price}</Text>
         </View>
         <View style={{ marginTop: -10 }}>
           <View style={{ marginRight: 20, alignItems: 'center' }}>
-            <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 10 }}>3</Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 10 }}>{total}</Text>
             <View style={style.actionBtn}>
               <TouchableOpacity activeOpacity={0.8} onPress={Home} style={style.icon}>
                 <MaterialIcons name="remove" color={COLORS.white} size={25} />
@@ -40,6 +46,7 @@ const CartScreen = ({ navigation }) => {
       </View>
     );
   };
+
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1 }}>
       <View style={style.header}>
@@ -49,22 +56,19 @@ const CartScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
       <View>
-        <View style={style.card}>
-          <CartCard />
-        </View>
-        <View style={style.card}>
-          <CartCard />
-        </View>
-        <View style={style.card}>
-          <CartCard />
-        </View>
+
+        {listItem.map((item) => (
+          <View key={item.itemId} style={style.card}>
+            <CartCard key={item.itemId} id={item.itemId} name={item.name} detail={item.detail} price={item.price} total={item.total} image={item.image} />
+          </View>
+        ))}
 
         <View style={{ paddingBottom: 80 }}>
           <View style={style.footer}>
             <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 30 }}>
               Total Price
             </Text>
-            <Text style={{ fontSize: 18, fontWeight: 'bold', marginRight: 40 }}>Rp 200.000</Text>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', marginRight: 40 }}>Rp {totalPrice}</Text>
           </View>
           <View style={{ marginHorizontal: 30 }}>
             <PrimaryButton title="Checkout" onPress={Home} />
