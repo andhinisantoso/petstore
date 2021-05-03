@@ -11,4 +11,14 @@ Project tugas besar pengembangan aplikasi mobile menggunakan React
     
     &#8594; Ketikkan `ipconfig`
 
-    &#8594; cari IPv4 Address ![IPv4address](https://drive.google.com/file/d/1WsiN9DYaNpjniANJ_-RAzjT2H88qO7JA/view)
+    &#8594; cari IPv4 Address ![IPv4address](https://github.com/nardiyansah/laravel-pet-shop-api/blob/main/ipv4address.PNG?raw=true)
+
+    &#8594; Catat IP nya (bisa di notepad atau apapun)
+
+4. Setelah itu jalankan XAMPP nya
+5. Jika belum pernah membuat database nya dengan data dari seeder, jalankan perintah `php artisan migrate:fresh --seed`
+6. Di project API (laravel) , jalankan project dengan menyertakan IP address yang sudah di dapat. Ketikkan `php artisan serve --host <ip address yang didapat tadi>`.
+![php artisan serve](https://github.com/nardiyansah/laravel-pet-shop-api/blob/main/phpserver.PNG?raw=true)
+7. Setelah itu catat alamat project (API yang sedang berjalan). dalam kasus tutorial ini alamatnya adalah `http://192.168.43.15:8000` ![service run](https://github.com/nardiyansah/laravel-pet-shop-api/blob/main/serve.PNG?raw=true)
+8. Lalu ganti nilai variabel HOST di file `src/const/host.js` dengan alamat tadi. (Untuk selanjutnya file ini akan dimasukkan di .gitignore jadi kalau kamu sudah melakukannya sekali kamu tidak perlu lagi mengaturnya).
+9. Banyak langkah yang dilalui tapi semoga saat ini projectnya dapat berjalan dengan baik
