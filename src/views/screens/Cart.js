@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView, StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
 import { PrimaryButton } from '../components/Button';
 import Home from './Home';
 import BottomNavigator from '../navigation/BottomNavigation';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+// redux
+import { plusOne, minusOne } from '../../redux/cartSlice';
 
 const CartScreen = ({ navigation }) => {
   const listItem = useSelector((state) => state.cart.listItem)
   const totalPrice = useSelector((state) => state.cart.totalPrice)
+  const dispatch = useDispatch()
 
   const CartCard = (props) => {
     const { id, name, detail, price, total, image } = props
@@ -34,10 +37,10 @@ const CartScreen = ({ navigation }) => {
           <View style={{ marginRight: 20, alignItems: 'center' }}>
             <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 10 }}>{total}</Text>
             <View style={style.actionBtn}>
-              <TouchableOpacity activeOpacity={0.8} onPress={Home} style={style.icon}>
+              <TouchableOpacity activeOpacity={0.8} onPress={() => dispatch(minusOne({ id: id }))} style={style.icon}>
                 <MaterialIcons name="remove" color={COLORS.white} size={25} />
               </TouchableOpacity>
-              <TouchableOpacity activeOpacity={0.8} onPress={Home} style={style.icon}>
+              <TouchableOpacity activeOpacity={0.8} onPress={() => dispatch(plusOne({ id: id }))} style={style.icon}>
                 <MaterialIcons name="add" color={COLORS.white} size={25} />
               </TouchableOpacity>
             </View>
