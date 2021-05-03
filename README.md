@@ -16,7 +16,7 @@ Project tugas besar pengembangan aplikasi mobile menggunakan React
     &#8594; Catat IP nya (bisa di notepad atau apapun)
 
 4. Setelah itu jalankan XAMPP nya
-5. Jika belum pernah membuat database nya dengan data dari seeder, jalankan perintah `php artisan migrate:fresh --seed`
+5. Jika belum pernah membuat database nya dengan data dari seeder, jalankan perintah `php artisan migrate:fresh --seed` di project API nya
 6. Di project API (laravel) , jalankan project dengan menyertakan IP address yang sudah di dapat. Ketikkan `php artisan serve --host <ip address yang didapat tadi>`.
 ![php artisan serve](https://github.com/nardiyansah/laravel-pet-shop-api/blob/main/phpserver.PNG?raw=true)
 7. Setelah itu catat alamat project (API yang sedang berjalan). dalam kasus tutorial ini alamatnya adalah `http://192.168.43.15:8000` ![service run](https://github.com/nardiyansah/laravel-pet-shop-api/blob/main/serve.PNG?raw=true)
