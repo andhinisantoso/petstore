@@ -29,6 +29,7 @@ import { addToCart } from '../../redux/cartSlice'
 const Home = ({ navigation }) => {
   const dispatch = useDispatch()
   const status = useSelector((state) => state.log.status)
+  const userId = useSelector((state) => state.log.userId)
   const role = useSelector((state) => state.log.role)
   const listCategory = useSelector((state) => state.category.listCategory)
   const listItem = useSelector((state) => state.item.listItem)
@@ -128,7 +129,7 @@ const Home = ({ navigation }) => {
             <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
               Rp {props.price}
             </Text>
-            <TouchableOpacity onPress={() => dispatch(addToCart({ itemId: props.id, price: props.price, name: props.name, detail: props.detail, image: props.image, total: 1 }))} >
+            <TouchableOpacity onPress={() => dispatch(addToCart({ userId: userId, categoryId: selectedCategoryIndex, itemId: props.id, price: props.price, name: props.name, detail: props.detail, image: props.image, total: 1 }))} >
               <View style={style.addToCartBtn}>
                 <MaterialIcons name="add" size={20} color={COLORS.white} />
               </View>

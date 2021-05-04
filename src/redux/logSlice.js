@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import HOME from '../const/host';
+import HOST from '../const/host';
 
 export const login = createAsyncThunk(
     'log/login',
     async (data) => {
         const response = await fetch(
-            `${HOME}/api/login`,
+            `${HOST}/api/login`,
             {
                 method: 'POST',
                 headers: {

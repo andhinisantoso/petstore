@@ -1,4 +1,4 @@
-import { configureStore, getDefaultMiddleware, combineReducers } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware, combineReducers, createImmutableStateInvariantMiddleware } from "@reduxjs/toolkit";
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import categoryReducer from './categorySlice';
@@ -21,6 +21,10 @@ const rootReducer = combineReducers({
     cart: cartReducer
 })
 
+const immutableStateInvariant = createImmutableStateInvariantMiddleware({
+    ignoredPaths: ['cart.listItem'],
+})
+
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
@@ -29,6 +33,7 @@ export const store = configureStore({
         serializableCheck: {
             ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
+        immutableStateInvariant: immutableStateInvariant
     }),
 })
 

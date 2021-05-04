@@ -7,12 +7,18 @@ import Home from './Home';
 import BottomNavigator from '../navigation/BottomNavigation';
 import { useDispatch, useSelector } from 'react-redux';
 // redux
-import { plusOne, minusOne } from '../../redux/cartSlice';
+import { plusOne, minusOne, checkout, } from '../../redux/cartSlice';
 
 const CartScreen = ({ navigation }) => {
   const listItem = useSelector((state) => state.cart.listItem)
   const totalPrice = useSelector((state) => state.cart.totalPrice)
+  const status = useSelector((state) => state.cart.status)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    console.log(listItem)
+    console.log(status)
+  }, [listItem])
 
   const CartCard = (props) => {
     const { id, name, detail, price, total, image } = props
@@ -74,7 +80,7 @@ const CartScreen = ({ navigation }) => {
             <Text style={{ fontSize: 18, fontWeight: 'bold', marginRight: 40 }}>Rp {totalPrice}</Text>
           </View>
           <View style={{ marginHorizontal: 30 }}>
-            <PrimaryButton title="Checkout" onPress={Home} />
+            <PrimaryButton title="Checkout" onPress={() => dispatch(checkout(listItem))} />
           </View>
         </View>
 
