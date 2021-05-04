@@ -30,6 +30,7 @@ const Home = ({ navigation }) => {
   const dispatch = useDispatch()
   const status = useSelector((state) => state.log.status)
   const userId = useSelector((state) => state.log.userId)
+  const userImage = useSelector((state) => state.log.image)
   const role = useSelector((state) => state.log.role)
   const listCategory = useSelector((state) => state.category.listCategory)
   const listItem = useSelector((state) => state.item.listItem)
@@ -156,7 +157,7 @@ const Home = ({ navigation }) => {
         </View>
         <TouchableOpacity onPress={() => navigation.navigate('Profile')} >
           <Image
-            source={require('../../assets/categories/home.png')}
+            source={{ uri: userImage }}
             style={{ height: 50, width: 50, borderRadius: 25 }}
           />
         </TouchableOpacity>

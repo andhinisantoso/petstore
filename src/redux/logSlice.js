@@ -24,6 +24,7 @@ const logSlice = createSlice({
     initialState: {
         userId: null,
         username: '',
+        image: '',
         email: '',
         phone: '',
         password: '',
@@ -45,6 +46,7 @@ const logSlice = createSlice({
             if (action.payload.code === 200) {
                 state.userId = action.payload.id
                 state.username = action.payload.name
+                state.image = action.payload.image
                 state.email = action.payload.email
                 state.phone = action.payload.phone
                 state.password = action.payload.password

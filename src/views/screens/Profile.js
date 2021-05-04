@@ -35,7 +35,7 @@ const Profile = ({ navigation }) => {
           marginTop: 10
         }}
       >
-        <Image source={require('../../assets/categories/home.png')} style={{
+        <Image source={{ uri: userData.image }} style={{
           width: 150,
           height: 150,
         }} />
