@@ -5,18 +5,21 @@ import { PrimaryButton, SecondaryButton } from '../components/Button';
 import Home from './Home';
 import { MaterialIcons } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // reducer
 import { logout } from '../../redux/logSlice';
 
 const Profile = ({ navigation }) => {
 
   const dispatch = useDispatch()
+  const userData = useSelector((state) => state.log)
 
   const _logout = () => {
     dispatch(logout())
     navigation.replace('SignIn')
   }
+
+  console.log(userData)
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: COLORS.white }}>
@@ -43,24 +46,24 @@ const Profile = ({ navigation }) => {
             Full Name
             </Text>
           <Text style={style.textInput}>
-            Dadu
-            </Text>
+            {userData.username}
+          </Text>
         </View>
         <View>
           <Text style={{ marginTop: 15, fontSize: 18, color: COLORS.grey }}>
             Email
             </Text>
           <Text style={style.textInput}>
-            dadu08@gmail.com
-            </Text>
+            {userData.email}
+          </Text>
         </View>
         <View>
           <Text style={{ marginTop: 15, fontSize: 18, color: COLORS.grey }}>
             Telephone
             </Text>
           <Text style={style.textInput}>
-            0808080808
-            </Text>
+            {userData.phone}
+          </Text>
         </View>
         <View>
           <Text style={{ marginTop: 15, fontSize: 18, color: COLORS.grey }}>

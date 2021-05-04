@@ -23,6 +23,10 @@ const logSlice = createSlice({
     name: 'log',
     initialState: {
         userId: null,
+        username: '',
+        email: '',
+        phone: '',
+        password: '',
         role: '',
         status: 'logout',
     },
@@ -39,7 +43,11 @@ const logSlice = createSlice({
         },
         [login.fulfilled]: (state, action) => {
             if (action.payload.code === 200) {
-                state.userId = action.payload.userId
+                state.userId = action.payload.id
+                state.username = action.payload.name
+                state.email = action.payload.email
+                state.phone = action.payload.phone
+                state.password = action.payload.password
                 state.role = action.payload.role
                 state.status = 'login'
             } else {

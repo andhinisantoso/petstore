@@ -15,11 +15,6 @@ const CartScreen = ({ navigation }) => {
   const status = useSelector((state) => state.cart.status)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    console.log(listItem)
-    console.log(status)
-  }, [listItem])
-
   const CartCard = (props) => {
     const { id, name, detail, price, total, image } = props
 
