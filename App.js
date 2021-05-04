@@ -12,6 +12,7 @@ import AlertSuccess from './src/views/screens/AlertSuccess';
 import Favorite from './src/views/screens/Favorite';
 import History from './src/views/screens/History';
 import DetailHistory from './src/views/screens/DetailHistory';
+import EditProfile from './src/views/screens/EditProfile';
 import AdminHome from './src/views/screens/AdminHome';
 import AdminCatalog from './src/views/screens/AdminCatalog';
 import AdminDetailsScreen from './src/views/screens/AdminDetailProduct';
@@ -20,7 +21,6 @@ import AddCategory from './src/views/screens/AddCategory';
 import AddProduct from './src/views/screens/AddProduct';
 import AdminEditProfile from './src/views/screens/AdminEditProfile';
 import InfoPetStore from './src/views/screens/StoreProfile';
-import BottomNavigation from './src/views/navigation/BottomNavigation';
 // navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -59,6 +59,7 @@ const App = () => {
             <Stack.Screen name="History" component={History} />
             <Stack.Screen name="DetailHistory" component={DetailHistory} />
             <Stack.Screen name="InfoPetStore" component={InfoPetStore} />
+            <Stack.Screen name="EditProfile" component={EditProfile} />
             <Stack.Screen name="Success" component={AlertSuccess} />
             {/* admin */}
             <Stack.Screen name="AdminHome" component={AdminHome} />

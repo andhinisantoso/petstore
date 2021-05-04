@@ -24,7 +24,7 @@ const Profile = ({ navigation }) => {
   return (
     <ScrollView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <View style={style.header}>
-        <MaterialIcons name="arrow-back-ios" size={28} onPress={Home} />
+        <MaterialIcons name="arrow-back-ios" size={28} onPress={() => navigation.goBack()} />
         <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Profile</Text>
       </View>
       <View
@@ -76,7 +76,7 @@ const Profile = ({ navigation }) => {
         <View style={{ paddingTop: 30 }}>
           <View style={{ marginBottom: 20 }}>
             <PrimaryButton
-              onPress={() => navigation.replace('Home')}
+              onPress={() => navigation.replace('EditProfile')}
               title="Edit"
             />
           </View>
