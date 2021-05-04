@@ -1,11 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, StyleSheet, View, Image, SafeAreaView, TextInput, TouchableOpacity } from 'react-native';
 import COLORS from '../../const/colors';
 import { PrimaryButton, SecondaryButton } from '../components/Button';
 import Home from './Home';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
+import { useDispatch, useSelector } from 'react-redux';
+// redux
+import { edit } from '../../redux/logSlice';
 
 const EditProfile = ({ navigation }) => {
+  const userData = useSelector((state) => state.log)
+  const dispatch = useDispatch()
+
+  const [name, setName] = useState(userData.username)
+  const [email, setEmail] = useState(userData.email)
+  const [phone, setPhone] = useState(userData.phone)
+  const [password, setPassword] = useState(userData.password)
+
+  const _edit = () => {
+    dispatch(edit({
+      id: userData.userId,
+      name: name,
+      email: email,
+      phone: phone,
+      password: password
+    }))
+  }
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <View style={style.header}>
@@ -38,6 +59,8 @@ const EditProfile = ({ navigation }) => {
             <View style={style.inputContainer}>
               <TextInput
                 style={{ paddingLeft: 10, flex: 2, fontSize: 16, color: COLORS.grey }}
+                value={name}
+                onChangeText={setName}
                 placeholder="Full Name"
               />
             </View>
@@ -45,22 +68,28 @@ const EditProfile = ({ navigation }) => {
               <TextInput
                 style={{ paddingLeft: 10, flex: 2, fontSize: 16 }}
                 placeholder="Email"
+                value={email}
+                onChangeText={setEmail}
               />
             </View>
             <View style={style.inputContainer}>
               <TextInput
                 style={{ paddingLeft: 10, flex: 2, fontSize: 16 }}
                 placeholder="Telephone"
+                value={phone}
+                onChangeText={setPhone}
               />
             </View>
             <View style={style.inputContainer}>
               <TextInput
                 style={{ paddingLeft: 10, flex: 2, fontSize: 16 }}
                 placeholder="Password"
+                value={password}
+                onChangeText={setPassword}
               />
             </View>
             <PrimaryButton
-              onPress={() => navigation.navigate('Home')}
+              onPress={() => _edit()}
               title="Save"
             />
           </View>

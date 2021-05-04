@@ -19,6 +19,26 @@ export const login = createAsyncThunk(
     }
 )
 
+export const edit = createAsyncThunk(
+    'log/edit',
+    async (data) => {
+        const id = data.id
+        delete data.id
+        const response = await fetch(
+            `${HOST}/api/users/${id}`,
+            {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }
+        )
+        return response.json()
+    }
+)
+
 const logSlice = createSlice({
     name: 'log',
     initialState: {
@@ -30,6 +50,7 @@ const logSlice = createSlice({
         password: '',
         role: '',
         status: 'logout',
+        statusEdit: 'idle'
     },
     reducers: {
         logout: (state) => {
@@ -58,6 +79,19 @@ const logSlice = createSlice({
         },
         [login.rejected]: (state) => {
             state.status = 'rejected'
+        },
+        [edit.fulfilled]: (state, action) => {
+            state.userId = action.payload.id
+            state.username = action.payload.name
+            state.image = action.payload.image
+            state.email = action.payload.email
+            state.phone = action.payload.phone
+            state.password = action.payload.password
+            state.role = action.payload.role
+            state.statusEdit = 'fullfilled'
+        },
+        [edit.rejected]: (state) => {
+            state.statusEdit = 'rejected'
         }
     }
 })

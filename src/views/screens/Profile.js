@@ -19,8 +19,6 @@ const Profile = ({ navigation }) => {
     navigation.replace('SignIn')
   }
 
-  console.log(userData)
-
   return (
     <ScrollView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <View style={style.header}>
