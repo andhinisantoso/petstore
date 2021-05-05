@@ -19,6 +19,14 @@ const Profile = ({ navigation }) => {
     navigation.replace('SignIn')
   }
 
+  const toEditScreen = () => {
+    if (userData.userId == 1) {
+      navigation.navigate('AdminEditProfile')
+    } else {
+      navigation.replace('EditProfile')
+    }
+  }
+
   return (
     <ScrollView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <View style={style.header}>
@@ -74,7 +82,7 @@ const Profile = ({ navigation }) => {
         <View style={{ paddingTop: 30 }}>
           <View style={{ marginBottom: 20 }}>
             <PrimaryButton
-              onPress={() => navigation.replace('EditProfile')}
+              onPress={toEditScreen}
               title="Edit"
             />
           </View>

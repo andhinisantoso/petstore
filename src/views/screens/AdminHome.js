@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Image,
   SafeAreaView,
@@ -14,10 +14,13 @@ import { AntDesign, MaterialIcons, MaterialCommunityIcons, Octicons } from '@exp
 import COLORS from '../../const/colors';
 import BottomNavigator from '../navigation/AdminButtomNavigation';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useSelector } from 'react-redux';
 const { width } = Dimensions.get('screen');
 const cardWidth = width / 2 - 20;
 
 const AdminHome = ({ navigation }) => {
+
+  const userData = useSelector((state) => state.log)
 
   const CardAddProduct = ({ }) => {
     return (
@@ -107,9 +110,9 @@ const AdminHome = ({ navigation }) => {
             Manage your store
           </Text>
         </View>
-        <TouchableOpacity onPress={() => { }}>
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
           <Image
-            source={require('../../assets/categories/home.png')}
+            source={{ uri: userData.image }}
             style={{ height: 50, width: 50, borderRadius: 25 }}
           />
         </TouchableOpacity>

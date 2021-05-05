@@ -48,7 +48,12 @@ export const editWithPhoto = createAsyncThunk(
         dataRequest.append('name', data['name'])
         dataRequest.append('email', data['email'])
         dataRequest.append('phone', data['phone'])
-        dataRequest.append('password', data['password'])
+        if (data['password']) {
+            dataRequest.append('password', data['password'])
+        }
+        if (data['address']) {
+            dataRequest.append('address', data['address'])
+        }
         const id = data['id']
         const response = await fetch(
             `${HOST}/api/users/update/${id}`,
@@ -69,6 +74,7 @@ const logSlice = createSlice({
         image: '',
         email: '',
         phone: '',
+        address: '',
         password: '',
         role: '',
         status: 'logout',
@@ -91,6 +97,7 @@ const logSlice = createSlice({
                 state.username = action.payload.name
                 state.image = action.payload.image
                 state.email = action.payload.email
+                state.address = action.payload.address
                 state.phone = action.payload.phone
                 state.password = action.payload.password
                 state.role = action.payload.role
@@ -107,6 +114,7 @@ const logSlice = createSlice({
             state.username = action.payload.name
             state.image = action.payload.image
             state.email = action.payload.email
+            state.address = action.payload.address
             state.phone = action.payload.phone
             state.password = action.payload.password
             state.role = action.payload.role
@@ -120,6 +128,7 @@ const logSlice = createSlice({
             state.username = action.payload.name
             state.image = action.payload.image
             state.email = action.payload.email
+            state.address = action.payload.address
             state.phone = action.payload.phone
             state.password = action.payload.password
             state.role = action.payload.role
