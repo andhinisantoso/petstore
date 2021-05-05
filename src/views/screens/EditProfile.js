@@ -5,8 +5,9 @@ import { PrimaryButton, SecondaryButton } from '../components/Button';
 import Home from './Home';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
+import * as ImagePicker from 'expo-image-picker';
 // redux
-import { edit } from '../../redux/logSlice';
+import { edit, editWithPhoto } from '../../redux/logSlice';
 
 const EditProfile = ({ navigation }) => {
   const userData = useSelector((state) => state.log)
@@ -17,14 +18,52 @@ const EditProfile = ({ navigation }) => {
   const [phone, setPhone] = useState(userData.phone)
   const [password, setPassword] = useState(userData.password)
 
+  const [image, setImage] = useState(null)
+  const [imageName, setImageName] = useState('')
+
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== 'web') {
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+          alert('Sorry, we need camera roll permissions to make this work!');
+        }
+      }
+    })();
+  }, []);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+      setImageName(result.uri.match(/[\w-]*.jpg/))
+    }
+  };
+
   const _edit = () => {
-    dispatch(edit({
-      id: userData.userId,
-      name: name,
-      email: email,
-      phone: phone,
-      password: password
-    }))
+    if (image) {
+      dispatch(editWithPhoto({
+        imageUri: image,
+        imageName: imageName[0],
+        id: userData.userId,
+        name: name,
+        email: email,
+        phone: phone,
+        password: password
+      }))
+    } else {
+      dispatch(edit({
+        id: userData.userId,
+        name: name,
+        email: email,
+        phone: phone,
+        password: password
+      }))
+    }
   }
 
   return (
@@ -48,7 +87,7 @@ const EditProfile = ({ navigation }) => {
               <View>
                 <View style={{ alignItems: 'center' }}>
                   <View style={style.actionBtn}>
-                    <TouchableOpacity activeOpacity={0.8} onPress={Home} style={style.icon}>
+                    <TouchableOpacity activeOpacity={0.8} onPress={() => pickImage()} style={style.icon}>
                       <Feather name="upload" color={COLORS.primary} size={28} />
                     </TouchableOpacity>
                   </View>

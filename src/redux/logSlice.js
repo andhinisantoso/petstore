@@ -39,6 +39,28 @@ export const edit = createAsyncThunk(
     }
 )
 
+export const editWithPhoto = createAsyncThunk(
+    'log/editWithPhoto',
+    async (data) => {
+        let dataRequest = new FormData()
+        dataRequest.append('image', { type: 'image/jpg', uri: data['imageUri'], name: data['imageName'] })
+        dataRequest.append('id', data['id'])
+        dataRequest.append('name', data['name'])
+        dataRequest.append('email', data['email'])
+        dataRequest.append('phone', data['phone'])
+        dataRequest.append('password', data['password'])
+        const id = data['id']
+        const response = await fetch(
+            `${HOST}/api/users/update/${id}`,
+            {
+                method: 'POST',
+                body: dataRequest
+            }
+        )
+        return response.json()
+    }
+)
+
 const logSlice = createSlice({
     name: 'log',
     initialState: {
@@ -92,6 +114,19 @@ const logSlice = createSlice({
         },
         [edit.rejected]: (state) => {
             state.statusEdit = 'rejected'
+        },
+        [editWithPhoto.fulfilled]: (state, action) => {
+            state.userId = action.payload.id
+            state.username = action.payload.name
+            state.image = action.payload.image
+            state.email = action.payload.email
+            state.phone = action.payload.phone
+            state.password = action.payload.password
+            state.role = action.payload.role
+            state.statusEdit = 'fullfilled'
+        },
+        [editWithPhoto.rejected]: (state, action) => {
+            state.statusEdit = action.payload
         }
     }
 })
