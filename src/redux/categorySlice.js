@@ -1,10 +1,27 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import HOME from '../const/host';
+import HOST from '../const/host';
 
 export const getCategories = createAsyncThunk(
     'category/getCategories',
     async () => {
-        const response = await fetch(`${HOME}/api/categories`)
+        const response = await fetch(`${HOST}/api/categories`)
+        return response.json()
+    }
+)
+
+export const add = createAsyncThunk(
+    'category/add',
+    async (data) => {
+        let dataRequest = new FormData()
+        dataRequest.append('image', { type: 'image/jpg', uri: data['imageUri'], name: data['imageName'] })
+        dataRequest.append('name', data['name'])
+        const response = await fetch(
+            `${HOST}/api/categories`,
+            {
+                method: 'POST',
+                body: dataRequest
+            }
+        )
         return response.json()
     }
 )
