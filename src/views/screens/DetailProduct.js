@@ -1,16 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
 import { GreyButton } from '../components/Button';
 import Home from '../screens/Home';
 import { useDispatch, useSelector } from 'react-redux';
-import { add } from '../../redux/favouriteSlice';
+import { add, remove } from '../../redux/favouriteSlice';
 
 const DetailsScreen = ({ route, navigation }) => {
   const { id, price, name, detail, description, image } = route.params
   const dispatch = useDispatch()
   const listFavourite = useSelector((state) => state.favourite.listFavourite)
+  const [isFavourite, setIsFavourite] = useState(false)
+
+  useEffect(() => {
+    for (let index = 0; index < listFavourite.length; index++) {
+      const element = listFavourite[index];
+      if (element.id == id) {
+        setIsFavourite(true);
+        break;
+      }
+    }
+  }, [listFavourite])
+
+  const addOrRemove = () => {
+    if (isFavourite) {
+      dispatch(remove({ id: id }))
+    } else {
+      dispatch(add({ id: id, image: image, name: name, detail: detail, price: price, inCart: false }))
+    }
+    setIsFavourite(!isFavourite)
+  }
 
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.white }}>
@@ -41,8 +61,8 @@ const DetailsScreen = ({ route, navigation }) => {
             <Text style={{ fontSize: 25, fontWeight: 'bold', color: COLORS.dark, marginBottom: -10 }}>
               {name}
             </Text>
-            <TouchableOpacity activeOpacity={0.8} onPress={() => dispatch(add({ id: id, image: image, name: name, detail: detail, price: price }))} style={style.iconContainer}>
-              <MaterialIcons name="favorite-border" color={COLORS.primary} size={25} />
+            <TouchableOpacity activeOpacity={0.8} onPress={() => addOrRemove()} style={style.iconContainer}>
+              <MaterialIcons name={isFavourite ? "favorite" : "favorite-border"} color={COLORS.primary} size={25} />
             </TouchableOpacity>
           </View>
           <Text style={{ fontSize: 14, fontWeight: 'bold', color: COLORS.dark, marginTop: 2 }}>{detail}</Text>

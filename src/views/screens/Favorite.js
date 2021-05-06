@@ -1,13 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
 import BottomNavigator from '../navigation/BottomNavigation';
 import Home from './Home';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { remove, moveCart } from '../../redux/favouriteSlice';
+import { addToCart, removeFromCart } from '../../redux/cartSlice'
 
 const Favorite = ({ navigation }) => {
   const listFavourite = useSelector((state) => state.favourite.listFavourite)
+  const listItem = useSelector((state) => state.item.listItem)
+  const listCart = useSelector((state) => state.cart.listItem)
+  const userId = useSelector((state) => state.log.userId)
+  const dispatch = useDispatch()
+
+  const toCart = (id) => {
+    if (inCart) {
+      dispatch(removeFromCart({ id: id }))
+    } else {
+      for (let index = 0; index < listItem.length; index++) {
+        const item = listItem[index];
+        if (item.id = id) {
+          dispatch(addToCart({ userId: userId, categoryId: item.category_id, itemId: item.id, price: item.price, name: item.name, detail: item.detail, image: item.image, total: 1 }))
+          dispatch(moveCart({ id: id }))
+        }
+        break;
+      }
+    }
+  }
 
   const FavoriteCard = (props) => {
     return (
@@ -29,11 +50,11 @@ const Favorite = ({ navigation }) => {
         <View style={{ marginTop: -20 }}>
           <View style={{ alignItems: 'center' }}>
             <View style={style.actionBtn}>
-              <TouchableOpacity activeOpacity={0.8} onPress={Home} style={style.iconContainer}>
+              <TouchableOpacity activeOpacity={0.8} onPress={() => dispatch(remove({ id: props.id }))} style={style.iconContainer}>
                 <MaterialIcons name="favorite" color={COLORS.primary} size={25} />
               </TouchableOpacity>
-              <TouchableOpacity activeOpacity={0.8} onPress={Home} style={style.iconContainer}>
-                <MaterialIcons name="shopping-cart" color={COLORS.primary} size={25} />
+              <TouchableOpacity activeOpacity={0.8} onPress={() => toCart(props.id)} style={style.iconContainer}>
+                <MaterialIcons name="shopping-cart" color={props.inCart ? COLORS.primary : COLORS.grey} size={25} />
               </TouchableOpacity>
             </View>
           </View>
@@ -53,7 +74,7 @@ const Favorite = ({ navigation }) => {
       <View style={{ marginBottom: 210 }}>
         {listFavourite.map((item) => (
           <View key={item.id} style={style.card}>
-            <FavoriteCard style={style.card} key={item.id} image={item.image} id={item.id} name={item.name} price={item.price} detail={item.detail} />
+            <FavoriteCard style={style.card} key={item.id} image={item.image} id={item.id} name={item.name} price={item.price} detail={item.detail} inCart={item.inCart} />
           </View>
         ))}
       </View>

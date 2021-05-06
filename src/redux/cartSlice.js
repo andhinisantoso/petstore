@@ -39,6 +39,9 @@ const cartSlice = createSlice({
             state.listItem = [...state.listItem.filter(item => item.id != action.payload.id), action.payload]
             state.totalPrice += action.payload.price * action.payload.total
         },
+        removeFromCart: (state, action) => {
+            state.listItem = state.listItem.filter(item => item.id != action.payload.id)
+        },
         plusOne: (state, action) => {
             state.listItem.forEach(item => {
                 if (item.itemId === action.payload.id) {
@@ -72,6 +75,6 @@ const cartSlice = createSlice({
     }
 })
 
-export const { addToCart, plusOne, minusOne, cobaarray } = cartSlice.actions
+export const { addToCart, removeFromCart, plusOne, minusOne } = cartSlice.actions
 
 export default cartSlice.reducer
