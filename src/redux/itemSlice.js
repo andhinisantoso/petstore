@@ -53,7 +53,7 @@ export const itemSlice = createSlice({
             state.status = 'pending in get all'
         },
         [getAllItem.fulfilled]: (state, action) => {
-            state.listItem = action.payload
+            state.listItem = action.payload.filter(item => item.stok > 0)
             state.status = 'ok in get all'
         },
         [getAllItem.rejected]: (state) => {
