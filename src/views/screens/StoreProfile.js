@@ -3,14 +3,19 @@ import { Text, StyleSheet, View, Image, ScrollView } from 'react-native';
 import COLORS from '../../const/colors';
 import BottomNavigator from '../navigation/BottomNavigation';
 import HOST from '../../const/host';
+import { set } from '../../redux/navigationSlice'
+import { useDispatch } from 'react-redux';
 
 const InfoPetStore = ({ navigation }) => {
   const [nameStore, setNameStore] = useState('')
   const [emailStore, setEmailStore] = useState('')
   const [phoneStore, setPhoneStore] = useState('')
   const [addressStore, setAddressStore] = useState('')
+  const dispatch = useDispatch()
 
   useEffect(() => {
+    dispatch(set({ value: 'Store' }))
+
     async function fetchData() {
       const response = await fetch(`${HOST}/api/users/1`)
       const result = await response.json()

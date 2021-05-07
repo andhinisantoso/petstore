@@ -5,15 +5,21 @@ import COLORS from '../../const/colors';
 import { PrimaryButton } from '../components/Button';
 import Home from './Home';
 import BottomNavigator from '../navigation/BottomNavigation';
+import { useFocusEffect } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 // redux
 import { plusOne, minusOne, checkout, } from '../../redux/cartSlice';
+import { set } from '../../redux/navigationSlice'
 
 const CartScreen = ({ navigation }) => {
   const listItem = useSelector((state) => state.cart.listItem)
   const totalPrice = useSelector((state) => state.cart.totalPrice)
   const status = useSelector((state) => state.cart.status)
   const dispatch = useDispatch()
+
+  useFocusEffect(() => {
+    dispatch(set({ value: 'Cart' }))
+  });
 
   const CartCard = (props) => {
     const { id, name, detail, price, total, image } = props

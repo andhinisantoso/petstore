@@ -17,6 +17,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
 import categories from '../../const/categories';
 import BottomNavigator from '../navigation/BottomNavigation';
+import { useFocusEffect } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 const { width } = Dimensions.get('screen');
 const cardWidth = width / 2 - 20;
@@ -36,15 +37,8 @@ const Home = ({ navigation }) => {
   const role = useSelector((state) => state.log.role)
   const listCategory = useSelector((state) => state.category.listCategory)
   const listItem = useSelector((state) => state.item.listItem)
-  const screen = useSelector((state) => state.navigation.value)
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
-
-  useEffect(() => {
-    dispatch(getCategories())
-    dispatch(getAllItem())
-    dispatch(set({ value: 'Home' }))
-    setSelectedCategoryIndex(listCategory[0]['id'])
-  }, [dispatch])
+  const listCart = useSelector((state) => state.cart.listItem)
 
   useEffect(() => {
     if (role == 'admin') {
@@ -54,7 +48,15 @@ const Home = ({ navigation }) => {
     }
   }, [])
 
-  const listCart = useSelector((state) => state.cart.listItem)
+  useEffect(() => {
+    setSelectedCategoryIndex(listCategory[0]['id'])
+  }, [dispatch])
+
+  useFocusEffect(() => {
+    dispatch(getCategories())
+    dispatch(getAllItem())
+    dispatch(set({ value: 'Home' }))
+  });
 
   const ListCategories = () => {
     return (

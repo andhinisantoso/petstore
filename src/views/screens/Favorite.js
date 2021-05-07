@@ -3,10 +3,12 @@ import { SafeAreaView, StyleSheet, View, Text, Image, TouchableOpacity } from 'r
 import { MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
 import BottomNavigator from '../navigation/BottomNavigation';
+import { useFocusEffect } from '@react-navigation/native';
 import Home from './Home';
 import { useDispatch, useSelector } from 'react-redux';
 import { remove, moveCart } from '../../redux/favouriteSlice';
 import { addToCart, removeFromCart } from '../../redux/cartSlice'
+import { set } from '../../redux/navigationSlice'
 
 const Favorite = ({ navigation }) => {
   const listFavourite = useSelector((state) => state.favourite.listFavourite)
@@ -14,6 +16,10 @@ const Favorite = ({ navigation }) => {
   const listCart = useSelector((state) => state.cart.listItem)
   const userId = useSelector((state) => state.log.userId)
   const dispatch = useDispatch()
+
+  useFocusEffect(() => {
+    dispatch(set({ value: 'Favourite' }))
+  });
 
   const toCart = (data) => {
     if (data.inCart) {
