@@ -6,6 +6,7 @@ import logReducer from './logSlice';
 import itemReducer from './itemSlice';
 import favouriteReducer from './favouriteSlice';
 import cartReducer from './cartSlice';
+import navigationReducer from './navigationSlice';
 
 const persistConfig = {
     key: 'root',
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     log: logReducer,
     item: itemReducer,
     favourite: favouriteReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    navigation: navigationReducer,
 })
 
 const immutableStateInvariant = createImmutableStateInvariantMiddleware({

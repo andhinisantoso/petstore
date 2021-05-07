@@ -25,6 +25,7 @@ const cardWidth = width / 2 - 20;
 import { getCategories } from '../../redux/categorySlice'
 import { getAllItem } from '../../redux/itemSlice'
 import { addToCart } from '../../redux/cartSlice'
+import { set } from '../../redux/navigationSlice'
 
 const Home = ({ navigation }) => {
   const dispatch = useDispatch()
@@ -35,11 +36,13 @@ const Home = ({ navigation }) => {
   const role = useSelector((state) => state.log.role)
   const listCategory = useSelector((state) => state.category.listCategory)
   const listItem = useSelector((state) => state.item.listItem)
+  const screen = useSelector((state) => state.navigation.value)
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
 
   useEffect(() => {
     dispatch(getCategories())
     dispatch(getAllItem())
+    dispatch(set({ value: 'Home' }))
     setSelectedCategoryIndex(listCategory[0]['id'])
   }, [dispatch])
 
