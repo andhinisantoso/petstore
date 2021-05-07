@@ -30,6 +30,7 @@ const Home = ({ navigation }) => {
   const dispatch = useDispatch()
   const status = useSelector((state) => state.log.status)
   const userId = useSelector((state) => state.log.userId)
+  const username = useSelector((state) => state.log.username)
   const userImage = useSelector((state) => state.log.image)
   const role = useSelector((state) => state.log.role)
   const listCategory = useSelector((state) => state.category.listCategory)
@@ -148,7 +149,7 @@ const Home = ({ navigation }) => {
           <View style={{ flexDirection: 'row' }}>
             <Text style={{ fontSize: 28 }}>Hello,</Text>
             <Text style={{ fontSize: 28, fontWeight: 'bold', marginLeft: 10 }}>
-              Dadu
+              {username}
             </Text>
           </View>
           <Text style={{ marginTop: 5, fontSize: 22, color: COLORS.grey }}>

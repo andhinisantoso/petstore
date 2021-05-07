@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
@@ -15,15 +15,16 @@ const Favorite = ({ navigation }) => {
   const userId = useSelector((state) => state.log.userId)
   const dispatch = useDispatch()
 
-  const toCart = (id) => {
-    if (inCart) {
-      dispatch(removeFromCart({ id: id }))
+  const toCart = (data) => {
+    if (data.inCart) {
+      dispatch(removeFromCart({ id: data.id }))
+      dispatch(moveCart({ id: data.id }))
     } else {
       for (let index = 0; index < listItem.length; index++) {
         const item = listItem[index];
-        if (item.id = id) {
+        if (item.id = data.id) {
           dispatch(addToCart({ userId: userId, categoryId: item.category_id, itemId: item.id, price: item.price, name: item.name, detail: item.detail, image: item.image, total: 1 }))
-          dispatch(moveCart({ id: id }))
+          dispatch(moveCart({ id: data.id }))
         }
         break;
       }
@@ -53,7 +54,7 @@ const Favorite = ({ navigation }) => {
               <TouchableOpacity activeOpacity={0.8} onPress={() => dispatch(remove({ id: props.id }))} style={style.iconContainer}>
                 <MaterialIcons name="favorite" color={COLORS.primary} size={25} />
               </TouchableOpacity>
-              <TouchableOpacity activeOpacity={0.8} onPress={() => toCart(props.id)} style={style.iconContainer}>
+              <TouchableOpacity activeOpacity={0.8} onPress={() => toCart({ id: props.id, inCart: props.inCart })} style={style.iconContainer}>
                 <MaterialIcons name="shopping-cart" color={props.inCart ? COLORS.primary : COLORS.grey} size={25} />
               </TouchableOpacity>
             </View>
