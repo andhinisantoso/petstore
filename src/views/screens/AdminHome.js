@@ -13,14 +13,21 @@ import {
 import { AntDesign, MaterialIcons, MaterialCommunityIcons, Octicons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
 import BottomNavigator from '../navigation/AdminButtomNavigation';
+import { useFocusEffect } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 const { width } = Dimensions.get('screen');
 const cardWidth = width / 2 - 20;
+// redux
+import { set } from '../../redux/navigationSlice'
 
 const AdminHome = ({ navigation }) => {
-
+  const dispatch = useDispatch()
   const userData = useSelector((state) => state.log)
+
+  useFocusEffect(() => {
+    dispatch(set({ value: 'AdminHome' }))
+  });
 
   const CardAddProduct = ({ }) => {
     return (

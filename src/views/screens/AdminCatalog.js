@@ -13,17 +13,25 @@ import {
   TouchableHighlight,
   TouchableOpacity,
 } from 'react-native';
-import { MaterialIcons, AntDesign  } from '@expo/vector-icons';
+import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
 import categories from '../../const/categories';
 import BottomNavigator from '../navigation/AdminButtomNavigation';
+import { useFocusEffect } from '@react-navigation/native';
 import { PrimaryButtonBox, SecondaryButtonBox } from '../components/Button';
-const {width} = Dimensions.get('screen');
+const { width } = Dimensions.get('screen');
 const cardWidth = width / 2 - 20;
+// redux
+import { set } from '../../redux/navigationSlice'
+import { useDispatch } from 'react-redux';
 
-const Home = ({navigation}) => {
-
+const Home = ({ navigation }) => {
+  const dispatch = useDispatch()
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
+
+  useFocusEffect(() => {
+    dispatch(set({ value: 'AdminCatalog' }))
+  });
 
   const ListCategories = () => {
     return (
@@ -37,7 +45,8 @@ const Home = ({navigation}) => {
             activeOpacity={0.8}
             onPress={() => setSelectedCategoryIndex(index)}>
             <View
-              style={{width: 150, marginRight: 10, borderRadius: 30, flexDirection: 'row', height: 50,
+              style={{
+                width: 150, marginRight: 10, borderRadius: 30, flexDirection: 'row', height: 50,
                 backgroundColor:
                   selectedCategoryIndex == index
                     ? COLORS.primary
@@ -47,7 +56,7 @@ const Home = ({navigation}) => {
               <View style={style.categoryBtnImgCon}>
                 <Image
                   source={category.image}
-                  style={{height: 30, width: 30, resizeMode: 'cover'}}
+                  style={{ height: 30, width: 30, resizeMode: 'cover' }}
                 />
               </View>
               <Text
@@ -70,45 +79,45 @@ const Home = ({navigation}) => {
     );
   };
 
-  const Card = ({}) => {
+  const Card = ({ }) => {
     return (
 
-        <View style={style.card}>
-          <View style={{ alignItems: 'baseline'}}>
-            <Image source={require('../../assets/rc-persian.png')} style={{height: 154, width: 123}} />
-          </View>
-          <View style={{ marginLeft: 13, marginTop: 10}}>
-            <Text style={{fontSize: 14, fontWeight: 'bold'}}>Royal Canin 1kg</Text>
-            <Text style={{ fontSize: 12, fontWeight: '500'}}>
-              Rp 200.000
+      <View style={style.card}>
+        <View style={{ alignItems: 'baseline' }}>
+          <Image source={require('../../assets/rc-persian.png')} style={{ height: 154, width: 123 }} />
+        </View>
+        <View style={{ marginLeft: 13, marginTop: 10 }}>
+          <Text style={{ fontSize: 14, fontWeight: 'bold' }}>Royal Canin 1kg</Text>
+          <Text style={{ fontSize: 12, fontWeight: '500' }}>
+            Rp 200.000
             </Text>
-            <Text style={{fontSize: 12, fontWeight: '500', marginTop: 2}}>Persian</Text>
-            <View style={{flexDirection:'row', marginTop:10}}>
-                <Image source={require('../../assets/Stock.png')} style={{height: 16, width: 16, marginRight:6}} />
-                <Text style={{fontSize: 12, color: COLORS.grey, marginRight:38}}>Stock</Text>
-                <Text style={{fontSize: 12, color: COLORS.grey}}>: 4</Text>
-            </View>
-            <View style={{flexDirection:'row', marginTop:4}}>
-                <Image source={require('../../assets/Favorite.png')} style={{height: 16, width: 16, marginRight:6}} />
-                <Text style={{fontSize: 12, color: COLORS.grey, marginRight:25}}>Favorite</Text>
-                <Text style={{fontSize: 12, color: COLORS.grey}}>: 5</Text>
-            </View>
-            <View style={{flexDirection:'row', marginTop:4}}>
-                <Image source={require('../../assets/Sold.png')} style={{height: 16, width: 16, marginRight:6}} />
-                <Text style={{fontSize: 12, color: COLORS.grey, marginRight:44}}>Sold</Text>
-                <Text style={{fontSize: 12, color: COLORS.grey}}>: 10</Text>
-            </View>
+          <Text style={{ fontSize: 12, fontWeight: '500', marginTop: 2 }}>Persian</Text>
+          <View style={{ flexDirection: 'row', marginTop: 10 }}>
+            <Image source={require('../../assets/Stock.png')} style={{ height: 16, width: 16, marginRight: 6 }} />
+            <Text style={{ fontSize: 12, color: COLORS.grey, marginRight: 38 }}>Stock</Text>
+            <Text style={{ fontSize: 12, color: COLORS.grey }}>: 4</Text>
           </View>
-          <View style={{marginLeft:50, marginTop:68}}>
-          <TouchableHighlight
-            underlayColor={COLORS.white}
-             activeOpacity={0.9}
-             onPress={() => navigation.navigate('DetailsScreen')}
-            >
-            <AntDesign name="right" size={20} color="black" />
-            </TouchableHighlight>
+          <View style={{ flexDirection: 'row', marginTop: 4 }}>
+            <Image source={require('../../assets/Favorite.png')} style={{ height: 16, width: 16, marginRight: 6 }} />
+            <Text style={{ fontSize: 12, color: COLORS.grey, marginRight: 25 }}>Favorite</Text>
+            <Text style={{ fontSize: 12, color: COLORS.grey }}>: 5</Text>
+          </View>
+          <View style={{ flexDirection: 'row', marginTop: 4 }}>
+            <Image source={require('../../assets/Sold.png')} style={{ height: 16, width: 16, marginRight: 6 }} />
+            <Text style={{ fontSize: 12, color: COLORS.grey, marginRight: 44 }}>Sold</Text>
+            <Text style={{ fontSize: 12, color: COLORS.grey }}>: 10</Text>
           </View>
         </View>
+        <View style={{ marginLeft: 50, marginTop: 68 }}>
+          <TouchableHighlight
+            underlayColor={COLORS.white}
+            activeOpacity={0.9}
+            onPress={() => navigation.navigate('DetailsScreen')}
+          >
+            <AntDesign name="right" size={20} color="black" />
+          </TouchableHighlight>
+        </View>
+      </View>
     );
   };
 
@@ -123,38 +132,38 @@ const Home = ({navigation}) => {
           paddingHorizontal: 20,
         }}>
         <View style={style.inputContainer}>
-          <MaterialIcons name="search" size={28} color={COLORS.p}/>
+          <MaterialIcons name="search" size={28} color={COLORS.p} />
           <TextInput
-            style={{paddingLeft: 5, flex: 2, fontSize: 18}}
+            style={{ paddingLeft: 5, flex: 2, fontSize: 18 }}
             placeholder="Search"
           />
         </View>
       </View>
-      <View style={{ alignContent:'stretch', flexDirection:'row', paddingTop:26, paddingBottom:12,}}>
-          <PrimaryButtonBox
-                
-                title="Available"
-                />
-             <SecondaryButtonBox
-                
-                title="Sold Out"
-                />    
-          </View>
+      <View style={{ alignContent: 'stretch', flexDirection: 'row', paddingTop: 26, paddingBottom: 12, }}>
+        <PrimaryButtonBox
+
+          title="Available"
+        />
+        <SecondaryButtonBox
+
+          title="Sold Out"
+        />
+      </View>
       <View>
-        <ListCategories/>
+        <ListCategories />
       </View>
-      <View style={{flex: 1, flexDirection: 'column', alignItems:'center', paddingTop:14 }}>
-        <Card/>
-        <Card/>
+      <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 14 }}>
+        <Card />
+        <Card />
       </View>
-      <BottomNavigator/>
+      <BottomNavigator />
     </SafeAreaView>
   )
 }
 
 const style = StyleSheet.create({
   container: {
-    flex: 1, 
+    flex: 1,
     backgroundColor: COLORS.white,
     minHeight: 600,
     height: '100%',
@@ -201,7 +210,7 @@ const style = StyleSheet.create({
     alignItems: 'center',
   },
   card: {
-    flexDirection:'row',
+    flexDirection: 'row',
     height: 154,
     width: 324,
     marginHorizontal: 10,
