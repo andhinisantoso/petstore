@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, StyleSheet, View, Image, SafeAreaView, TextInput } from 'react-native';
+import { Text, StyleSheet, View, Image, SafeAreaView, TextInput, ToastAndroid } from 'react-native';
 import { TouchableOpacity, TouchableHighlight } from 'react-native';
 import COLORS from '../../const/colors';
 import { PrimaryButton } from '../components/Button';
@@ -7,7 +7,7 @@ import Home from './Home';
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
-import { edit, editWithPhoto } from '../../redux/logSlice';
+import { edit, editWithPhoto, resetMessage } from '../../redux/logSlice';
 
 const AdminEditProfile = ({ navigation }) => {
   const adminData = useSelector((state) => state.log)
@@ -18,6 +18,7 @@ const AdminEditProfile = ({ navigation }) => {
   const [address, setAddress] = useState(adminData.address)
   const [image, setImage] = useState(null)
   const [imageName, setImageName] = useState('')
+  const message = useSelector((state) => state.log.message)
 
   useEffect(() => {
     (async () => {
@@ -41,6 +42,13 @@ const AdminEditProfile = ({ navigation }) => {
       setImageName(result.uri.match(/[\w-]*.jpg/))
     }
   };
+
+  useEffect(() => {
+    if (message != '') {
+      ToastAndroid.show(message, ToastAndroid.SHORT)
+      dispatch(resetMessage())
+    }
+  }, [message])
 
   const _edit = () => {
     if (image) {

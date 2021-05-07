@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, StyleSheet, View, Image, SafeAreaView, TextInput, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, View, Image, SafeAreaView, TextInput, TouchableOpacity, ToastAndroid } from 'react-native';
 import COLORS from '../../const/colors';
 import { PrimaryButton, SecondaryButton } from '../components/Button';
 import Home from './Home';
@@ -7,10 +7,11 @@ import { Feather, MaterialIcons } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 // redux
-import { edit, editWithPhoto } from '../../redux/logSlice';
+import { edit, editWithPhoto, resetMessage } from '../../redux/logSlice';
 
 const EditProfile = ({ navigation }) => {
   const userData = useSelector((state) => state.log)
+  const message = useSelector((state) => state.log.message)
   const dispatch = useDispatch()
 
   const [name, setName] = useState(userData.username)
@@ -43,6 +44,13 @@ const EditProfile = ({ navigation }) => {
       setImageName(result.uri.match(/[\w-]*.jpg/))
     }
   };
+
+  useEffect(() => {
+    if (message != '') {
+      ToastAndroid.show(message, ToastAndroid.SHORT)
+      dispatch(resetMessage())
+    }
+  }, [message])
 
   const _edit = () => {
     if (image) {

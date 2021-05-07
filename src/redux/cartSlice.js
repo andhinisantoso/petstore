@@ -5,25 +5,29 @@ import HOST from '../const/host';
 export const checkout = createAsyncThunk(
     'cart/checkout',
     async (data) => {
-        const uuid = require("uuid");
-        const orderkey = uuid.v4();
-        const newOrder = data.map((item) => ({
-            user_id: item.userId,
-            item_id: item.itemId,
-            order_key: orderkey,
-            total_order: item.total,
-            status: 'WAITING'
-        }))
+        try {
+            const uuid = require("uuid");
+            const orderkey = uuid.v4();
+            const newOrder = data.map((item) => ({
+                user_id: item.userId,
+                item_id: item.itemId,
+                order_key: orderkey,
+                total_order: item.total,
+                status: "WAITING"
+            }))
 
-        const response = await fetch(
-            `${HOST}/api/orders`,
-            {
-                method: 'POST',
-                body: JSON.stringify(newOrder)
-            }
-        )
+            const response = await fetch(
+                `${HOST}/api/orders`,
+                {
+                    method: 'POST',
+                    body: JSON.stringify(newOrder)
+                }
+            )
 
-        return response.json()
+            return response.json()
+        } catch (error) {
+            return error
+        }
     }
 )
 
@@ -33,6 +37,7 @@ const cartSlice = createSlice({
         listItem: [],
         totalPrice: 0,
         status: 'idle',
+        message: ''
     },
     reducers: {
         addToCart: (state, action) => {
@@ -61,7 +66,9 @@ const cartSlice = createSlice({
                 }
             })
         },
-
+        resetMessage: (state) => {
+            state.message = ''
+        }
     },
     extraReducers: {
         [checkout.pending]: (state) => {
@@ -71,13 +78,15 @@ const cartSlice = createSlice({
             state.listItem = []
             state.totalPrice = 0
             state.status = 'fullfilled'
+            state.message = 'Berhasil memesan. Tunggu pesanan diproses toko'
         },
-        [checkout.rejected]: (state) => {
+        [checkout.rejected]: (state, action) => {
             state.status = 'rejected'
+            state.message = 'Maaf pesanan anda gagal diproses'
         }
     }
 })
 
-export const { addToCart, removeFromCart, plusOne, minusOne } = cartSlice.actions
+export const { addToCart, removeFromCart, plusOne, minusOne, resetMessage } = cartSlice.actions
 
 export default cartSlice.reducer

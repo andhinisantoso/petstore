@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text, StyleSheet, View, Image, SafeAreaView, TextInput } from 'react-native';
-import { TouchableOpacity, TouchableHighlight } from 'react-native';
+import { TouchableOpacity, TouchableHighlight, ToastAndroid } from 'react-native';
 import COLORS from '../../const/colors';
 import { PrimaryButton } from '../components/Button';
 import Home from './Home';
@@ -10,7 +10,7 @@ import { Picker } from '@react-native-picker/picker';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as ImagePicker from 'expo-image-picker';
 // redux
-import { add } from '../../redux/itemSlice';
+import { add, resetMessage } from '../../redux/itemSlice';
 
 const AddProduct = ({ navigation }) => {
   const [image, setImage] = useState(null)
@@ -23,6 +23,7 @@ const AddProduct = ({ navigation }) => {
   const [description, setDescription] = useState('')
   const dispatch = useDispatch()
   const listCategory = useSelector((state) => state.category.listCategory)
+  const message = useSelector((state) => state.item.message)
 
   useEffect(() => {
     (async () => {
@@ -47,6 +48,13 @@ const AddProduct = ({ navigation }) => {
     }
   };
 
+  useEffect(() => {
+    if (message != '') {
+      ToastAndroid.show(message, ToastAndroid.SHORT)
+      dispatch(resetMessage())
+    }
+  }, [message])
+
   const _add = () => {
     if (image) {
       dispatch(add({
@@ -59,6 +67,8 @@ const AddProduct = ({ navigation }) => {
         price: parseInt(price),
         description: description
       }))
+    } else {
+      ToastAndroid.show('Maaf gambarnya belum ada', ToastAndroid.SHORT)
     }
   }
 

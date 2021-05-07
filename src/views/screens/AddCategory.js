@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { Text, StyleSheet, View, Image, SafeAreaView, TextInput } from 'react-native';
+import { Text, StyleSheet, View, Image, SafeAreaView, TextInput, ToastAndroid } from 'react-native';
 import { TouchableOpacity, TouchableHighlight } from 'react-native';
 import COLORS from '../../const/colors';
 import { PrimaryButton } from '../components/Button';
 import Home from './Home';
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // redux
-import { add } from '../../redux/categorySlice';
+import { add, resetMessage } from '../../redux/categorySlice';
 
 const AddCategory = ({ navigation }) => {
   const [name, setName] = useState('')
   const [image, setImage] = useState(null)
   const [imageName, setImageName] = useState('')
+  const message = useSelector((state) => state.category.message)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -39,6 +40,13 @@ const AddCategory = ({ navigation }) => {
     }
   };
 
+  useEffect(() => {
+    if (message != '') {
+      ToastAndroid.show(message, ToastAndroid.SHORT)
+      dispatch(resetMessage())
+    }
+  }, [message])
+
   const _add = () => {
     if (image) {
       dispatch(add({
@@ -46,6 +54,8 @@ const AddCategory = ({ navigation }) => {
         imageName: imageName[0],
         name: name
       }))
+    } else {
+      ToastAndroid.show('Maaf gambarnya belum ada', ToastAndroid.SHORT)
     }
   }
 

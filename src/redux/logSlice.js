@@ -4,65 +4,77 @@ import HOST from '../const/host';
 export const login = createAsyncThunk(
     'log/login',
     async (data) => {
-        const response = await fetch(
-            `${HOST}/api/login`,
-            {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            }
-        )
-        const result = await response.json()
-        return result
+        try {
+            const response = await fetch(
+                `${HOST}/api/login`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                }
+            )
+            const result = await response.json()
+            return result
+        } catch (error) {
+            return error
+        }
     }
 )
 
 export const edit = createAsyncThunk(
     'log/edit',
     async (data) => {
-        const id = data.id
-        delete data.id
-        const response = await fetch(
-            `${HOST}/api/users/${id}`,
-            {
-                method: 'PUT',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            }
-        )
-        return response.json()
+        try {
+            const id = data.id
+            delete data.id
+            const response = await fetch(
+                `${HOST}/api/users/${id}`,
+                {
+                    method: 'PUT',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                }
+            )
+            return response.json()
+        } catch (error) {
+            return error
+        }
     }
 )
 
 export const editWithPhoto = createAsyncThunk(
     'log/editWithPhoto',
     async (data) => {
-        let dataRequest = new FormData()
-        dataRequest.append('image', { type: 'image/jpg', uri: data['imageUri'], name: data['imageName'] })
-        dataRequest.append('id', data['id'])
-        dataRequest.append('name', data['name'])
-        dataRequest.append('email', data['email'])
-        dataRequest.append('phone', data['phone'])
-        if (data['password']) {
-            dataRequest.append('password', data['password'])
-        }
-        if (data['address']) {
-            dataRequest.append('address', data['address'])
-        }
-        const id = data['id']
-        const response = await fetch(
-            `${HOST}/api/users/update/${id}`,
-            {
-                method: 'POST',
-                body: dataRequest
+        try {
+            let dataRequest = new FormData()
+            dataRequest.append('image', { type: 'image/jpg', uri: data['imageUri'], name: data['imageName'] })
+            dataRequest.append('id', data['id'])
+            dataRequest.append('name', data['name'])
+            dataRequest.append('email', data['email'])
+            dataRequest.append('phone', data['phone'])
+            if (data['password']) {
+                dataRequest.append('password', data['password'])
             }
-        )
-        return response.json()
+            if (data['address']) {
+                dataRequest.append('address', data['address'])
+            }
+            const id = data['id']
+            const response = await fetch(
+                `${HOST}/api/users/update/${id}`,
+                {
+                    method: 'POST',
+                    body: dataRequest
+                }
+            )
+            return response.json()
+        } catch (error) {
+            return error
+        }
     }
 )
 
@@ -78,13 +90,17 @@ const logSlice = createSlice({
         password: '',
         role: '',
         status: 'logout',
-        statusEdit: 'idle'
+        statusEdit: 'idle',
+        message: ''
     },
     reducers: {
         logout: (state) => {
             state.userId = null
             state.role = ''
             state.status = 'logout'
+        },
+        resetMessage: (state) => {
+            state.message = ''
         }
     },
     extraReducers: {
@@ -119,9 +135,11 @@ const logSlice = createSlice({
             state.password = action.payload.password
             state.role = action.payload.role
             state.statusEdit = 'fullfilled'
+            state.message = 'Perubahan berhasil disimpan'
         },
         [edit.rejected]: (state) => {
             state.statusEdit = 'rejected'
+            state.message = 'Maaf perubahan tidak berhasil disimpan'
         },
         [editWithPhoto.fulfilled]: (state, action) => {
             state.userId = action.payload.id
@@ -133,13 +151,15 @@ const logSlice = createSlice({
             state.password = action.payload.password
             state.role = action.payload.role
             state.statusEdit = 'fullfilled'
+            state.message = 'Perubahan berhasil disimpan'
         },
         [editWithPhoto.rejected]: (state, action) => {
             state.statusEdit = action.payload
+            state.message = 'Maaf perubahan tidak berhasil disimpan'
         }
     }
 })
 
-export const { logout } = logSlice.actions
+export const { logout, resetMessage } = logSlice.actions
 
 export default logSlice.reducer

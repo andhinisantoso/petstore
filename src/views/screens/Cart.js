@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { SafeAreaView, StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import { SafeAreaView, StyleSheet, View, Text, Image, TouchableOpacity, ToastAndroid } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
 import { PrimaryButton } from '../components/Button';
@@ -8,18 +8,25 @@ import BottomNavigator from '../navigation/BottomNavigation';
 import { useFocusEffect } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 // redux
-import { plusOne, minusOne, checkout, } from '../../redux/cartSlice';
+import { plusOne, minusOne, checkout, resetMessage } from '../../redux/cartSlice';
 import { set } from '../../redux/navigationSlice'
 
 const CartScreen = ({ navigation }) => {
   const listItem = useSelector((state) => state.cart.listItem)
   const totalPrice = useSelector((state) => state.cart.totalPrice)
-  const status = useSelector((state) => state.cart.status)
+  const message = useSelector((state) => state.cart.message)
   const dispatch = useDispatch()
 
   useFocusEffect(() => {
     dispatch(set({ value: 'Cart' }))
   });
+
+  useEffect(() => {
+    if (message != '') {
+      ToastAndroid.show(message, ToastAndroid.SHORT)
+      dispatch(resetMessage())
+    }
+  }, [message])
 
   const CartCard = (props) => {
     const { id, name, detail, price, total, image } = props
