@@ -45,7 +45,7 @@ const AdminHome = ({ navigation }) => {
       <TouchableHighlight
         underlayColor={COLORS.white}
         activeOpacity={0.9}
-        onPress={() => navigation.navigate('DetailsScreen')}
+        onPress={() => { }}
       >
         <View style={style.card}>
           <View style={{ marginBottom: 15.06, marginLeft: 50, marginTop: 45, height: 50.94 }}>
@@ -81,7 +81,7 @@ const AdminHome = ({ navigation }) => {
       <TouchableHighlight
         underlayColor={COLORS.white}
         activeOpacity={0.9}
-        onPress={() => navigation.navigate('DetailsScreen')}
+        onPress={() => { }}
       >
         <View style={style.card}>
           <View style={{ marginBottom: 15.06, marginLeft: 50, marginTop: 45, height: 50.94 }}>

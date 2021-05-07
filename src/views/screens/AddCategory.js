@@ -63,6 +63,7 @@ const AddCategory = ({ navigation }) => {
             <View style={style.inputContainer}>
               <View style={{ flexDirection: 'row' }}>
                 <TextInput
+                  editable={false}
                   style={{ paddingLeft: 10, flex: 2, fontSize: 16, color: COLORS.grey }}
                   value={imageName[0]}
                   placeholder="Upload Icon"

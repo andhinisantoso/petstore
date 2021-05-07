@@ -76,7 +76,9 @@ const AdminEditProfile = ({ navigation }) => {
             <View style={style.inputContainer}>
               <View style={{ flexDirection: 'row' }}>
                 <TextInput
+                  editable={false}
                   style={{ paddingLeft: 10, flex: 2, fontSize: 16, color: COLORS.grey }}
+                  value={imageName[0]}
                   placeholder="Upload Photo"
                 />
                 <View style={{ backgroundColor: COLORS.secondary, width: 73, height: 50, justifyContent: 'center', alignItems: 'center', borderRadius: 15 }}>

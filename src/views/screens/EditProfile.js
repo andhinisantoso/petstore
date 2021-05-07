@@ -82,7 +82,7 @@ const EditProfile = ({ navigation }) => {
                 flex: 1,
                 marginTop: 30,
               }}>
-                <Text style={{ paddingLeft: 10, flex: 2, fontSize: 16, color: '#8C8C8C' }}>Upload Photo</Text>
+                <Text style={{ paddingLeft: 10, flex: 2, fontSize: 16, color: '#8C8C8C' }}>{imageName[0] ? imageName[0] : "Upload Photo"}</Text>
               </View>
               <View>
                 <View style={{ alignItems: 'center' }}>
