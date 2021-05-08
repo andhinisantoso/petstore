@@ -164,6 +164,7 @@ const Home = ({ navigation }) => {
       </View>
       <View
         style={{
+          flex:1,
           marginTop: 20,
           flexDirection: 'row',
           paddingHorizontal: 20,
@@ -176,17 +177,27 @@ const Home = ({ navigation }) => {
           />
         </View>
       </View>
-      <View>
+      <View style={{flex:1}}>
         <ListCategories />
       </View>
-      <View style={{ flex: 1, flexDirection: 'row', marginLeft: 10, }}>
-        {listItem.map((item) => {
+      <View style={{ flex: 6, flexDirection: 'column', marginLeft: 10 }}>
+      <ScrollView horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={style.categoriesListContainer}
+        >
+          {listItem.map((item) => {
           if (item.category_id == selectedCategoryIndex) {
             return <Card image={item.image} name={item.name} price={item.price} detail={item.detail} description={item.description} key={item.id} id={item.id} />
           }
         })}
+      </ScrollView>
       </View>
+      
+      
+      <View style={{flex:1,  }}>
       <BottomNavigator />
+      </View>
+     
     </SafeAreaView>
   )
 }

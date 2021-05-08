@@ -3,18 +3,19 @@ import COLORS from '../../const/colors';
 import { MaterialIcons } from '@expo/vector-icons';
 import { View, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const BottomNavigator = () => {
-  
+  const navigation = useNavigation();
   return (
     <View style={style.navigatorContainer}>
       <TouchableOpacity activeOpacity={0.5} style={style.icon}>
         <MaterialIcons name="home" size={36} color={COLORS.primary}/>
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.5} style={style.icon}>
+      <TouchableOpacity onPress={() => navigation.navigate('AdminCatalog')} activeOpacity={0.5} style={style.icon}>
         <MaterialIcons name="shopping-bag" size={36} color={COLORS.secondary}/>
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.5} style={style.icon}>
+      <TouchableOpacity  activeOpacity={0.5} style={style.icon}>
         <MaterialIcons name="store" size={36} color={COLORS.secondary}/>
       </TouchableOpacity>
       

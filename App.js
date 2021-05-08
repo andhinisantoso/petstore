@@ -21,6 +21,7 @@ import AddCategory from './src/views/screens/AddCategory';
 import AddProduct from './src/views/screens/AddProduct';
 import AdminEditProfile from './src/views/screens/AdminEditProfile';
 import InfoPetStore from './src/views/screens/StoreProfile';
+import AdminSummary from './src/views/screens/AdminSummary'
 // navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -64,6 +65,7 @@ const App = () => {
             {/* admin */}
             <Stack.Screen name="AdminHome" component={AdminHome} />
             <Stack.Screen name="AdminCatalog" component={AdminCatalog} />
+            <Stack.Screen name="AdminSummary" component={AdminSummary} />
             <Stack.Screen name="AdminEditProfile" component={AdminEditProfile} />
             <Stack.Screen name="AdminDetailsScreen" component={AdminDetailsScreen} />
             <Stack.Screen name="AddCategory" component={AddCategory} />

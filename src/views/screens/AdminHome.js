@@ -30,7 +30,7 @@ const AdminHome = ({ navigation }) => {
         onPress={() => navigation.navigate('AddProduct')}
       >
         <View style={style.card}>
-          <View style={{ marginBottom: 15.06, marginLeft: 40, marginTop: 45, height: 50.94 }}>
+          <View style={{ marginBottom: 15.06, marginLeft: 40, marginTop: 30, height: 50.94 }}>
             <AntDesign name="tag" size={70} color={COLORS.primary} />
           </View>
           <View style={{ marginHorizontal: 10, marginTop: 10 }}>
@@ -48,7 +48,7 @@ const AdminHome = ({ navigation }) => {
         onPress={() => navigation.navigate('DetailsScreen')}
       >
         <View style={style.card}>
-          <View style={{ marginBottom: 15.06, marginLeft: 50, marginTop: 45, height: 50.94 }}>
+          <View style={{ marginBottom: 15.06, marginLeft: 50, marginTop: 30, height: 50.94 }}>
             <MaterialCommunityIcons name="briefcase-check" size={70} color={COLORS.primary} />
           </View>
           <View style={{ marginHorizontal: 10, marginTop: 10 }}>
@@ -66,7 +66,7 @@ const AdminHome = ({ navigation }) => {
         onPress={() => navigation.navigate('AddCategory')}
       >
         <View style={style.card}>
-          <View style={{ marginBottom: 15.06, marginLeft: 50, marginTop: 40, height: 50.94 }}>
+          <View style={{ marginBottom: 15.06, marginLeft: 50, marginTop: 30, height: 50.94 }}>
             <MaterialIcons name="category" size={70} color={COLORS.primary} />
           </View>
           <View style={{ marginHorizontal: 10, marginTop: 10 }}>
@@ -81,10 +81,10 @@ const AdminHome = ({ navigation }) => {
       <TouchableHighlight
         underlayColor={COLORS.white}
         activeOpacity={0.9}
-        onPress={() => navigation.navigate('DetailsScreen')}
+        onPress={() => navigation.navigate('AdminSummary')}
       >
         <View style={style.card}>
-          <View style={{ marginBottom: 15.06, marginLeft: 50, marginTop: 45, height: 50.94 }}>
+          <View style={{ marginBottom: 15.06, marginLeft: 50, marginTop: 30, height: 50.94 }}>
             <Octicons name="graph" size={70} color={COLORS.primary} />
           </View>
           <View style={{ marginHorizontal: 10, marginTop: 10 }}>
@@ -99,27 +99,31 @@ const AdminHome = ({ navigation }) => {
   return (
     <SafeAreaView style={style.container}>
       <View style={style.header}>
-        <View>
-          <View style={{ flexDirection: 'row' }}>
+        <View style={{flex:1}}>
+          <View style={{ flex:1, flexDirection: 'row' }}>
             <Text style={{ fontSize: 28, fontWeight: 'bold' }}>Welcome ,</Text>
             <Text style={{ fontSize: 28, fontWeight: 'bold', marginLeft: 10 }}>
               Admin
             </Text>
           </View>
+          <View style={{flex:1}}>
           <Text style={{ marginTop: 5, fontSize: 22, color: COLORS.grey }}>
             Manage your store
           </Text>
+          </View>
         </View>
+        <View style={{flex:1}}>
         <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
           <Image
             source={{ uri: userData.image }}
             style={{ height: 50, width: 50, borderRadius: 25 }}
           />
         </TouchableOpacity>
+        </View>
       </View>
       <View
         style={{
-          marginTop: 51,
+          flex:1,
           flexDirection: 'row',
           paddingHorizontal: 20,
           borderBottomColor: 'black',
@@ -129,7 +133,7 @@ const AdminHome = ({ navigation }) => {
           marginBottom: 10,
         }}>
       </View>
-
+      <View style={{flex:7}}>
       <View style={{ flex: 1, flexDirection: 'row', marginLeft: 10, }}>
         <CardAddProduct />
         <CardOrderCheck />
@@ -138,7 +142,10 @@ const AdminHome = ({ navigation }) => {
         <CardAddCategory />
         <CardSummary />
       </View>
+      </View>
+      <View style={{flex:1}}>
       <BottomNavigator />
+      </View>
     </SafeAreaView>
   )
 }
@@ -151,20 +158,12 @@ const style = StyleSheet.create({
     height: '100%',
   },
   header: {
+    flex:1,
     marginTop: 70,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     marginBottom: -10,
-  },
-  inputContainer: {
-    flex: 1,
-    height: 50,
-    borderRadius: 10,
-    flexDirection: 'row',
-    backgroundColor: COLORS.secondary,
-    alignItems: 'center',
-    paddingHorizontal: 20,
   },
   categoriesListContainer: {
     paddingVertical: 10,
@@ -203,7 +202,8 @@ const style = StyleSheet.create({
     elevation: 13,
     backgroundColor: COLORS.secondary,
     shadowRadius: 5,
-    shadowColor: COLORS.grey
+    shadowColor: COLORS.grey,
+    flex:1
   },
   addToCartBtn: {
     height: 30,

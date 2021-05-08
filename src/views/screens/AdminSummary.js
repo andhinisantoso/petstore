@@ -17,7 +17,7 @@ import { MaterialIcons, AntDesign  } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
 import categories from '../../const/categories';
 import BottomNavigator from '../navigation/AdminButtomNavigation';
-import { PrimaryButtonBox, SecondaryButtonBox } from '../components/Button';
+import { SecondaryButton } from '../components/Button';
 const {width} = Dimensions.get('screen');
 const cardWidth = width / 2 - 20;
 
@@ -73,32 +73,14 @@ const Home = ({navigation}) => {
     return (
 
         <View style={style.card}>
-          <View style={{ alignItems: 'baseline'}}>
-            <Image source={require('../../assets/rc-persian.png')} style={{height: 154, width: 123}} />
-          </View>
           <View style={{ marginLeft: 13, marginTop: 10}}>
-            <Text style={{fontSize: 14, fontWeight: 'bold'}}>Royal Canin 1kg</Text>
-            <Text style={{ fontSize: 12, fontWeight: '500'}}>
-              Rp 200.000
-            </Text>
-            <Text style={{fontSize: 12, fontWeight: '500', marginTop: 2}}>Persian</Text>
-            <View style={{flexDirection:'row', marginTop:10}}>
-                <Image source={require('../../assets/Stock.png')} style={{height: 16, width: 16, marginRight:6}} />
-                <Text style={{fontSize: 12, color: COLORS.grey, marginRight:38}}>Stock</Text>
-                <Text style={{fontSize: 12, color: COLORS.grey}}>: 4</Text>
-            </View>
-            <View style={{flexDirection:'row', marginTop:4}}>
-                <Image source={require('../../assets/Favorite.png')} style={{height: 16, width: 16, marginRight:6}} />
-                <Text style={{fontSize: 12, color: COLORS.grey, marginRight:25}}>Favorite</Text>
-                <Text style={{fontSize: 12, color: COLORS.grey}}>: 5</Text>
-            </View>
-            <View style={{flexDirection:'row', marginTop:4}}>
-                <Image source={require('../../assets/Sold.png')} style={{height: 16, width: 16, marginRight:6}} />
-                <Text style={{fontSize: 12, color: COLORS.grey, marginRight:44}}>Sold</Text>
-                <Text style={{fontSize: 12, color: COLORS.grey}}>: 10</Text>
-            </View>
+            <Text style={{fontSize: 14, fontWeight: 'bold'}}>Name           : Dadu</Text>
+            <Text style={{fontSize: 14, fontWeight: 'bold'}}>Telephone  : 08000000</Text>
+            <Text style={{fontSize: 14, fontWeight: 'bold'}}>Date              : 12 April 2021</Text>
+            <Text style={{fontSize: 14, fontWeight: 'bold'}}>Time              : 15:0</Text>
+            <Text style={{fontSize: 14, fontWeight: 'bold'}}>Total             : Rp 480000</Text>
           </View>
-          <View style={{marginLeft:50, marginTop:68}}>
+          <View style={{marginLeft:150, marginTop:68}}>
           <TouchableHighlight
             underlayColor={COLORS.white}
              activeOpacity={0.9}
@@ -128,29 +110,18 @@ const Home = ({navigation}) => {
           />
         </View>
       </View>
-      <View style={{ flex:1, alignContent:'stretch', flexDirection:'row', paddingTop:10, }}>
-          <PrimaryButtonBox
-                
-                title="Available"
-                />
-             <SecondaryButtonBox
-                
-                title="Sold Out"
-                />    
-          </View>
-      <View style={{flex:1}}>
-        <ListCategories/>
+      <View style={{flex:1, flexDirection:'row', padding:10}}>
+        <View style={{flex:1, paddingHorizontal:10}}><SecondaryButton title="1 Month" ></SecondaryButton></View>
+        <View style={{flex:1, paddingHorizontal:10}}><SecondaryButton title="1 Year" ></SecondaryButton></View>
+        <View style={{flex:1, paddingHorizontal:10}}><SecondaryButton title="All" ></SecondaryButton></View>
       </View>
-      <View style={{flex:6}}>
+      <View style={{flex:8}}>
       <ScrollView >
       <View style={{ flexDirection: 'column', alignItems:'center', paddingTop:14 }}>
         <Card/>
         <Card/>
       </View>
       </ScrollView>
-      </View>
-      <View style={{flex:1}}>
-      <BottomNavigator/>
       </View>
     </SafeAreaView>
   )

@@ -140,7 +140,7 @@ const AdminEditProfile = ({ navigation }) => {
 
 const style = StyleSheet.create({
   header: {
-    paddingVertical: 20,
+    paddingTop: 50,
     flexDirection: 'row',
     alignItems: 'center',
     marginHorizontal: 20,
@@ -157,13 +157,14 @@ const style = StyleSheet.create({
     marginTop: 30,
   },
   inputContainer: {
-    height: 50,
-    width: 324,
-    marginBottom: 20,
+    height: 60,
+    width: 290,
+    marginBottom: 30,
     borderRadius: 15,
     backgroundColor: COLORS.white,
     shadowRadius: 5,
     shadowColor: COLORS.grey,
+    elevation: 13,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

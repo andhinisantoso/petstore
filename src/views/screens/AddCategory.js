@@ -4,7 +4,7 @@ import { TouchableOpacity, TouchableHighlight } from 'react-native';
 import COLORS from '../../const/colors';
 import { PrimaryButton } from '../components/Button';
 import Home from './Home';
-import { MaterialIcons, AntDesign } from '@expo/vector-icons';
+import { Feather, MaterialIcons, AntDesign } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { useDispatch } from 'react-redux';
 // redux
@@ -53,28 +53,28 @@ const AddCategory = ({ navigation }) => {
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <View style={style.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
+          <View style={{flexDirection:'row'}}>
           <MaterialIcons name="arrow-back-ios" size={28} />
-          <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Add category</Text>
+          <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Add Category</Text>
+          </View>
         </TouchableOpacity>
       </View>
-      <View style={style.textContainer}>
-        <View>
-          <View style={style.formLogin}>
-            <View style={style.inputContainer}>
-              <View style={{ flexDirection: 'row' }}>
-                <TextInput
-                  style={{ paddingLeft: 10, flex: 2, fontSize: 16, color: COLORS.grey }}
-                  value={imageName[0]}
-                  placeholder="Upload Icon"
-                />
-                <View style={{ backgroundColor: COLORS.secondary, width: 73, height: 50, justifyContent: 'center', alignItems: 'center', borderRadius: 15 }}>
-                  <TouchableHighlight
-                    underlayColor={COLORS.white}
-                    activeOpacity={0.9}
-                    onPress={() => pickImage()}
-                  >
-                    <AntDesign name="upload" size={26} color="black" />
-                  </TouchableHighlight>
+      <View style={{flex:8, alignItems:'center'}}>
+      <View style={style.cartCard}>
+              <View style={{
+                height: 60,
+                flex: 1,
+                marginTop: 30,
+              }}>
+                <Text style={{ paddingLeft: 10, flex: 2, fontSize: 16, color: '#8C8C8C' }}>Upload Photo</Text>
+              </View>
+              <View>
+                <View style={{ alignItems: 'center' }}>
+                  <View style={style.actionBtn}>
+                    <TouchableOpacity activeOpacity={0.8} onPress={() => pickImage()} style={style.icon}>
+                      <Feather name="upload" color={COLORS.primary} size={28} />
+                    </TouchableOpacity>
+                  </View>
                 </View>
               </View>
             </View>
@@ -86,15 +86,12 @@ const AddCategory = ({ navigation }) => {
                 placeholder="Category Name"
               />
             </View>
-            <View style={{ marginTop: 300, marginBottom: 87 }}>
+      </View>
+      <View style={{ flex:1, padding:20 }}>
               <PrimaryButton
                 onPress={() => _add()}
                 title="Save"
               />
-            </View>
-
-          </View>
-        </View>
       </View>
     </SafeAreaView>
   );
@@ -102,7 +99,8 @@ const AddCategory = ({ navigation }) => {
 
 const style = StyleSheet.create({
   header: {
-    paddingVertical: 20,
+    flex:1,
+    paddingVertical: 40,
     flexDirection: 'row',
     alignItems: 'center',
     marginHorizontal: 20,
@@ -112,23 +110,52 @@ const style = StyleSheet.create({
     paddingHorizontal: 50,
     justifyContent: 'space-between',
     paddingBottom: 40,
-    paddingTop: 10,
+    paddingTop: 30,
 
   },
   formLogin: {
-    marginTop: 30,
+    marginTop: 40,
   },
   inputContainer: {
-    height: 50,
-    width: 324,
-    marginBottom: 20,
+    height: 60,
+    width: 290,
+    marginBottom: 30,
     borderRadius: 15,
+    backgroundColor: COLORS.white,
+    shadowRadius: 5,
+    shadowColor: COLORS.grey,
+    elevation: 13,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  cartCard: {
+    height: 60,
+    width: 290,
+    marginHorizontal: 10,
+    marginBottom: 30,
+    borderRadius: 15,
+    elevation: 13,
     backgroundColor: COLORS.white,
     shadowRadius: 5,
     shadowColor: COLORS.grey,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  actionBtn: {
+    width: 100,
+    height: 60,
+    backgroundColor: COLORS.secondary,
+    borderRadius: 15,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignContent: 'center',
+  },
+  icon: {
+    marginRight: 10,
+    marginTop: 10,
+    marginLeft: 7
   },
 });
 
