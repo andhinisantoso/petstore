@@ -5,19 +5,20 @@ import COLORS from '../../const/colors';
 import BottomNavigator from '../navigation/BottomNavigation';
 import { useFocusEffect } from '@react-navigation/native';
 import Home from './Home';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // redux
-import { set } from '../../redux/navigationSlice'
+import navigationSlice, { set } from '../../redux/navigationSlice'
 
-const History = () => {
+const History = ({ navigation }) => {
 
   const dispatch = useDispatch();
+  const listHistory = useSelector((state) => state.history.listHistory)
 
   useFocusEffect(() => {
     dispatch(set({ value: 'History' }))
   });
 
-  const HistoryCard = () => {
+  const HistoryCard = (props) => {
     return (
       <View>
         <View style={style.historyCard}>
@@ -27,14 +28,14 @@ const History = () => {
             <Text style={style.text}>Total</Text>
           </View>
           <View style={style.textData}>
-            <Text style={style.text}>: 12 April 2021</Text>
-            <Text style={style.text}>: 15:00</Text>
-            <Text style={style.text}>: Rp 480.000</Text>
+            <Text style={style.text}>: {props.date}</Text>
+            <Text style={style.text}>: {props.time}</Text>
+            <Text style={style.text}>: Rp {props.total}</Text>
           </View>
           <View>
             <View style={{ alignItems: 'center' }}>
               <View style={style.actionBtn}>
-                <TouchableOpacity activeOpacity={0.5} onPress={Home} style={style.iconContainer}>
+                <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.navigate('DetailHistory')} style={style.iconContainer}>
                   <MaterialIcons name="arrow-forward-ios" color={COLORS.primary} size={28} />
                 </TouchableOpacity>
               </View>
@@ -48,12 +49,11 @@ const History = () => {
     <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1 }}>
       <View style={style.header}></View>
       <View style={{ marginBottom: 380 }}>
-        <View style={style.card}>
-          <HistoryCard style={style.card} />
-        </View>
-        <View style={style.card}>
-          <HistoryCard style={style.card} />
-        </View>
+        {listHistory.map((history) => (
+          <View key={history.id} style={style.card}>
+            <HistoryCard key={history.id} id={history.id} date={history.date} time={history.time} total={history.total} style={style.card} />
+          </View>
+        ))}
       </View>
       <BottomNavigator />
     </SafeAreaView>

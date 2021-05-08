@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, View, Text, Image, TouchableOpacity, ToastAndroid } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
@@ -10,12 +10,16 @@ import { useDispatch, useSelector } from 'react-redux';
 // redux
 import { plusOne, minusOne, checkout, resetMessage } from '../../redux/cartSlice';
 import { set } from '../../redux/navigationSlice'
+import { add } from '../../redux/historySlice'
 
 const CartScreen = ({ navigation }) => {
   const listItem = useSelector((state) => state.cart.listItem)
   const totalPrice = useSelector((state) => state.cart.totalPrice)
   const message = useSelector((state) => state.cart.message)
   const dispatch = useDispatch()
+
+  const [itemHistory, setItemHistory] = useState([])
+  const [totalHistory, setTotalHistory] = useState(0)
 
   useFocusEffect(() => {
     dispatch(set({ value: 'Cart' }))
@@ -24,9 +28,35 @@ const CartScreen = ({ navigation }) => {
   useEffect(() => {
     if (message != '') {
       ToastAndroid.show(message, ToastAndroid.SHORT)
+      if (message == 'Berhasil memesan. Tunggu pesanan diproses toko') {
+        let currentDate = new Date();
+        let cDay = currentDate.getDate();
+        let cMonth = currentDate.getMonth() + 1;
+        let cYear = currentDate.getFullYear();
+        const date = cDay + "/" + cMonth + "/" + cYear;
+        let time = currentDate.getHours() + ":" + currentDate.getMinutes()
+        const uuid = require("uuid");
+        dispatch(add({
+          id: uuid.v4(),
+          date: date,
+          time: time,
+          total: totalHistory,
+          listItem: itemHistory
+        }))
+      }
       dispatch(resetMessage())
     }
   }, [message])
+
+  const _checkout = async () => {
+    try {
+      setItemHistory(listItem)
+      setTotalHistory(totalPrice)
+      await dispatch(checkout(listItem))
+    } catch (error) {
+      ToastAndroid.show(error, ToastAndroid.SHORT)
+    }
+  }
 
   const CartCard = (props) => {
     const { id, name, detail, price, total, image } = props
@@ -88,7 +118,7 @@ const CartScreen = ({ navigation }) => {
             <Text style={{ fontSize: 18, fontWeight: 'bold', marginRight: 40 }}>Rp {totalPrice}</Text>
           </View>
           <View style={{ marginHorizontal: 30 }}>
-            <PrimaryButton title="Checkout" onPress={() => dispatch(checkout(listItem))} />
+            <PrimaryButton title="Checkout" onPress={() => _checkout()} />
           </View>
         </View>
 
