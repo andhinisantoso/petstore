@@ -9,6 +9,14 @@ export const getAllItem = createAsyncThunk(
     }
 )
 
+export const getSoldOutItem = createAsyncThunk(
+    'item/getAllItem',
+    async () => {
+        const response = await fetch(`${HOST}/api/items`)
+        return response.json()
+    }
+)
+
 export const add = createAsyncThunk(
     'item/add',
     async (data) => {
@@ -40,6 +48,7 @@ export const itemSlice = createSlice({
     name: 'item',
     initialState: {
         listItem: [],
+        listSoldOut: [],
         status: '',
         message: ''
     },
@@ -57,6 +66,16 @@ export const itemSlice = createSlice({
             state.status = 'ok in get all'
         },
         [getAllItem.rejected]: (state) => {
+            state.status = 'rejected in get all'
+        },
+        [getSoldOutItem.pending]: (state) => {
+            state.status = 'pending in get all'
+        },
+        [getSoldOutItem.fulfilled]: (state, action) => {
+            state.listSoldOut = action.payload.filter(item => item.stok <= 0)
+            state.status = 'ok in get all'
+        },
+        [getSoldOutItem.rejected]: (state) => {
             state.status = 'rejected in get all'
         },
         [add.fulfilled]: (state) => {

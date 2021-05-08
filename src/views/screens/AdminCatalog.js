@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Image,
   SafeAreaView,
@@ -23,15 +23,37 @@ const { width } = Dimensions.get('screen');
 const cardWidth = width / 2 - 20;
 // redux
 import { set } from '../../redux/navigationSlice'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCategories } from '../../redux/categorySlice'
+import { getAllItem, getSoldOutItem } from '../../redux/itemSlice'
 
 const Home = ({ navigation }) => {
   const dispatch = useDispatch()
+  const listCategory = useSelector((state) => state.category.listCategory)
+  const listItem = useSelector((state) => state.item.listItem)
+  const listSoldOut = useSelector((state) => state.item.listSoldOut)
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
+  const [availableSelected, setAvailableSelected] = useState(true)
+  const [selectedButton, setSelectedButton] = useState('available')
 
   useFocusEffect(() => {
     dispatch(set({ value: 'AdminCatalog' }))
+    dispatch(getCategories())
+    dispatch(getSoldOutItem())
+    dispatch(getAllItem())
   });
+
+  useEffect(() => {
+    setSelectedCategoryIndex(listCategory[0]['id'])
+  }, [dispatch])
+
+  const available = () => {
+    setSelectedButton('available')
+  }
+
+  const sold_out = () => {
+    setSelectedButton('sold')
+  }
 
   const ListCategories = () => {
     return (
@@ -39,23 +61,23 @@ const Home = ({ navigation }) => {
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={style.categoriesListContainer}>
-        {categories.map((category, index) => (
+        {listCategory.map((category) => (
           <TouchableOpacity
-            key={index}
+            key={category.id}
             activeOpacity={0.8}
-            onPress={() => setSelectedCategoryIndex(index)}>
+            onPress={() => setSelectedCategoryIndex(category.id)}>
             <View
               style={{
                 width: 150, marginRight: 10, borderRadius: 30, flexDirection: 'row', height: 50,
                 backgroundColor:
-                  selectedCategoryIndex == index
+                  selectedCategoryIndex == category.id
                     ? COLORS.primary
                     : COLORS.secondary,
                 ...style.categoryBtn,
               }}>
               <View style={style.categoryBtnImgCon}>
                 <Image
-                  source={category.image}
+                  source={{ uri: category.image }}
                   style={{ height: 30, width: 30, resizeMode: 'cover' }}
                 />
               </View>
@@ -66,7 +88,7 @@ const Home = ({ navigation }) => {
                   marginLeft: 10,
                   marginTop: 15,
                   color:
-                    selectedCategoryIndex == index
+                    selectedCategoryIndex == category.id
                       ? COLORS.white
                       : COLORS.primary,
                 }}>
@@ -79,43 +101,24 @@ const Home = ({ navigation }) => {
     );
   };
 
-  const Card = ({ }) => {
+  const Card = (props) => {
     return (
 
       <View style={style.card}>
         <View style={{ alignItems: 'baseline' }}>
-          <Image source={require('../../assets/rc-persian.png')} style={{ height: 154, width: 123 }} />
+          <Image source={{ uri: props.image }} style={{ height: 154, width: 123 }} />
         </View>
         <View style={{ marginLeft: 13, marginTop: 10 }}>
-          <Text style={{ fontSize: 14, fontWeight: 'bold' }}>Royal Canin 1kg</Text>
+          <Text style={{ fontSize: 14, fontWeight: 'bold' }}>{props.name}</Text>
           <Text style={{ fontSize: 12, fontWeight: '500' }}>
-            Rp 200.000
-            </Text>
-          <Text style={{ fontSize: 12, fontWeight: '500', marginTop: 2 }}>Persian</Text>
+            Rp {props.price}
+          </Text>
+          <Text style={{ fontSize: 12, fontWeight: '500', marginTop: 2 }}>{props.detail}</Text>
           <View style={{ flexDirection: 'row', marginTop: 10 }}>
             <Image source={require('../../assets/Stock.png')} style={{ height: 16, width: 16, marginRight: 6 }} />
             <Text style={{ fontSize: 12, color: COLORS.grey, marginRight: 38 }}>Stock</Text>
-            <Text style={{ fontSize: 12, color: COLORS.grey }}>: 4</Text>
+            <Text style={{ fontSize: 12, color: COLORS.grey }}>: {props.stok}</Text>
           </View>
-          <View style={{ flexDirection: 'row', marginTop: 4 }}>
-            <Image source={require('../../assets/Favorite.png')} style={{ height: 16, width: 16, marginRight: 6 }} />
-            <Text style={{ fontSize: 12, color: COLORS.grey, marginRight: 25 }}>Favorite</Text>
-            <Text style={{ fontSize: 12, color: COLORS.grey }}>: 5</Text>
-          </View>
-          <View style={{ flexDirection: 'row', marginTop: 4 }}>
-            <Image source={require('../../assets/Sold.png')} style={{ height: 16, width: 16, marginRight: 6 }} />
-            <Text style={{ fontSize: 12, color: COLORS.grey, marginRight: 44 }}>Sold</Text>
-            <Text style={{ fontSize: 12, color: COLORS.grey }}>: 10</Text>
-          </View>
-        </View>
-        <View style={{ marginLeft: 50, marginTop: 68 }}>
-          <TouchableHighlight
-            underlayColor={COLORS.white}
-            activeOpacity={0.9}
-            onPress={() => navigation.navigate('DetailsScreen')}
-          >
-            <AntDesign name="right" size={20} color="black" />
-          </TouchableHighlight>
         </View>
       </View>
     );
@@ -139,23 +142,51 @@ const Home = ({ navigation }) => {
           />
         </View>
       </View>
-      <View style={{ alignContent: 'stretch', flexDirection: 'row', paddingTop: 26, paddingBottom: 12, }}>
-        <PrimaryButtonBox
-
-          title="Available"
-        />
-        <SecondaryButtonBox
-
-          title="Sold Out"
-        />
-      </View>
+      {
+        selectedButton == 'available' ?
+          <View style={{ alignContent: 'stretch', flexDirection: 'row', paddingTop: 26, paddingBottom: 12, }}>
+            <PrimaryButtonBox
+              onPress={() => available()}
+              title="Available"
+            />
+            <SecondaryButtonBox
+              onPress={() => sold_out()}
+              title="Sold Out"
+            />
+          </View>
+          :
+          <View style={{ alignContent: 'stretch', flexDirection: 'row', paddingTop: 26, paddingBottom: 12, }}>
+            <SecondaryButtonBox
+              onPress={() => available()}
+              title="Available"
+            />
+            <PrimaryButtonBox
+              onPress={() => sold_out()}
+              title="Sold Out"
+            />
+          </View>
+      }
       <View>
         <ListCategories />
       </View>
-      <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 14 }}>
-        <Card />
-        <Card />
-      </View>
+      {
+        selectedButton == 'available' ?
+          <ScrollView style={{ flex: 1, paddingTop: 14 }}>
+            {listItem.map((item) => {
+              if (item.category_id == selectedCategoryIndex) {
+                return <Card key={item.id} image={item.image} name={item.name} detail={item.detail} price={item.price} stok={item.stok} />
+              }
+            })}
+          </ScrollView>
+          :
+          <ScrollView style={{ flex: 1, paddingTop: 14 }}>
+            {listSoldOut.map((item) => {
+              if (item.category_id == selectedCategoryIndex) {
+                return <Card key={item.id} image={item.image} name={item.name} detail={item.detail} price={item.price} stok={item.stok} />
+              }
+            })}
+          </ScrollView>
+      }
       <BottomNavigator />
     </SafeAreaView>
   )
