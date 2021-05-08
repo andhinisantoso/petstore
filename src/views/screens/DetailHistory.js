@@ -1,11 +1,13 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
+import { SafeAreaView, StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
 import BottomNavigator from '../navigation/BottomNavigation';
 import Home from './Home';
 
-const DetailHistory = () => {
+const DetailHistory = ({ route, navigation }) => {
+  const { date, time, total, listItem } = route.params
+
   const HistoryCard = () => {
     return (
       <View style={style.historyCard}>
@@ -16,19 +18,19 @@ const DetailHistory = () => {
           <Text style={style.text}>List</Text>
         </View>
         <View style={style.textData}>
-          <Text style={style.text}>: 12 April 2021</Text>
-          <Text style={style.text}>: 15:00</Text>
-          <Text style={style.text}>: Rp 480.000</Text>
+          <Text style={style.text}>: {date}</Text>
+          <Text style={style.text}>: {time}</Text>
+          <Text style={style.text}>: Rp {total}</Text>
           <Text style={style.text}>: </Text>
         </View>
       </View>
     );
   };
 
-  const CartCard = () => {
+  const CartCard = (props) => {
     return (
       <View style={style.cartCard}>
-        <Image source={require('../../assets/rc-persian.png')} style={{height: 80, width: 80}} />
+        <Image source={{ uri: props.image }} style={{ height: 80, width: 80 }} />
         <View
           style={{
             height: 100,
@@ -36,36 +38,36 @@ const DetailHistory = () => {
             flex: 1,
             marginTop: 30,
           }}>
-          <Text style={{fontWeight: 'bold', fontSize: 16}}>Royal Canin</Text>
-          <Text style={{fontSize: 13, color: COLORS.grey}}>
-            Persian 1 kg
+          <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{props.name}</Text>
+          <Text style={{ fontSize: 13, color: COLORS.grey }}>
+            {props.detail}
           </Text>
-          <Text style={{fontSize: 16, fontWeight: 'bold'}}>Rp 200.000</Text>
+          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Rp {props.price}</Text>
         </View>
-        <View style={{marginRight: 30, alignItems: 'center'}}>
-            <Text style={{fontWeight: 'bold', fontSize: 18, marginBottom: 10}}>3</Text>
+        <View style={{ marginRight: 30, alignItems: 'center' }}>
+          <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 10 }}>{props.total}</Text>
         </View>
       </View>
     );
   };
-  
+
   return (
-    <SafeAreaView style={{backgroundColor: COLORS.white, flex: 1}}>
+    <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1 }}>
       <View style={style.header}>
-        <MaterialIcons name="arrow-back-ios" size={28}/>
-        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Detail History</Text>
+        <MaterialIcons name="arrow-back-ios" size={28} />
+        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Detail History</Text>
       </View>
-      <View style={{marginBottom: 50}}>
-      <View>
-        <View style={style.card}>
-          <HistoryCard style={style.card}/>
+      <View style={{ marginBottom: 50 }}>
+        <View>
+          <View style={style.card}>
+            <HistoryCard style={style.card} />
+          </View>
+          {listItem.map((item) => (
+            <CartCard key={item.itemId} image={item.image} name={item.name} detail={item.detail} price={item.price} total={item.total} />
+          ))}
         </View>
-        <CartCard/>
-        <CartCard/>
-        <CartCard/>
       </View>
-      </View>
-      <BottomNavigator/>
+      <BottomNavigator />
     </SafeAreaView>
   );
 };
@@ -105,8 +107,8 @@ const style = StyleSheet.create({
     flex: 1,
   },
   text: {
-    fontWeight: 'bold', 
-    fontSize: 16, 
+    fontWeight: 'bold',
+    fontSize: 16,
     color: COLORS.primary,
     marginBottom: 10,
   },

@@ -35,7 +35,12 @@ const History = ({ navigation }) => {
           <View>
             <View style={{ alignItems: 'center' }}>
               <View style={style.actionBtn}>
-                <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.navigate('DetailHistory')} style={style.iconContainer}>
+                <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.navigate('DetailHistory', {
+                  date: props.date,
+                  time: props.time,
+                  total: props.total,
+                  listItem: props.listItem
+                })} style={style.iconContainer}>
                   <MaterialIcons name="arrow-forward-ios" color={COLORS.primary} size={28} />
                 </TouchableOpacity>
               </View>
@@ -51,7 +56,7 @@ const History = ({ navigation }) => {
       <View style={{ marginBottom: 380 }}>
         {listHistory.map((history) => (
           <View key={history.id} style={style.card}>
-            <HistoryCard key={history.id} id={history.id} date={history.date} time={history.time} total={history.total} style={style.card} />
+            <HistoryCard key={history.id} id={history.id} date={history.date} time={history.time} total={history.total} listItem={history.listItem} style={style.card} />
           </View>
         ))}
       </View>
