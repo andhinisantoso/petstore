@@ -24,14 +24,13 @@ const cardWidth = width / 2 - 20;
 // redux
 import { set } from '../../redux/navigationSlice'
 import { useDispatch, useSelector } from 'react-redux';
-import { getCategories } from '../../redux/categorySlice'
-import { getAllItem, getSoldOutItem } from '../../redux/itemSlice'
+import HOST from '../../const/host';
 
 const Home = ({ navigation }) => {
   const dispatch = useDispatch()
-  const listCategory = useSelector((state) => state.category.listCategory)
-  const listItem = useSelector((state) => state.item.listItem)
-  const listSoldOut = useSelector((state) => state.item.listSoldOut)
+  const [listCategory, setListCategory] = useState([])
+  const [listItem, setListItem] = useState([])
+  const [listSoldOut, setListSoldOut] = useState([])
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
   const [availableSelected, setAvailableSelected] = useState(true)
   const [selectedButton, setSelectedButton] = useState('available')
@@ -40,7 +39,26 @@ const Home = ({ navigation }) => {
     dispatch(set({ value: 'AdminCatalog' }))
   });
 
-  console.log(listCategory)
+  useEffect(() => {
+
+    async function fetchData() {
+      const responseCategories = await fetch(`${HOST}/api/categories`)
+      const resultCategories = await responseCategories.json()
+      const responseItems = await fetch(`${HOST}/api/items`)
+      const resultItems = await responseItems.json()
+      const responseSoldOut = await fetch(`${HOST}/api/soldout`)
+      const resultSoldOut = await responseSoldOut.json()
+      setListCategory(resultCategories)
+      setListItem(resultItems)
+      setListSoldOut(resultSoldOut)
+    }
+
+    try {
+      fetchData()
+    } catch (error) {
+
+    }
+  }, [])
 
   const available = () => {
     setSelectedButton('available')

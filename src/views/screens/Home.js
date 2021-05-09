@@ -34,7 +34,7 @@ const Home = ({ navigation }) => {
   const [listCategory, setListCategory] = useState([])
   const [listItem, setListItem] = useState([])
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
-  const listCart = useSelector((state) => state.cart.listItem)
+
   useEffect(() => {
 
     async function fetchData() {

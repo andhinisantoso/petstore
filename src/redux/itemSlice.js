@@ -1,14 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import HOST from '../const/host';
 
-export const getSoldOutItem = createAsyncThunk(
-    'item/getAllItem',
-    async () => {
-        const response = await fetch(`${HOST}/api/items`)
-        return response.json()
-    }
-)
-
 export const add = createAsyncThunk(
     'item/add',
     async (data) => {
@@ -39,8 +31,6 @@ export const add = createAsyncThunk(
 export const itemSlice = createSlice({
     name: 'item',
     initialState: {
-        listItem: [],
-        listSoldOut: [],
         status: '',
         message: ''
     },
@@ -50,16 +40,6 @@ export const itemSlice = createSlice({
         }
     },
     extraReducers: {
-        [getSoldOutItem.pending]: (state) => {
-            state.status = 'pending in get all'
-        },
-        [getSoldOutItem.fulfilled]: (state, action) => {
-            state.listSoldOut = action.payload.filter(item => item.stok <= 0)
-            state.status = 'ok in get all'
-        },
-        [getSoldOutItem.rejected]: (state) => {
-            state.status = 'rejected in get all'
-        },
         [add.fulfilled]: (state) => {
             state.message = 'Data produk berhasil ditambahkan'
         },
