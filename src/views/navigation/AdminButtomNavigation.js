@@ -21,7 +21,6 @@ const BottomNavigator = () => {
       <TouchableOpacity activeOpacity={0.5} style={style.icon}>
         <MaterialIcons name="store" size={36} color={COLORS.secondary} />
       </TouchableOpacity>
-
     </View>
   );
 };

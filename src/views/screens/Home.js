@@ -41,11 +41,11 @@ const Home = ({ navigation }) => {
     async function fetchData() {
       const responseCategories = await fetch(`${HOST}/api/categories`)
       const resultCategories = await responseCategories.json()
-      setListCategory(resultCategories)
+      await setListCategory(resultCategories)
       const responseItems = await fetch(`${HOST}/api/items`)
       const resultItems = await responseItems.json()
       await setListItem(resultItems)
-      setSelectedCategoryIndex(listItem[0]['category_id'])
+      setSelectedCategoryIndex(listCategory[0]['id'])
     }
 
     fetchData()
@@ -173,6 +173,7 @@ const Home = ({ navigation }) => {
       </View>
       <View
         style={{
+          flex: 1,
           marginTop: 20,
           flexDirection: 'row',
           paddingHorizontal: 20,
@@ -185,18 +186,27 @@ const Home = ({ navigation }) => {
           />
         </View>
       </View>
-      <View>
+      <View style={{ flex: 1 }}>
         <ListCategories />
       </View>
-      <View style={{ flex: 1, flexDirection: 'row', marginLeft: 10, }}>
-        {listItem.map((item) => {
-          if (item.category_id == selectedCategoryIndex && item.stok > 0) {
-            return <Card image={item.image} name={item.name} price={item.price} detail={item.detail} description={item.description} key={item.id} id={item.id} />
-          }
-        })}
+      <View style={{ flex: 6, flexDirection: 'column', marginLeft: 10 }}>
+        <ScrollView horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={style.categoriesListContainer}
+        >
+          {listItem.map((item) => {
+            if (item.category_id == selectedCategoryIndex && item.stok > 0) {
+
+              return <Card image={item.image} name={item.name} price={item.price} detail={item.detail} description={item.description} key={item.id} id={item.id} />
+            }
+          })}
+        </ScrollView>
+      </View >
+      <View style={{ flex: 1, }}>
+        <BottomNavigator />
       </View>
-      <BottomNavigator />
-    </SafeAreaView>
+
+    </SafeAreaView >
   )
 }
 

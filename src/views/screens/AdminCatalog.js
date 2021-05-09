@@ -43,10 +43,6 @@ const Home = ({ navigation }) => {
     dispatch(getAllItem())
   });
 
-  // useEffect(() => {
-  //   setSelectedCategoryIndex(listCategory[0]['id'])
-  // }, [dispatch])
-
   console.log(listCategory)
 
   const available = () => {
@@ -88,7 +84,6 @@ const Home = ({ navigation }) => {
                   fontSize: 15,
                   fontWeight: 'bold',
                   marginLeft: 10,
-                  marginTop: 15,
                   color:
                     selectedCategoryIndex == category.id
                       ? COLORS.white
@@ -128,13 +123,12 @@ const Home = ({ navigation }) => {
 
   return (
     <SafeAreaView style={style.container}>
-      <View style={style.header}>
-      </View>
       <View
         style={{
+          flex: 1,
           marginTop: 20,
           flexDirection: 'row',
-          paddingHorizontal: 20,
+          padding: 20,
         }}>
         <View style={style.inputContainer}>
           <MaterialIcons name="search" size={28} color={COLORS.p} />
@@ -146,7 +140,7 @@ const Home = ({ navigation }) => {
       </View>
       {
         selectedButton == 'available' ?
-          <View style={{ alignContent: 'stretch', flexDirection: 'row', paddingTop: 26, paddingBottom: 12, }}>
+          <View style={{ flex: 1, alignContent: 'stretch', flexDirection: 'row', paddingTop: 10, }}>
             <PrimaryButtonBox
               onPress={() => available()}
               title="Available"
@@ -157,7 +151,7 @@ const Home = ({ navigation }) => {
             />
           </View>
           :
-          <View style={{ alignContent: 'stretch', flexDirection: 'row', paddingTop: 26, paddingBottom: 12, }}>
+          <View style={{ flex: 1, alignContent: 'stretch', flexDirection: 'row', paddingTop: 10, }}>
             <SecondaryButtonBox
               onPress={() => available()}
               title="Available"
@@ -168,28 +162,36 @@ const Home = ({ navigation }) => {
             />
           </View>
       }
-      <View>
+      <View style={{ flex: 1 }}>
         <ListCategories />
       </View>
-      {
-        selectedButton == 'available' ?
-          <ScrollView style={{ flex: 1, paddingTop: 14 }}>
-            {listItem.map((item) => {
-              if (item.category_id == selectedCategoryIndex) {
-                return <Card key={item.id} image={item.image} name={item.name} detail={item.detail} price={item.price} stok={item.stok} />
-              }
-            })}
-          </ScrollView>
-          :
-          <ScrollView style={{ flex: 1, paddingTop: 14 }}>
-            {listSoldOut.map((item) => {
-              if (item.category_id == selectedCategoryIndex) {
-                return <Card key={item.id} image={item.image} name={item.name} detail={item.detail} price={item.price} stok={item.stok} />
-              }
-            })}
-          </ScrollView>
-      }
-      <BottomNavigator />
+      <View style={{ flex: 6 }}>
+        {
+          selectedButton == 'available' ?
+            <ScrollView style={{ flex: 1, paddingTop: 14 }}>
+              <View style={{ flexDirection: 'column', alignItems: 'center', paddingTop: 14 }}>
+                {listItem.map((item) => {
+                  if (item.category_id == selectedCategoryIndex) {
+                    return <Card key={item.id} image={item.image} name={item.name} detail={item.detail} price={item.price} stok={item.stok} />
+                  }
+                })}
+              </View>
+            </ScrollView>
+            :
+            <ScrollView style={{ flex: 1, paddingTop: 14 }}>
+              <View style={{ flexDirection: 'column', alignItems: 'center', paddingTop: 14 }}>
+                {listSoldOut.map((item) => {
+                  if (item.category_id == selectedCategoryIndex) {
+                    return <Card key={item.id} image={item.image} name={item.name} detail={item.detail} price={item.price} stok={item.stok} />
+                  }
+                })}
+              </View>
+            </ScrollView>
+        }
+      </View>
+      <View>
+        <BottomNavigator />
+      </View>
     </SafeAreaView>
   )
 }
