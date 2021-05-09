@@ -47,7 +47,11 @@ const Home = ({ navigation }) => {
       setListItem(resultItems)
     }
 
-    fetchData()
+    try {
+      fetchData()
+    } catch (error) {
+
+    }
   }, [])
 
   useFocusEffect(() => {

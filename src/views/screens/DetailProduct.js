@@ -6,9 +6,11 @@ import { GreyButton } from '../components/Button';
 import Home from '../screens/Home';
 import { useDispatch, useSelector } from 'react-redux';
 import { add, remove } from '../../redux/favouriteSlice';
+import { addToCart } from '../../redux/cartSlice'
 
 const DetailsScreen = ({ route, navigation }) => {
   const { id, price, name, detail, description, image, category_id } = route.params
+  const userId = useSelector((state) => state.log.userId)
   const dispatch = useDispatch()
   const listFavourite = useSelector((state) => state.favourite.listFavourite)
   const [isFavourite, setIsFavourite] = useState(false)
@@ -70,7 +72,9 @@ const DetailsScreen = ({ route, navigation }) => {
             {description}
           </Text>
           <View style={{ marginTop: 40, marginBottom: 40 }}>
-            <GreyButton title="Add To Cart" />
+            <TouchableOpacity onPress={() => dispatch(addToCart({ userId: userId, categoryId: category_id, itemId: id, price: price, name: name, detail: detail, image: image, total: 1 }))}>
+              <GreyButton title="Add To Cart" />
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
