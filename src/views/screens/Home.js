@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Image,
   SafeAreaView,
@@ -15,16 +15,12 @@ import {
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
-import categories from '../../const/categories';
 import BottomNavigator from '../navigation/BottomNavigation';
 import { useFocusEffect } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 const { width } = Dimensions.get('screen');
 const cardWidth = width / 2 - 20;
-
-// redux
-import { getCategories } from '../../redux/categorySlice'
-import { getAllItem } from '../../redux/itemSlice'
+import HOST from '../../const/host';
 import { addToCart } from '../../redux/cartSlice'
 import { set } from '../../redux/navigationSlice'
 
@@ -35,28 +31,35 @@ const Home = ({ navigation }) => {
   const username = useSelector((state) => state.log.username)
   const userImage = useSelector((state) => state.log.image)
   const role = useSelector((state) => state.log.role)
-  const listCategory = useSelector((state) => state.category.listCategory)
-  const listItem = useSelector((state) => state.item.listItem)
+  const [listCategory, setListCategory] = useState([])
+  const [listItem, setListItem] = useState([])
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
   const listCart = useSelector((state) => state.cart.listItem)
 
   useEffect(() => {
+
+    async function fetchData() {
+      const responseCategories = await fetch(`${HOST}/api/categories`)
+      const resultCategories = await responseCategories.json()
+      setListCategory(resultCategories)
+      const responseItems = await fetch(`${HOST}/api/items`)
+      const resultItems = await responseItems.json()
+      await setListItem(resultItems)
+      setSelectedCategoryIndex(listItem[0]['category_id'])
+    }
+
+    fetchData()
+  }, [])
+
+  useFocusEffect(() => {
     if (role == 'admin') {
       navigation.replace('AdminHome')
     } else if (status != 'login') {
       navigation.replace('OnBoard')
     }
-  }, [])
 
-  useEffect(() => {
-    setSelectedCategoryIndex(listCategory[0]['id'])
-  }, [dispatch])
-
-  useFocusEffect(() => {
-    dispatch(getCategories())
-    dispatch(getAllItem())
     dispatch(set({ value: 'Home' }))
-  });
+  })
 
   const ListCategories = () => {
     return (
@@ -187,7 +190,7 @@ const Home = ({ navigation }) => {
       </View>
       <View style={{ flex: 1, flexDirection: 'row', marginLeft: 10, }}>
         {listItem.map((item) => {
-          if (item.category_id == selectedCategoryIndex) {
+          if (item.category_id == selectedCategoryIndex && item.stok > 0) {
             return <Card image={item.image} name={item.name} price={item.price} detail={item.detail} description={item.description} key={item.id} id={item.id} />
           }
         })}
