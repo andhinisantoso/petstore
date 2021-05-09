@@ -41,11 +41,10 @@ const Home = ({ navigation }) => {
     async function fetchData() {
       const responseCategories = await fetch(`${HOST}/api/categories`)
       const resultCategories = await responseCategories.json()
-      await setListCategory(resultCategories)
+      setListCategory(resultCategories)
       const responseItems = await fetch(`${HOST}/api/items`)
       const resultItems = await responseItems.json()
-      await setListItem(resultItems)
-      setSelectedCategoryIndex(listCategory[0]['id'])
+      setListItem(resultItems)
     }
 
     fetchData()
@@ -117,7 +116,8 @@ const Home = ({ navigation }) => {
           name: props.name,
           detail: props.detail,
           description: props.description,
-          image: props.image
+          image: props.image,
+          category_id: props.category_id
         })}
       >
         <View style={style.card}>
@@ -197,7 +197,7 @@ const Home = ({ navigation }) => {
           {listItem.map((item) => {
             if (item.category_id == selectedCategoryIndex && item.stok > 0) {
 
-              return <Card image={item.image} name={item.name} price={item.price} detail={item.detail} description={item.description} key={item.id} id={item.id} />
+              return <Card image={item.image} name={item.name} price={item.price} detail={item.detail} description={item.description} key={item.id} id={item.id} category_id={selectedCategoryIndex} />
             }
           })}
         </ScrollView>

@@ -12,7 +12,6 @@ import { set } from '../../redux/navigationSlice'
 
 const Favorite = ({ navigation }) => {
   const listFavourite = useSelector((state) => state.favourite.listFavourite)
-  const listItem = useSelector((state) => state.item.listItem)
   const listCart = useSelector((state) => state.cart.listItem)
   const userId = useSelector((state) => state.log.userId)
   const dispatch = useDispatch()
@@ -23,12 +22,12 @@ const Favorite = ({ navigation }) => {
 
   const toCart = (data) => {
     if (data.inCart) {
-      dispatch(removeFromCart({ id: data.id }))
+      dispatch(removeFromCart({ itemId: data.id }))
       dispatch(moveCart({ id: data.id }))
     } else {
-      for (let index = 0; index < listItem.length; index++) {
-        const item = listItem[index];
-        if (item.id = data.id) {
+      for (let index = 0; index < listFavourite.length; index++) {
+        const item = listFavourite[index];
+        if (item.id == data.id) {
           dispatch(addToCart({ userId: userId, categoryId: item.category_id, itemId: item.id, price: item.price, name: item.name, detail: item.detail, image: item.image, total: 1 }))
           dispatch(moveCart({ id: data.id }))
         }

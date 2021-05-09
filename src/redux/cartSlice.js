@@ -48,7 +48,10 @@ const cartSlice = createSlice({
             }
         },
         removeFromCart: (state, action) => {
-            state.listItem = state.listItem.filter(item => item.id != action.payload.id)
+            state.listItem = state.listItem.filter(item => item.itemId != action.payload.itemId)
+            let total = 0
+            state.listItem.forEach(item => total += item.total * item.price)
+            state.totalPrice = total
         },
         plusOne: (state, action) => {
             state.listItem.forEach(item => {

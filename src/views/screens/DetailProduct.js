@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { add, remove } from '../../redux/favouriteSlice';
 
 const DetailsScreen = ({ route, navigation }) => {
-  const { id, price, name, detail, description, image } = route.params
+  const { id, price, name, detail, description, image, category_id } = route.params
   const dispatch = useDispatch()
   const listFavourite = useSelector((state) => state.favourite.listFavourite)
   const [isFavourite, setIsFavourite] = useState(false)
@@ -27,7 +27,7 @@ const DetailsScreen = ({ route, navigation }) => {
     if (isFavourite) {
       dispatch(remove({ id: id }))
     } else {
-      dispatch(add({ id: id, image: image, name: name, detail: detail, price: price, inCart: false }))
+      dispatch(add({ id: id, image: image, name: name, detail: detail, price: price, inCart: false, category_id: category_id }))
     }
     setIsFavourite(!isFavourite)
   }
