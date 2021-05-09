@@ -2,14 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import HOST from '../const/host';
 import { ToastAndroid } from 'react-native'
 
-export const getCategories = createAsyncThunk(
-    'category/getCategories',
-    async () => {
-        const response = await fetch(`${HOST}/api/categories`)
-        return response.json()
-    }
-)
-
 export const add = createAsyncThunk(
     'category/add',
     async (data) => {
@@ -44,16 +36,6 @@ export const categorySlice = createSlice({
         }
     },
     extraReducers: {
-        [getCategories.pending]: (state) => {
-            state.status = 'pending'
-        },
-        [getCategories.fulfilled]: (state, action) => {
-            state.listCategory = action.payload
-            state.status = 'success'
-        },
-        [getCategories.rejected]: (state, action) => {
-            state.status = 'failed'
-        },
         [add.fulfilled]: (state) => {
             state.message = 'Kategori baru berhasil disimpan'
         },

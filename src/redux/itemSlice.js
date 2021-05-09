@@ -1,14 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import HOST from '../const/host';
 
-export const getAllItem = createAsyncThunk(
-    'item/getAllItem',
-    async () => {
-        const response = await fetch(`${HOST}/api/items`)
-        return response.json()
-    }
-)
-
 export const getSoldOutItem = createAsyncThunk(
     'item/getAllItem',
     async () => {
@@ -58,16 +50,6 @@ export const itemSlice = createSlice({
         }
     },
     extraReducers: {
-        [getAllItem.pending]: (state) => {
-            state.status = 'pending in get all'
-        },
-        [getAllItem.fulfilled]: (state, action) => {
-            state.listItem = action.payload.filter(item => item.stok > 0)
-            state.status = 'ok in get all'
-        },
-        [getAllItem.rejected]: (state) => {
-            state.status = 'rejected in get all'
-        },
         [getSoldOutItem.pending]: (state) => {
             state.status = 'pending in get all'
         },
