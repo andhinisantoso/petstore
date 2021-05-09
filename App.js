@@ -41,7 +41,6 @@ const App = () => {
       <PersistGate loading={null} persistor={persistore} >
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Home"
             screenOptions={{
               headerShown: false
             }}

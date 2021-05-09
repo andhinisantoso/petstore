@@ -7,6 +7,7 @@ import { PrimaryButton } from '../components/Button';
 import Home from './Home';
 // redux
 import { login } from '../../redux/logSlice';
+import { useFocusEffect } from '@react-navigation/core';
 // navigation
 
 const SignIn = ({ navigation }) => {
@@ -21,15 +22,15 @@ const SignIn = ({ navigation }) => {
     dispatch(login({ name: username, password: password }))
   }
 
-  useEffect(() => {
-    if (status === 'login') {
-      if (role === 'user') {
+  useFocusEffect(() => {
+    if (status == 'login') {
+      if (role == 'user') {
         navigation.replace('Home')
-      } else if (role === 'admin') {
+      } else if (role == 'admin') {
         navigation.replace('AdminHome')
       }
     }
-  }, [status])
+  })
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>

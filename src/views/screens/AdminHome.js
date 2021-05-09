@@ -23,9 +23,16 @@ import { set } from '../../redux/navigationSlice'
 
 const AdminHome = ({ navigation }) => {
   const dispatch = useDispatch()
+  const status = useSelector((state) => state.log.status)
+  const role = useSelector((state) => state.log.role)
   const userData = useSelector((state) => state.log)
 
   useFocusEffect(() => {
+    if (role == 'user') {
+      navigation.replace('Home')
+    } else if (status != 'login') {
+      navigation.replace('OnBoard')
+    }
     dispatch(set({ value: 'AdminHome' }))
   });
 

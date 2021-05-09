@@ -1,10 +1,25 @@
+import { useFocusEffect } from '@react-navigation/core';
 import React from 'react';
 import { Text, StyleSheet, View, Image, SafeAreaView } from 'react-native';
+import { useSelector } from 'react-redux';
 import COLORS from '../../const/colors';
 import { PrimaryButton } from '../components/Button';
 import Home from './Home';
 
 const OnBoardScreen = ({ navigation }) => {
+  const status = useSelector((state) => state.log.status)
+  const role = useSelector((state) => state.log.role)
+
+  useFocusEffect(() => {
+    if (status == 'login') {
+      if (role == 'user') {
+        navigation.replace('Home')
+      } else if (role == 'admin') {
+        navigation.replace('AdminHome')
+      }
+    }
+  })
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <View

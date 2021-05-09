@@ -26,7 +26,6 @@ export const add = createAsyncThunk(
 export const categorySlice = createSlice({
     name: 'category',
     initialState: {
-        listCategory: [],
         status: '',
         message: ''
     },

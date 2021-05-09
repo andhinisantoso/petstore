@@ -38,9 +38,6 @@ const Home = ({ navigation }) => {
 
   useFocusEffect(() => {
     dispatch(set({ value: 'AdminCatalog' }))
-    dispatch(getCategories())
-    dispatch(getSoldOutItem())
-    dispatch(getAllItem())
   });
 
   console.log(listCategory)

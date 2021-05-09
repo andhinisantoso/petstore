@@ -27,23 +27,22 @@ import { set } from '../../redux/navigationSlice'
 const Home = ({ navigation }) => {
   const dispatch = useDispatch()
   const status = useSelector((state) => state.log.status)
+  const role = useSelector((state) => state.log.role)
   const userId = useSelector((state) => state.log.userId)
   const username = useSelector((state) => state.log.username)
   const userImage = useSelector((state) => state.log.image)
-  const role = useSelector((state) => state.log.role)
   const [listCategory, setListCategory] = useState([])
   const [listItem, setListItem] = useState([])
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
   const listCart = useSelector((state) => state.cart.listItem)
-
   useEffect(() => {
 
     async function fetchData() {
       const responseCategories = await fetch(`${HOST}/api/categories`)
       const resultCategories = await responseCategories.json()
-      setListCategory(resultCategories)
       const responseItems = await fetch(`${HOST}/api/items`)
       const resultItems = await responseItems.json()
+      setListCategory(resultCategories)
       setListItem(resultItems)
     }
 
