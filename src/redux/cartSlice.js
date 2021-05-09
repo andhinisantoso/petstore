@@ -60,11 +60,12 @@ const cartSlice = createSlice({
         },
         minusOne: (state, action) => {
             state.listItem.forEach(item => {
-                if (item.itemId === action.payload.id && item.total > 1) {
+                if (item.itemId === action.payload.id && item.total >= 1) {
                     item.total -= 1
                     state.totalPrice -= item.price
                 }
             })
+            state.listItem = state.listItem.filter(item => item.total > 0)
         },
         resetMessage: (state) => {
             state.message = ''
