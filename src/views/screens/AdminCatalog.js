@@ -43,9 +43,11 @@ const Home = ({ navigation }) => {
     dispatch(getAllItem())
   });
 
-  useEffect(() => {
-    setSelectedCategoryIndex(listCategory[0]['id'])
-  }, [dispatch])
+  // useEffect(() => {
+  //   setSelectedCategoryIndex(listCategory[0]['id'])
+  // }, [dispatch])
+
+  console.log(listCategory)
 
   const available = () => {
     setSelectedButton('available')
