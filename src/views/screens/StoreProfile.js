@@ -27,13 +27,6 @@ const InfoPetStore = ({ navigation }) => {
 
     fetchData()
   }, [])
-  const Map = ({ }) => {
-    return (
-      <View style={style.card}>
-        <Text>MAP</Text>
-      </View>
-    );
-  };
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: COLORS.white }}>
@@ -82,9 +75,6 @@ const InfoPetStore = ({ navigation }) => {
           <Text style={style.textInput}>
             {addressStore}
           </Text>
-        </View>
-        <View style={{ paddingTop: 30 }}>
-          <Map />
         </View>
       </View>
       <BottomNavigator />
