@@ -42,7 +42,7 @@ const cartSlice = createSlice({
     reducers: {
         addToCart: (state, action) => {
             const len = state.listItem.length
-            state.listItem = [...state.listItem.filter(item => item.id != action.payload.id), action.payload]
+            state.listItem = [...state.listItem.filter(item => item.itemId != action.payload.itemId), action.payload]
             if (state.listItem.length > len) {
                 state.totalPrice += action.payload.price * action.payload.total
             }
