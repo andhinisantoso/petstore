@@ -22,6 +22,11 @@ import AddProduct from './src/views/screens/AddProduct';
 import AdminEditProfile from './src/views/screens/AdminEditProfile';
 import InfoPetStore from './src/views/screens/StoreProfile';
 import AdminSummary from './src/views/screens/AdminSummary'
+import AdminEditProduk from './src/views/screens/AdminEditProduk'
+import AdminOrderCheck from './src/views/screens/AdminOrderCheck'
+import AdminDetailUnprocessed from './src/views/screens/AdminDetailUnprocessed'
+import AdminDetailProcessed from './src/views/screens/AdminDetailProcessed'
+import AdminDetailFinished from './src/views/screens/AdminDetailFinished'
 // navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -70,12 +75,17 @@ const App = () => {
             <Stack.Screen name="AdminDetailsScreen" component={AdminDetailsScreen} />
             <Stack.Screen name="AddCategory" component={AddCategory} />
             <Stack.Screen name="AddProduct" component={AddProduct} />
+            <Stack.Screen name="AdminEditProduk" component={AdminEditProduk} />
+            <Stack.Screen name="AdminOrderCheck" component={AdminOrderCheck} />
+            <Stack.Screen name="AdminDetailUnprocessed" component={AdminDetailUnprocessed} />
+            <Stack.Screen name="AdminDetailProcessed" component={AdminDetailProcessed} />
+            <Stack.Screen name="AdminDetailFinished" component={AdminDetailFinished} />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>
     </Provider>
   )
-}
+} 
 
 export default App;
 

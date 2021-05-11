@@ -102,13 +102,26 @@ const AddProduct = ({ navigation }) => {
                   placeholder="Product Name"
                 />  
               </View>
-              <View style={style.inputContainer}>
-                <TextInput
-                  style={{ paddingLeft: 10, flex: 2, fontSize: 16, color: COLORS.grey }}
-                  value={name}
-                  onChangeText={setName}
-                  placeholder="Stock"
-                />
+              <View style={style.cartCard}>
+                <View style={{
+                  height: 60,
+                  flex: 1,
+                  marginTop: 30,
+                }}>
+                  <Text style={{ paddingLeft: 10, flex: 2, fontSize: 16, color: '#8C8C8C' }}>Stock</Text>
+                </View>
+                <View>
+                  <View style={{ alignItems: 'center' }}>
+                    <View style={{flexDirection:'column'}}>
+                      <TouchableOpacity activeOpacity={0.2} onPress={() => pickImage()} style={{marginRight: 10,marginLeft: 7}}>
+                        <Feather name="chevron-up" color={COLORS.primary} size={28} />
+                      </TouchableOpacity>
+                      <TouchableOpacity activeOpacity={0.2} onPress={() => pickImage()} style={{marginRight: 10,marginLeft: 7}}>
+                        <Feather name="chevron-down" color={COLORS.primary} size={28} />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </View>
               </View>
               <View style={style.inputContainer}>
                 <TextInput
