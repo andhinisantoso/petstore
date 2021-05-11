@@ -11,20 +11,35 @@ import { ScrollView } from 'react-native-gesture-handler';
 import * as ImagePicker from 'expo-image-picker';
 // redux
 import { add, resetMessage } from '../../redux/itemSlice';
+import HOST from '../../const/host';
 
 const AddProduct = ({ navigation }) => {
   const [image, setImage] = useState(null)
   const [imageName, setImageName] = useState('')
   const [name, setName] = useState('')
-  const [stock, setStock] = useState('0')
+  const [stock, setStock] = useState('')
   const [detail, setDetail] = useState('')
   const [selectedCategory, setSelectedCategory] = useState(null)
-  const [price, setPrice] = useState('0')
+  const [price, setPrice] = useState('')
   const [description, setDescription] = useState('')
   const dispatch = useDispatch()
-  const listCategory = useSelector((state) => state.category.listCategory)
   const message = useSelector((state) => state.item.message)
-  const [selectedValue, setSelectedValue] = useState("");
+  const [listCategory, setListCategory] = useState([])
+
+  useEffect(() => {
+
+    async function fetchData() {
+      const responseCategories = await fetch(`${HOST}/api/categories`)
+      const resultCategories = await responseCategories.json()
+      setListCategory(resultCategories)
+    }
+
+    try {
+      fetchData()
+    } catch (error) {
+
+    }
+  }, [])
 
   useEffect(() => {
     (async () => {
@@ -92,7 +107,7 @@ const AddProduct = ({ navigation }) => {
                 flex: 1,
                 marginTop: 30,
               }}>
-                <Text style={{ paddingLeft: 10, flex: 2, fontSize: 16, color: '#8C8C8C' }}>Upload Photo</Text>
+                <Text style={{ paddingLeft: 10, flex: 2, fontSize: 16, color: '#8C8C8C' }}>{image ? imageName[0] : 'Upload Photo'}</Text>
               </View>
               <View>
                 <View style={{ alignItems: 'center' }}>
@@ -106,7 +121,6 @@ const AddProduct = ({ navigation }) => {
             </View>
             <View style={style.inputContainer}>
               <TextInput
-                editable={false}
                 style={{ paddingLeft: 10, flex: 2, fontSize: 16, color: COLORS.grey }}
                 value={name}
                 onChangeText={setName}
@@ -116,49 +130,47 @@ const AddProduct = ({ navigation }) => {
             <View style={style.inputContainer}>
               <TextInput
                 style={{ paddingLeft: 10, flex: 2, fontSize: 16, color: COLORS.grey }}
-                value={name}
-                onChangeText={setName}
+                value={stock}
+                onChangeText={setStock}
+                keyboardType={'numeric'}
                 placeholder="Stock"
               />
             </View>
             <View style={style.inputContainer}>
               <TextInput
                 style={{ paddingLeft: 10, flex: 2, fontSize: 16, color: COLORS.grey }}
-                value={name}
-                onChangeText={setName}
+                value={detail}
+                onChangeText={setDetail}
                 placeholder="Varian"
               />
             </View>
             <View style={style.inputContainer}>
               <Picker
-                selectedValue={selectedValue}
+                selectedValue={selectedCategory}
                 style={{ height: 50, width: 150 }}
-                onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                onValueChange={(itemValue, itemIndex) => setSelectedCategory(itemValue)}
                 style={{ paddingLeft: 10, flex: 2, fontSize: 16, color: COLORS.grey }}
               >
                 <Picker.Item label="Category" value="" />
-                <Picker.Item label="Food" value="Food" />
-                <Picker.Item label="Medicine" value="Medicine" />
-                <Picker.Item label="Accessories" value="Accessories" />
-                <Picker.Item label="Equipment" value="Equipment" />
-
-
-
+                {listCategory.map((category) => (
+                  <Picker.Item key={category.id} label={category.name} value={category.id} />
+                ))}
               </Picker>
             </View>
             <View style={style.inputContainer}>
               <TextInput
                 style={{ paddingLeft: 10, flex: 2, fontSize: 16, color: COLORS.grey }}
-                value={name}
-                onChangeText={setName}
+                value={price}
+                onChangeText={setPrice}
+                keyboardType={'numeric'}
                 placeholder="Price"
               />
             </View>
             <View style={style.inputContainer}>
               <TextInput
                 style={{ paddingLeft: 10, flex: 2, fontSize: 16, color: COLORS.grey }}
-                value={name}
-                onChangeText={setName}
+                value={description}
+                onChangeText={setDescription}
                 placeholder="Description"
               />
             </View>
