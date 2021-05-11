@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Image,
   SafeAreaView,
@@ -13,83 +13,61 @@ import {
   TouchableHighlight,
   TouchableOpacity,
 } from 'react-native';
-import { MaterialIcons, AntDesign  } from '@expo/vector-icons';
+import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
 import categories from '../../const/categories';
 import BottomNavigator from '../navigation/AdminButtomNavigation';
 import { SecondaryButton } from '../components/Button';
-const {width} = Dimensions.get('screen');
+const { width } = Dimensions.get('screen');
 const cardWidth = width / 2 - 20;
+import HOST from '../../const/host';
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
+  const [oneMonth, setOneMonth] = useState([])
+  const [oneYear, setOneYear] = useState([])
+  const [all, setAll] = useState([])
+  const [selectedType, setSelectedType] = useState('')
 
-  const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
+  useEffect(() => {
+    async function fetchData() {
+      const responseOneMonth = await fetch(`${HOST}/api/currentMonth`)
+      const resultOneMonth = await responseOneMonth.json()
+      const responseOneYear = await fetch(`${HOST}/api/currentYear`)
+      const resultOneYear = await responseOneYear.json()
+      const responseAll = await fetch(`${HOST}/api/summary`)
+      const resultAll = await responseAll.json()
+      setOneMonth(resultOneMonth)
+      setOneYear(resultOneYear)
+      setAll(resultAll)
+    }
 
-  const ListCategories = () => {
-    return (
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={style.categoriesListContainer}>
-        {categories.map((category, index) => (
-          <TouchableOpacity
-            key={index}
-            activeOpacity={0.8}
-            onPress={() => setSelectedCategoryIndex(index)}>
-            <View
-              style={{width: 150, marginRight: 10, borderRadius: 30, flexDirection: 'row', height: 50,
-                backgroundColor:
-                  selectedCategoryIndex == index
-                    ? COLORS.primary
-                    : COLORS.secondary,
-                ...style.categoryBtn,
-              }}>
-              <View style={style.categoryBtnImgCon}>
-                <Image
-                  source={category.image}
-                  style={{height: 30, width: 30, resizeMode: 'cover'}}
-                />
-              </View>
-              <Text
-                style={{
-                  fontSize: 15,
-                  fontWeight: 'bold',
-                  marginLeft: 10,
-                  color:
-                    selectedCategoryIndex == index
-                      ? COLORS.white
-                      : COLORS.primary,
-                }}>
-                {category.name}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
-    );
-  };
+    try {
+      fetchData()
+    } catch (error) {
 
-  const Card = ({}) => {
+    }
+  }, [])
+
+  const Card = (props) => {
     return (
 
-        <View style={style.card}>
-          <View style={{ marginLeft: 13, marginTop: 10}}>
-            <Text style={{fontSize: 14, fontWeight: 'bold'}}>Name           : Dadu</Text>
-            <Text style={{fontSize: 14, fontWeight: 'bold'}}>Telephone  : 08000000</Text>
-            <Text style={{fontSize: 14, fontWeight: 'bold'}}>Date              : 12 April 2021</Text>
-            <Text style={{fontSize: 14, fontWeight: 'bold'}}>Time              : 15:0</Text>
-            <Text style={{fontSize: 14, fontWeight: 'bold'}}>Total             : Rp 480000</Text>
-          </View>
-          <View style={{marginLeft:150, marginTop:68}}>
+      <View style={style.card}>
+        <View style={{ marginLeft: 13, marginTop: 10 }}>
+          <Text style={{ fontSize: 14, fontWeight: 'bold' }}>Name           : {props.name}</Text>
+          <Text style={{ fontSize: 14, fontWeight: 'bold' }}>Telephone  : {props.phone}</Text>
+          <Text style={{ fontSize: 14, fontWeight: 'bold' }}>Date & time            : {props.time}</Text>
+          <Text style={{ fontSize: 14, fontWeight: 'bold' }}>Total             : Rp {props.total}</Text>
+        </View>
+        <View style={{ marginLeft: 150, marginTop: 68 }}>
           <TouchableHighlight
             underlayColor={COLORS.white}
-             activeOpacity={0.9}
-             onPress={() => navigation.navigate('DetailsScreen')}
-            >
+            activeOpacity={0.9}
+            onPress={() => navigation.navigate('DetailsScreen')}
+          >
             <AntDesign name="right" size={20} color="black" />
-            </TouchableHighlight>
-          </View>
+          </TouchableHighlight>
         </View>
+      </View>
     );
   };
 
@@ -97,31 +75,44 @@ const Home = ({navigation}) => {
     <SafeAreaView style={style.container}>
       <View
         style={{
-          flex:1,
+          flex: 1,
           marginTop: 20,
           flexDirection: 'row',
           padding: 20,
         }}>
         <View style={style.inputContainer}>
-          <MaterialIcons name="search" size={28} color={COLORS.p}/>
+          <MaterialIcons name="search" size={28} color={COLORS.p} />
           <TextInput
-            style={{paddingLeft: 5, flex: 2, fontSize: 18}}
+            style={{ paddingLeft: 5, flex: 2, fontSize: 18 }}
             placeholder="Search"
           />
         </View>
       </View>
-      <View style={{flex:1, flexDirection:'row', padding:10}}>
-        <View style={{flex:1, paddingHorizontal:10}}><SecondaryButton title="1 Month" ></SecondaryButton></View>
-        <View style={{flex:1, paddingHorizontal:10}}><SecondaryButton title="1 Year" ></SecondaryButton></View>
-        <View style={{flex:1, paddingHorizontal:10}}><SecondaryButton title="All" ></SecondaryButton></View>
+      <View style={{ flex: 1, flexDirection: 'row', padding: 10 }}>
+        <View style={{ flex: 1, paddingHorizontal: 10 }}><SecondaryButton onPress={() => setSelectedType('month')} title="1 Month" ></SecondaryButton></View>
+        <View style={{ flex: 1, paddingHorizontal: 10 }}><SecondaryButton onPress={() => setSelectedType('year')} title="1 Year" ></SecondaryButton></View>
+        <View style={{ flex: 1, paddingHorizontal: 10 }}><SecondaryButton onPress={() => setSelectedType('all')} title="All" ></SecondaryButton></View>
       </View>
-      <View style={{flex:8}}>
-      <ScrollView >
-      <View style={{ flexDirection: 'column', alignItems:'center', paddingTop:14 }}>
-        <Card/>
-        <Card/>
-      </View>
-      </ScrollView>
+      <View style={{ flex: 8 }}>
+        <ScrollView >
+          <View style={{ flexDirection: 'column', alignItems: 'center', paddingTop: 14 }}>
+            {
+              selectedType == 'month' ? oneMonth.map((data) => (
+                <Card key={data.order_key} name={data.name} phone={data.phone} time={data.created_at} total={data.sum_income} />
+              )) : false
+            }
+            {
+              selectedType == 'year' ? oneYear.map((data) => (
+                <Card key={data.order_key} name={data.name} phone={data.phone} time={data.created_at} total={data.sum_income} />
+              )) : false
+            }
+            {
+              selectedType == 'all' ? all.map((data) => (
+                <Card key={data.order_key} name={data.name} phone={data.phone} time={data.created_at} total={data.sum_income} />
+              )) : false
+            }
+          </View>
+        </ScrollView>
       </View>
     </SafeAreaView>
   )
@@ -129,7 +120,7 @@ const Home = ({navigation}) => {
 
 const style = StyleSheet.create({
   container: {
-    flex: 1, 
+    flex: 1,
     backgroundColor: COLORS.white,
     minHeight: 600,
     height: '100%',
@@ -176,7 +167,7 @@ const style = StyleSheet.create({
     alignItems: 'center',
   },
   card: {
-    flexDirection:'row',
+    flexDirection: 'row',
     height: 154,
     width: 324,
     marginHorizontal: 10,
