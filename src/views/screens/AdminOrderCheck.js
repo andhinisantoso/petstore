@@ -21,7 +21,7 @@ import { SecondaryButton } from '../components/Button';
 const {width} = Dimensions.get('screen');
 const cardWidth = width / 2 - 20;
 
-const Home = ({navigation}) => {
+const AdminOrderCheck = ({navigation}) => {
 
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
 
@@ -74,17 +74,17 @@ const Home = ({navigation}) => {
 
         <View style={style.card}>
           <View style={{ marginLeft: 13, marginTop: 10}}>
-            <Text style={{fontSize: 14, fontWeight: 'bold'}}>Name           : Dadu</Text>
-            <Text style={{fontSize: 14, fontWeight: 'bold'}}>Telephone  : 08000000</Text>
-            <Text style={{fontSize: 14, fontWeight: 'bold'}}>Date              : 12 April 2021</Text>
-            <Text style={{fontSize: 14, fontWeight: 'bold'}}>Time              : 15:0</Text>
-            <Text style={{fontSize: 14, fontWeight: 'bold'}}>Total             : Rp 480000</Text>
+            <Text style={{color:COLORS.primary, fontSize: 14, fontWeight: 'bold'}}>Name           : Dadu</Text>
+            <Text style={{color:COLORS.primary, fontSize: 14, fontWeight: 'bold'}}>Telephone  : 08000000</Text>
+            <Text style={{color:COLORS.primary, fontSize: 14, fontWeight: 'bold'}}>Date              : 12 April 2021</Text>
+            <Text style={{color:COLORS.primary, fontSize: 14, fontWeight: 'bold'}}>Time              : 15:0</Text>
+            <Text style={{color:COLORS.primary, fontSize: 14, fontWeight: 'bold'}}>Total             : Rp 480000</Text>
           </View>
-          <View style={{marginLeft:150, marginTop:68}}>
+          <View style={{marginLeft:100, marginTop:68}}>
           <TouchableHighlight
             underlayColor={COLORS.white}
              activeOpacity={0.9}
-             onPress={() => navigation.navigate('DetailsScreen')}
+             onPress={() => navigation.navigate('AdminDetailFinished')}
             >
             <AntDesign name="right" size={20} color="black" />
             </TouchableHighlight>
@@ -95,6 +95,14 @@ const Home = ({navigation}) => {
 
   return (
     <SafeAreaView style={style.container}>
+      <View style={style.header}>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <View style={{flexDirection:'row'}}>
+        <MaterialIcons name="arrow-back-ios" size={28} />
+        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Order Check</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
       <View
         style={{
           flex:1,
@@ -110,10 +118,10 @@ const Home = ({navigation}) => {
           />
         </View>
       </View>
-      <View style={{flex:1, flexDirection:'row', padding:10}}>
-        <View style={{flex:1, paddingHorizontal:10}}><SecondaryButton title="Unprocessed" ></SecondaryButton></View>
-        <View style={{flex:1, paddingHorizontal:10}}><SecondaryButton title="Process" ></SecondaryButton></View>
-        <View style={{flex:1, paddingHorizontal:10}}><SecondaryButton title="Finished" ></SecondaryButton></View>
+      <View style={{flex:1, flexDirection:'row', padding:3}}>
+        <View style={{flex:1, paddingHorizontal:3}}><SecondaryButton title="Unprocessed" ></SecondaryButton></View>
+        <View style={{flex:1, paddingHorizontal:3}}><SecondaryButton title="Processed" ></SecondaryButton></View>
+        <View style={{flex:1, paddingHorizontal:3}}><SecondaryButton title="Finished" ></SecondaryButton></View>
       </View>
       <View style={{flex:8}}>
       <ScrollView >
@@ -184,7 +192,7 @@ const style = StyleSheet.create({
     marginTop: 20,
     borderRadius: 15,
     elevation: 13,
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.secondary,
     shadowRadius: 5,
     shadowColor: COLORS.grey
   },
@@ -199,4 +207,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default Home;
+export default AdminOrderCheck;

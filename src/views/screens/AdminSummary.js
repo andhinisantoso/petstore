@@ -22,7 +22,8 @@ const { width } = Dimensions.get('screen');
 const cardWidth = width / 2 - 20;
 import HOST from '../../const/host';
 
-const Home = ({ navigation }) => {
+const AdminSummary = ({ navigation }) => {
+
   const [oneMonth, setOneMonth] = useState([])
   const [oneYear, setOneYear] = useState([])
   const [all, setAll] = useState([])
@@ -50,15 +51,14 @@ const Home = ({ navigation }) => {
 
   const Card = (props) => {
     return (
-
       <View style={style.card}>
         <View style={{ marginLeft: 13, marginTop: 10 }}>
-          <Text style={{ fontSize: 14, fontWeight: 'bold' }}>Name           : {props.name}</Text>
-          <Text style={{ fontSize: 14, fontWeight: 'bold' }}>Telephone  : {props.phone}</Text>
-          <Text style={{ fontSize: 14, fontWeight: 'bold' }}>Date & time            : {props.time}</Text>
-          <Text style={{ fontSize: 14, fontWeight: 'bold' }}>Total             : Rp {props.total}</Text>
+          <Text style={{ color: COLORS.primary, fontSize: 14, fontWeight: 'bold' }}>Name           : {props.name}</Text>
+          <Text style={{ color: COLORS.primary, fontSize: 14, fontWeight: 'bold' }}>Telephone  : {props.phone}</Text>
+          <Text style={{ color: COLORS.primary, fontSize: 14, fontWeight: 'bold' }}>Date              : {props.time}</Text>
+          <Text style={{ color: COLORS.primary, fontSize: 14, fontWeight: 'bold' }}>Total             : Rp {props.total}</Text>
         </View>
-        <View style={{ marginLeft: 150, marginTop: 68 }}>
+        <View style={{ marginLeft: 100, marginTop: 68 }}>
           <TouchableHighlight
             underlayColor={COLORS.white}
             activeOpacity={0.9}
@@ -175,7 +175,7 @@ const style = StyleSheet.create({
     marginTop: 20,
     borderRadius: 15,
     elevation: 13,
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.secondary,
     shadowRadius: 5,
     shadowColor: COLORS.grey
   },
@@ -190,4 +190,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default Home;
+export default AdminSummary;
