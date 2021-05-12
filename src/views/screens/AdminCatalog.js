@@ -132,6 +132,22 @@ const Home = ({ navigation }) => {
             <Text style={{ fontSize: 12, color: COLORS.grey }}>: {props.stok}</Text>
           </View>
         </View>
+        <View style={{ marginLeft: 50, marginTop: 68 }}>
+          <TouchableHighlight
+            underlayColor={COLORS.white}
+            activeOpacity={0.9}
+            onPress={() => navigation.navigate('AdminDetailsScreen', {
+              id: props.id,
+              name: props.name,
+              image: props.image,
+              detail: props.detail,
+              price: props.price,
+              description: props.description
+            })}
+          >
+            <AntDesign name="right" size={20} color="black" />
+          </TouchableHighlight>
+        </View>
       </View>
     );
   };
@@ -187,7 +203,7 @@ const Home = ({ navigation }) => {
               <View style={{ flexDirection: 'column', alignItems: 'center', paddingTop: 14 }}>
                 {listItem.map((item) => {
                   if (item.category_id == selectedCategoryIndex) {
-                    return <Card key={item.id} image={item.image} name={item.name} detail={item.detail} price={item.price} stok={item.stok} />
+                    return <Card key={item.id} id={item.id} image={item.image} name={item.name} description={item.description} detail={item.detail} price={item.price} stok={item.stok} />
                   }
                 })}
               </View>
