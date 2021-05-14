@@ -43,7 +43,7 @@ const DetailsScreen = ({ route, navigation }) => {
             {description}
           </Text>
           <View style={{ marginTop: 40, marginBottom: 7 }}>
-            <PrimaryButton title="Edit" />
+            <PrimaryButton onPress={() => navigation.navigate('AdminEditProduk', { id: id })} title="Edit" />
           </View>
           <View style={{ marginTop: 7, marginBottom: 40 }}>
             <GreyButton title="Decline" />
