@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Image,
   SafeAreaView,
   StyleSheet,
   Text,
+  ToastAndroid,
   View,
 } from 'react-native';
 import {
@@ -21,87 +22,82 @@ import { SecondaryButton, PrimaryButton } from '../components/Button';
 import { color } from 'react-native-reanimated';
 const { width } = Dimensions.get('screen');
 const cardWidth = width / 2 - 20;
+import HOST from '../../const/host';
 
 const AdminDetailUnprocessed = ({ route, navigation }) => {
+  const { order_key, name, phone, time, total } = route.params
+  const [items, setItems] = useState([])
 
-  const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
+  useEffect(() => {
+    async function fetchData(data) {
+      const response = await fetch(
+        `${HOST}/api/orders/whereOrderKey`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': '*/*'
+          },
+          body: JSON.stringify(data)
+        }
+      )
+      const result = await response.json()
+      setItems(result)
+    }
 
-  const ListCategories = () => {
-    return (
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={style.categoriesListContainer}>
-        {categories.map((category, index) => (
-          <TouchableOpacity
-            key={index}
-            activeOpacity={0.8}
-            onPress={() => setSelectedCategoryIndex(index)}>
-            <View
-              style={{
-                width: 150, marginRight: 10, borderRadius: 30, flexDirection: 'row', height: 50,
-                backgroundColor:
-                  selectedCategoryIndex == index
-                    ? COLORS.primary
-                    : COLORS.secondary,
-                ...style.categoryBtn,
-              }}>
-              <View style={style.categoryBtnImgCon}>
-                <Image
-                  source={category.image}
-                  style={{ height: 30, width: 30, resizeMode: 'cover' }}
-                />
-              </View>
-              <Text
-                style={{
-                  fontSize: 15,
-                  fontWeight: 'bold',
-                  marginLeft: 10,
-                  color:
-                    selectedCategoryIndex == index
-                      ? COLORS.white
-                      : COLORS.primary,
-                }}>
-                {category.name}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
-    );
-  };
+    try {
+      fetchData({ key: order_key })
+    } catch (error) {
 
-  const CardInvoice = ({ }) => {
+    }
+  }, [])
+
+  const change_status = async () => {
+    try {
+      const response = await fetch(
+        `${HOST}/api/orders/processed`,
+        {
+          method: 'POST',
+          body: JSON.stringify({ key: order_key })
+        }
+      )
+      ToastAndroid.show('berhasil ubah status', ToastAndroid.SHORT)
+    } catch (error) {
+      ToastAndroid.show('gagal mengubah status', ToastAndroid.SHORT)
+    }
+  }
+
+  const CardInvoice = () => {
     return (
 
       <View style={style.card}>
         <View style={{ marginLeft: 13, marginTop: 10 }}>
-          <Text style={{ color: COLORS.primary, fontSize: 14, fontWeight: 'bold' }}>Name           : Dadu</Text>
-          <Text style={{ color: COLORS.primary, fontSize: 14, fontWeight: 'bold' }}>Telephone  : 08000000</Text>
-          <Text style={{ color: COLORS.primary, fontSize: 14, fontWeight: 'bold' }}>Date              : 12 April 2021</Text>
-          <Text style={{ color: COLORS.primary, fontSize: 14, fontWeight: 'bold' }}>Time              : 15:0</Text>
-          <Text style={{ color: COLORS.primary, fontSize: 14, fontWeight: 'bold' }}>Total             : Rp 480000</Text>
+          <Text style={{ color: COLORS.primary, fontSize: 14, fontWeight: 'bold' }}>Name           : {name}</Text>
+          <Text style={{ color: COLORS.primary, fontSize: 14, fontWeight: 'bold' }}>Telephone  : {phone}</Text>
+          <Text style={{ color: COLORS.primary, fontSize: 14, fontWeight: 'bold' }}>Date              : {time.slice(0, 10)}</Text>
+          <Text style={{ color: COLORS.primary, fontSize: 14, fontWeight: 'bold' }}>Total             : Rp {total}</Text>
           <Text style={{ color: COLORS.primary, fontSize: 14, fontWeight: 'bold' }}>List               : </Text>
         </View>
       </View>
     );
   };
-  const CardProduk = ({ }) => {
+
+  const CardProduk = (props) => {
     return (
 
       <View style={style.cardProduk}>
         <View style={{ flex: 1, padding: 5 }}>
-          <Image source={require('../../assets/rc-persian.png')} style={{ height: 80, width: 80 }} />
+          <Image source={{ uri: props.image }} style={{ height: 80, width: 80 }} />
         </View>
         <View style={{ flex: 1, marginLeft: 0, marginTop: 10 }}>
-          <Text style={{ fontSize: 12, fontWeight: 'bold' }}>Royal Canin 1kg</Text>
+          <Text style={{ fontSize: 12, fontWeight: 'bold' }}>{props.name}</Text>
           <Text style={{ fontSize: 10, fontWeight: '500' }}>
-            Persian
-                </Text>
-          <Text style={{ fontSize: 12, fontWeight: 'bold', marginTop: 10 }}>Rp 250.000</Text>
+            {props.detail}
+          </Text>
+          <Text style={{ fontSize: 12, fontWeight: 'bold', marginTop: 10 }}>Rp {props.price}</Text>
         </View>
         <View style={{ flex: 1, marginLeft: 50, marginTop: 30 }}>
-          <Text style={{ textAlignVertical: 'auto', fontSize: 14, fontWeight: 'bold' }}>1</Text>
+          <Text style={{ textAlignVertical: 'auto', fontSize: 14, fontWeight: 'bold' }}>{props.total}</Text>
         </View>
       </View>
     );
@@ -121,11 +117,11 @@ const AdminDetailUnprocessed = ({ route, navigation }) => {
         <ScrollView >
           <View style={{ flexDirection: 'column', alignItems: 'center', paddingTop: 14 }}>
             <CardInvoice />
-            <CardProduk />
-            <CardProduk />
-            <CardProduk />
-            <CardProduk />
-            <CardProduk />
+            {
+              items.map((data) => (
+                <CardProduk id={data.id} key={data.id} image={data.image} name={data.name} detail={data.detail} price={data.price} total={data.total_order} />
+              ))
+            }
           </View>
         </ScrollView>
       </View>

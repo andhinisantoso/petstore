@@ -62,7 +62,14 @@ const AdminOrderCheck = ({ navigation }) => {
           <TouchableHighlight
             underlayColor={COLORS.white}
             activeOpacity={0.9}
-            onPress={() => navigation.navigate(props.navigate, { order_key: props.key })}
+            onPress={() => navigation.navigate(props.navigate,
+              {
+                order_key: props.order_key,
+                name: props.name,
+                phone: props.phone,
+                time: props.time,
+                total: props.total
+              })}
           >
             <AntDesign name="right" size={20} color="black" />
           </TouchableHighlight>
@@ -106,17 +113,17 @@ const AdminOrderCheck = ({ navigation }) => {
           <View style={{ flexDirection: 'column', alignItems: 'center', paddingTop: 14 }}>
             {
               selectedType == 'unprocessed' ? unprocessedOrder.map((data) => (
-                <Card key={data.order_key} name={data.name} phone={data.phone} time={data.created_at} total={data.sum_income} navigate={'AdminDetailUnprocessed'} />
+                <Card key={data.order_key} name={data.name} phone={data.phone} order_key={data.order_key} time={data.created_at} total={data.sum_income} navigate={'AdminDetailUnprocessed'} />
               )) : false
             }
             {
               selectedType == 'processed' ? processedOrder.map((data) => (
-                <Card key={data.order_key} name={data.name} phone={data.phone} time={data.created_at} total={data.sum_income} navigate={'AdminDetailProcessed'} />
+                <Card key={data.order_key} name={data.name} phone={data.phone} order_key={data.order_key} time={data.created_at} total={data.sum_income} navigate={'AdminDetailProcessed'} />
               )) : false
             }
             {
               selectedType == 'finished' ? finishedOrder.map((data) => (
-                <Card key={data.order_key} name={data.name} phone={data.phone} time={data.created_at} total={data.sum_income} navigate={'AdminDetailFinished'} />
+                <Card key={data.order_key} name={data.name} phone={data.phone} order_key={data.order_key} time={data.created_at} total={data.sum_income} navigate={'AdminDetailFinished'} />
               )) : false
             }
           </View>
