@@ -13,7 +13,7 @@ export const checkout = createAsyncThunk(
                 item_id: item.itemId,
                 order_key: orderkey,
                 total_order: item.total,
-                status: "WAITING"
+                status: "UNPROCESSED"
             }))
 
             const response = await fetch(

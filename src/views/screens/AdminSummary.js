@@ -55,7 +55,7 @@ const AdminSummary = ({ navigation }) => {
         <View style={{ marginLeft: 13, marginTop: 10 }}>
           <Text style={{ color: COLORS.primary, fontSize: 14, fontWeight: 'bold' }}>Name           : {props.name}</Text>
           <Text style={{ color: COLORS.primary, fontSize: 14, fontWeight: 'bold' }}>Telephone  : {props.phone}</Text>
-          <Text style={{ color: COLORS.primary, fontSize: 14, fontWeight: 'bold' }}>Date              : {props.time}</Text>
+          <Text style={{ color: COLORS.primary, fontSize: 14, fontWeight: 'bold' }}>Date              : {props.time.slice(0, 10)}</Text>
           <Text style={{ color: COLORS.primary, fontSize: 14, fontWeight: 'bold' }}>Total             : Rp {props.total}</Text>
         </View>
         <View style={{ marginLeft: 100, marginTop: 68 }}>
