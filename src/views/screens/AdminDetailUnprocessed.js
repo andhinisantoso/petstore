@@ -58,6 +58,10 @@ const AdminDetailUnprocessed = ({ route, navigation }) => {
         `${HOST}/api/orders/processed`,
         {
           method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': '*/*'
+          },
           body: JSON.stringify({ key: order_key })
         }
       )
@@ -127,7 +131,7 @@ const AdminDetailUnprocessed = ({ route, navigation }) => {
       </View>
       <View style={{ flex: 1, padding: 20 }}>
         <PrimaryButton
-          onPress={() => _add()}
+          onPress={() => change_status()}
           title="Process"
         />
       </View>
