@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Text,
   View,
+  ToastAndroid
 } from 'react-native';
 import {
   Dimensions,
