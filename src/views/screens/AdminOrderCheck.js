@@ -17,7 +17,7 @@ import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
 import categories from '../../const/categories';
 import BottomNavigator from '../navigation/AdminButtomNavigation';
-import { SecondaryButton } from '../components/Button';
+import { SecondaryButton, PrimaryButton } from '../components/Button';
 const { width } = Dimensions.get('screen');
 const cardWidth = width / 2 - 20;
 import HOST from '../../const/host';
@@ -104,9 +104,21 @@ const AdminOrderCheck = ({ navigation }) => {
         </View>
       </View>
       <View style={{ flex: 1, flexDirection: 'row', padding: 3 }}>
-        <View style={{ flex: 1, paddingHorizontal: 3 }}><SecondaryButton onPress={() => setSelectedType('unprocessed')} title="Unprocessed" ></SecondaryButton></View>
-        <View style={{ flex: 1, paddingHorizontal: 3 }}><SecondaryButton onPress={() => setSelectedType('processed')} title="Processed" ></SecondaryButton></View>
-        <View style={{ flex: 1, paddingHorizontal: 3 }}><SecondaryButton onPress={() => setSelectedType('finished')} title="Finished" ></SecondaryButton></View>
+        <View style={{ flex: 1, paddingHorizontal: 3 }}>
+          {
+            selectedType == 'unprocessed' ? <PrimaryButton title="Unprocessed" ></PrimaryButton> : <SecondaryButton onPress={() => setSelectedType('unprocessed')} title="Unprocessed" ></SecondaryButton>
+          }
+        </View>
+        <View style={{ flex: 1, paddingHorizontal: 3 }}>
+          {
+            selectedType == 'processed' ? <PrimaryButton title="Processed" ></PrimaryButton> : <SecondaryButton onPress={() => setSelectedType('processed')} title="Processed" ></SecondaryButton>
+          }
+        </View>
+        <View style={{ flex: 1, paddingHorizontal: 3 }}>
+          {
+            selectedType == 'finished' ? <PrimaryButton title="Finished" ></PrimaryButton> : <SecondaryButton onPress={() => setSelectedType('finished')} title="Finished" ></SecondaryButton>
+          }
+        </View>
       </View>
       <View style={{ flex: 8 }}>
         <ScrollView >

@@ -17,7 +17,7 @@ import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 import COLORS from '../../const/colors';
 import categories from '../../const/categories';
 import BottomNavigator from '../navigation/AdminButtomNavigation';
-import { SecondaryButton } from '../components/Button';
+import { SecondaryButton, PrimaryButton } from '../components/Button';
 const { width } = Dimensions.get('screen');
 const cardWidth = width / 2 - 20;
 import HOST from '../../const/host';
@@ -89,9 +89,21 @@ const AdminSummary = ({ navigation }) => {
         </View>
       </View>
       <View style={{ flex: 1, flexDirection: 'row', padding: 10 }}>
-        <View style={{ flex: 1, paddingHorizontal: 10 }}><SecondaryButton onPress={() => setSelectedType('month')} title="1 Month" ></SecondaryButton></View>
-        <View style={{ flex: 1, paddingHorizontal: 10 }}><SecondaryButton onPress={() => setSelectedType('year')} title="1 Year" ></SecondaryButton></View>
-        <View style={{ flex: 1, paddingHorizontal: 10 }}><SecondaryButton onPress={() => setSelectedType('all')} title="All" ></SecondaryButton></View>
+        <View style={{ flex: 1, paddingHorizontal: 10 }}>
+          {
+            selectedType == 'month' ? <PrimaryButton title="1 Month" ></PrimaryButton> : <SecondaryButton onPress={() => setSelectedType('month')} title="1 Month" ></SecondaryButton>
+          }
+        </View>
+        <View style={{ flex: 1, paddingHorizontal: 10 }}>
+          {
+            selectedType == 'year' ? <PrimaryButton title="1 Year" ></PrimaryButton> : <SecondaryButton onPress={() => setSelectedType('year')} title="1 Year" ></SecondaryButton>
+          }
+        </View>
+        <View style={{ flex: 1, paddingHorizontal: 10 }}>
+          {
+            selectedType == 'all' ? <PrimaryButton title="All" ></PrimaryButton> : <SecondaryButton onPress={() => setSelectedType('all')} title="All" ></SecondaryButton>
+          }
+        </View>
       </View>
       <View style={{ flex: 8 }}>
         <ScrollView >
